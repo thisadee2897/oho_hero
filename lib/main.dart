@@ -1,12 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive_framework/responsive_framework.dart';
-
-import 'config/routes/app_router.dart';
-import 'config/themes/custom_themes.dart';
-import 'config/translation/generated/l10n.dart';
-
+import 'package:oho_hero/config/routes/export.dart';
 void main() {
   runApp(
     ProviderScope(
@@ -28,8 +20,8 @@ class _MyAppState extends ConsumerState<MyApp> {
     final appRouter = ref.watch(appRouterProvider);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-      title: 'POS',
-      theme: CustomThemes.mainTheme, 
+      title: 'OHO HERO',
+      theme: CustomThemes.mainTheme,
       // locale: ref.watch(languageProvider),
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,

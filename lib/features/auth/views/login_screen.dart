@@ -21,46 +21,62 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     return Scaffold(
       body: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width * 0.5,
+          width: MediaQuery.of(context).size.width * 0.6,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 'Welcome Back',
               ),
-              SizedBox(height: 16.0),
-              Text(
-                'Please log in to your account',
-              ),
+              // SizedBox(height: 16.0),
+              // Text(
+              //   'Please log in to your account',
+              // ),
               SizedBox(height: 32.0),
-              TextFormField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Pin',
-                  prefixIcon: Icon(Icons.pin),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(),
-                ),
+              // TextFormField(
+              //   decoration: InputDecoration(
+              //     hintText: 'Email,Phone number',
+              //   ),
+              // ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text('Email or phone number'),
+                  TextFormField(
+                      // obscureText: true,
+                      ),
+                ],
               ),
               SizedBox(height: 16.0),
-              TextFormField(
-                obscureText: true,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
-                  enabledBorder: OutlineInputBorder(),
-                  focusedBorder: OutlineInputBorder(),
-                ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text('Password'),
+                  TextFormField(
+                    obscureText: true,
+                  ),
+                ],
               ),
               SizedBox(height: 32.0),
               ButtonCustom(
+                borderRadius: 8,
                 text: 'Log in',
                 width: 120,
                 loading: loginState.isLoading,
                 onTap: _onLoginTab,
               ),
               SizedBox(height: 16.0),
+              // ButtonCustom(
+              //   buttonType:ButtonType.outlined,
+              //   borderRadius: 8,
+              //   text: 'Cancle',
+              //   width: 120,
+              //   loading: loginState.isLoading,
+              //   onTap: _onLoginTab,
+              // ),
+              // SizedBox(height: 16.0),
             ],
           ),
         ),

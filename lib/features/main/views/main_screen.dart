@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:responsive_builder/src/sizing_information.dart';
-import 'package:oho_hero/config/themes/themes.dart';
-import 'package:oho_hero/shared_components/base_full_widget.dart';
-
+import 'package:oho_hero/config/routes/export.dart';
 class MainScreen extends BaseStatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
