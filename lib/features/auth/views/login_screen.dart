@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:oho_hero/features/auth/controllers/login_controller.dart';
-import 'package:oho_hero/shared_components/button_custom.dart';
+import 'package:oho_hero/config/routes/export.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
