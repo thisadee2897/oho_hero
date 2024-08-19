@@ -1,3 +1,4 @@
+export 'package:oho_hero/shared_components/dialog_custom.dart';
 export 'package:oho_hero/shared_components/button_custom.dart';
 export 'package:oho_hero/features/auth/controllers/login_controller.dart';
 export 'package:oho_hero/config/routes/app_router.dart';

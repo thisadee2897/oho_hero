@@ -8,6 +8,10 @@ class CustomThemes {
     primaryColor: CustomColors.primaryColor,
     // fontFamily: kFontFamily,
     scaffoldBackgroundColor: CustomColors.backgroundColor,
+    dialogTheme: DialogTheme(
+        backgroundColor: Colors.white,
+        elevation:10,
+        ),
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -71,8 +75,8 @@ class CustomThemes {
       ),
     ),
     colorScheme: ColorScheme.fromSwatch().copyWith(
-        secondary: CustomColors.primaryColor,
-        surface: CustomColors.backgroundColor),
-    
+      secondary: CustomColors.primaryColor,
+      surface: CustomColors.backgroundColor,
+    ),
   );
 }

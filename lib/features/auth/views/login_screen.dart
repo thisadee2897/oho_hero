@@ -25,24 +25,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               Text(
                 'Welcome Back',
               ),
-              // SizedBox(height: 16.0),
-              // Text(
-              //   'Please log in to your account',
-              // ),
               SizedBox(height: 32.0),
-              // TextFormField(
-              //   decoration: InputDecoration(
-              //     hintText: 'Email,Phone number',
-              //   ),
-              // ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text('Email or phone number'),
-                  TextFormField(
-                      // obscureText: true,
-                      ),
+                  TextFormField(onFieldSubmitted: null),
                 ],
               ),
               SizedBox(height: 16.0),
@@ -65,15 +54,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 onTap: _onLoginTab,
               ),
               SizedBox(height: 16.0),
-              // ButtonCustom(
-              //   buttonType:ButtonType.outlined,
-              //   borderRadius: 8,
-              //   text: 'Cancle',
-              //   width: 120,
-              //   loading: loginState.isLoading,
-              //   onTap: _onLoginTab,
-              // ),
-              // SizedBox(height: 16.0),
             ],
           ),
         ),
