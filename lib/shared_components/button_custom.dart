@@ -1,11 +1,8 @@
 import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../config/constants/constants.dart';
 import '../config/themes/themes.dart';
-import 'loading.dart';
-
 enum ButtonType { outlined, filled }
 
 class ButtonCustom extends StatelessWidget {
@@ -20,8 +17,8 @@ class ButtonCustom extends StatelessWidget {
     this.textStyle = const TextStyle(),
     this.textColor,
     this.child,
-    this.buttonType = ButtonType.filled, // new parameter for button type
-    this.borderRadius = 90,
+    this.buttonType = ButtonType.filled,
+    this.borderRadius = 8,
     this.loading = false,
     this.borderColor,
     this.elevation = 0,
@@ -51,22 +48,12 @@ class ButtonCustom extends StatelessWidget {
         (buttonType == ButtonType.outlined ? borderColor : Colors.white);
 
     final buttonColor = buttonType == ButtonType.outlined
-        ? color ?? Colors.white
+        ? color ?? Colors.grey.shade200
         : color ?? CustomColors.primaryColor;
-
-    final borderSide =
-        BorderSide(color: enabled ? borderColor : Colors.grey, width: 1);
-
-    final buttonShape = RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(borderRadius),
-      side: borderSide,
-    );
     Timer? _debounce;
-    return SizedBox(
-      width: width,
-      height: height,
-      child: MaterialButton(
-        elevation: elevation,
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CupertinoButton(
         onPressed: !loading && enabled
             ? () => {
                   if (_debounce?.isActive == true) {_debounce?.cancel()},
@@ -75,17 +62,17 @@ class ButtonCustom extends StatelessWidget {
                   })
                 }
             : null,
-        disabledColor: Colors.white,
+        disabledColor: Colors.grey.shade50,
         color: buttonColor,
-        shape: buttonShape,
         child: loading
-            ? Loading()
-            : child ??
-                Text(
-                  text,
-                  style: textStyle!.copyWith(color: textColor),
-                  textAlign: TextAlign.center,
-                ),
+            ? CupertinoActivityIndicator(
+                color: CustomColors.primaryColor,
+              )
+            : Text(
+                text,
+                style: textStyle!.copyWith(color: textColor),
+                textAlign: TextAlign.center,
+              ),
       ),
     );
   }

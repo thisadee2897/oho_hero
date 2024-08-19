@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:oho_hero/config/routes/export.dart';
+
 void main() {
   runApp(
     ProviderScope(
@@ -17,8 +19,8 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
-    final appRouter = ref.watch(appRouterProvider);
-    return MaterialApp.router(
+    GoRouter appRouter = ref.watch(appRouterProvider);
+    return CupertinoApp.router(
       debugShowCheckedModeBanner: false,
       title: 'OHO HERO',
       theme: CustomThemes.mainTheme,

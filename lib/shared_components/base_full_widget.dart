@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/features/main/views/controllers/menu_controller.dart';
+
 
 import 'responsive.dart';
 
@@ -16,11 +17,12 @@ abstract class BaseState<T extends BaseStatefulWidget>
   @override
   Widget build(BuildContext context) {
     return Responsive(
-        mobile: (sizing) => buildMobile(context, sizing),
-        desktop: (sizing) => Center(
-            child: SizedBox(width: 1200, child: buildDesktop(context, sizing))),
-        tablet: (sizing) =>
-            buildTablet(context, sizing) ?? buildMobile(context, sizing));
+      mobile: (sizing) => ScreenWidget(body: buildMobile(context, sizing)),
+      desktop: (sizing) =>
+          ScreenWidget(body: buildDesktop(context, sizing), isDesktop: true),
+      tablet: (sizing) => ScreenWidget(
+          body: buildTablet(context, sizing) ?? buildMobile(context, sizing)),
+    );
   }
 
   Widget buildMobile(BuildContext context, SizingInformation sizingInformation);
@@ -31,5 +33,46 @@ abstract class BaseState<T extends BaseStatefulWidget>
   Widget? buildTablet(
       BuildContext context, SizingInformation sizingInformation) {
     return null;
+  }
+}
+
+class ScreenWidget extends ConsumerStatefulWidget {
+  const ScreenWidget({
+    super.key,
+    required this.body,
+    this.isDesktop = false,
+  });
+
+  final body;
+  final bool isDesktop;
+
+  @override
+  ConsumerState<ScreenWidget> createState() => _ScreenWidgetState();
+}
+
+class _ScreenWidgetState extends ConsumerState<ScreenWidget> {
+  @override
+  Widget build(BuildContext context) {
+    final menuAsyncValue = ref.watch(menuProvider);
+    final isLoggedIn = ref.watch(isLoggedInProvider);
+    return CupertinoPageScaffold(
+      navigationBar: isLoggedIn.value != true
+          ? null
+          : CupertinoNavigationBar(
+              leading: Row(
+                children: [
+                  CircleAvatar(),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text('OHO HERO'),
+                  )
+                ],
+              ),
+              trailing: widget.isDesktop
+                  ? MenuForDesktop(menuAsyncValue: menuAsyncValue, ref: ref)
+                  : MenuForMobile(menuAsyncValue: menuAsyncValue, ref: ref),
+            ),
+      child: widget.body,
+    );
   }
 }

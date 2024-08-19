@@ -6,7 +6,7 @@ class LoginController extends StateNotifier<AsyncValue> {
   LoginController(this.ref) : super(AsyncData(LoginModel()));
   final Ref ref;
 
-  void login(loginData,context) async {
+  void login(loginData, context) async {
     state = AsyncValue.loading();
     state =
         await AsyncValue.guard(() => ref.read(authRepositoryProvider).login({
@@ -14,9 +14,11 @@ class LoginController extends StateNotifier<AsyncValue> {
               'password': loginData['pass_word'],
             }));
     if (state.hasError) {
-      showSnackBar(context, state.error.toString());
+      return customAlert(context, state.error.toString());
+    } else {
+      GoRouter.of(context).go(Routes.home);
+      ref.invalidate(isLoggedInProvider);
     }
-    ref.invalidate(isLoggedInProvider);
   }
 
   void logout() async {

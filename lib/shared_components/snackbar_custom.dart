@@ -1,15 +1,21 @@
-import 'package:oho_hero/config/routes/export.dart';
+import 'package:flutter/cupertino.dart';
 
-void showSnackBar(BuildContext context, String message) {
-  ScaffoldMessenger.of(context).clearSnackBars();
-  ScaffoldMessenger.of(context).showSnackBar(
-    snackBarAnimationStyle: AnimationStyle(),
-    SnackBar(
-      content: Text(message),
-      backgroundColor: Colors.redAccent,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-    ),
+void customAlert(BuildContext context, String message) {
+  showCupertinoDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return CupertinoAlertDialog(
+        title: Text('Notice'),
+        content: Text(message),
+        actions: [
+          CupertinoDialogAction(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ],
+      );
+    },
   );
 }
