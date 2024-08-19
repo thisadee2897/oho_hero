@@ -17,7 +17,8 @@ abstract class BaseState<T extends BaseStatefulWidget>
   Widget build(BuildContext context) {
     return Responsive(
         mobile: (sizing) => buildMobile(context, sizing),
-        desktop: (sizing) => buildDesktop(context, sizing),
+        desktop: (sizing) => Center(
+            child: SizedBox(width: 1200, child: buildDesktop(context, sizing))),
         tablet: (sizing) =>
             buildTablet(context, sizing) ?? buildMobile(context, sizing));
   }

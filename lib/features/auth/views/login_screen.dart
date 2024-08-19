@@ -8,8 +8,14 @@ class LoginScreen extends ConsumerStatefulWidget {
 }
 
 class _LoginScreenState extends ConsumerState<LoginScreen> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   _onLoginTab() {
-    ref.read(loginProvider.notifier).login();
+    final loginData = {
+      'user_name': usernameController.text,
+      'pass_word': passwordController.text,
+    };
+    ref.read(loginProvider.notifier).login(loginData,context);
   }
 
   @override
@@ -31,7 +37,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Text('Email or phone number'),
-                  TextFormField(onFieldSubmitted: null),
+                  TextFormField(
+                    controller: usernameController,
+                  ),
                 ],
               ),
               SizedBox(height: 16.0),
@@ -41,6 +49,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                 children: [
                   Text('Password'),
                   TextFormField(
+                    controller: passwordController,
                     obscureText: true,
                   ),
                 ],

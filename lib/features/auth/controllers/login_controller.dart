@@ -1,25 +1,30 @@
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/features/auth/models/user_login.dart';
+import 'package:oho_hero/shared_components/snackbar_custom.dart';
 
 class LoginController extends StateNotifier<AsyncValue> {
-  LoginController(this.ref) : super(AsyncData(null));
+  LoginController(this.ref) : super(AsyncData(LoginModel()));
   final Ref ref;
 
-  void login() async {
+  void login(loginData,context) async {
     state = AsyncValue.loading();
-
-    /// state = await AsyncValue.guard(() => ref.read(authRepositoryProvider).login({}));
-    state = await AsyncValue.guard(() => Future.delayed(Duration(seconds: 3)));
-    ref.read(localStorageServiceProvider).saveToken('123');
+    state =
+        await AsyncValue.guard(() => ref.read(authRepositoryProvider).login({
+              'username': loginData['user_name'],
+              'password': loginData['pass_word'],
+            }));
+    if (state.hasError) {
+      showSnackBar(context, state.error.toString());
+    }
     ref.invalidate(isLoggedInProvider);
   }
 
   void logout() async {
     state = AsyncValue.loading();
     await Future.delayed(Duration(seconds: 1));
-    // Use delete to remove the stored token
     await ref.read(localStorageServiceProvider).delete('auth_token');
     ref.invalidate(isLoggedInProvider);
-    state = AsyncData(null);
+    state = AsyncData(LoginModel());
   }
 }
 
