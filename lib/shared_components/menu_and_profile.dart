@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 showLogOut(BuildContext context, WidgetRef ref) {
@@ -61,6 +60,12 @@ class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
                         title: subMenu.name,
                         onTap: () {
                           print(subMenu.path);
+                          switch (subMenu.path) {
+                            case 'setting-company':
+                              context.go(Routes.company);
+                            case 'setting-account-security':
+                              context.go(Routes.account);
+                          }
                         },
                       );
                     }).toList(),
@@ -124,6 +129,13 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
                           actions: main.subMenu.map((subMenu) {
                             return CupertinoActionSheetAction(
                               onPressed: () {
+                                print(subMenu.path);
+                                switch (subMenu.path) {
+                                  case 'setting-company':
+                                    context.go(Routes.company);
+                                  case 'setting-account-security':
+                                    context.go(Routes.account);
+                                }
                                 Navigator.pop(context);
                               },
                               child: Text(subMenu.name),
@@ -145,7 +157,7 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
               buttonBuilder: (context, showMenu) => CupertinoButton(
                 onPressed: showMenu,
                 padding: EdgeInsets.zero,
-                child: Icon(Icons.menu),
+                child: Icon(CupertinoIcons.list_bullet),
               ),
             );
           },

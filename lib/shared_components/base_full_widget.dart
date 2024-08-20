@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:oho_hero/config/routes/export.dart';
 import 'package:oho_hero/features/main/views/controllers/menu_controller.dart';
-
 
 import 'responsive.dart';
 
@@ -61,7 +59,17 @@ class _ScreenWidgetState extends ConsumerState<ScreenWidget> {
           : CupertinoNavigationBar(
               leading: Row(
                 children: [
-                  CircleAvatar(),
+                  ClipOval(
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      color: CupertinoColors.systemBrown,
+                      // child: Image.network(
+                      //   '',
+                      //   fit: BoxFit.cover,
+                      // ),
+                    ),
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text('OHO HERO'),

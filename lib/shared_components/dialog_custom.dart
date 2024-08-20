@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
@@ -9,7 +8,7 @@ class DialogCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (kIsWeb) {
-      return AlertDialog(
+      return CupertinoAlertDialog(
         title: Text('Confirm Logout'),
         content: Text('Are you sure you want to logout?'),
         actions: <Widget>[
@@ -42,7 +41,7 @@ class DialogCustom extends StatelessWidget {
                 ),
               ],
             )
-          : AlertDialog(
+          : CupertinoAlertDialog(
               title: Text('Confirm Logout'),
               content: Text('Are you sure you want to logout?'),
               actions: <Widget>[

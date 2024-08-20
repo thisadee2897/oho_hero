@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 class LoginScreen extends BaseStatefulWidget {
@@ -46,12 +45,9 @@ class _LoginScreenState extends BaseState<LoginScreen> {
         child: SizedBox(
           width: 400,
           height: 400,
-          child: Card(
-            elevation: 10,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: content(context, loginState),
-            ),
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: content(context, loginState),
           ),
         ),
       ),

@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:oho_hero/config/routes/export.dart';
-
-enum ComapnyItem { updateCompany, addBranch, addSubCompany }
-
 class MainScreen extends BaseStatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
 
@@ -39,7 +36,7 @@ class _MainScreenState extends BaseState<MainScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
-          children: [ 
+          children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: CupertinoSearchTextField(

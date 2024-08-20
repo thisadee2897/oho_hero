@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../config/constants/constants.dart';
 import '../config/themes/themes.dart';
+
 enum ButtonType { outlined, filled }
 
 class ButtonCustom extends StatelessWidget {
@@ -42,14 +43,28 @@ class ButtonCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final borderColor =
-        enabled ? Theme.of(context).primaryColor : Colors.transparent;
+        enabled ? CustomColors.primaryColor : Colors.transparent;
 
     final textColor = this.textColor ??
         (buttonType == ButtonType.outlined ? borderColor : Colors.white);
 
     final buttonColor = buttonType == ButtonType.outlined
-        ? color ?? Colors.grey.shade200
-        : color ?? CustomColors.primaryColor;
+        ? color ??
+            CupertinoDynamicColor.resolve(
+              CupertinoDynamicColor.withBrightness(
+                color: CupertinoColors.systemGrey6,
+                darkColor: CupertinoColors.darkBackgroundGray,
+              ),
+              context,
+            )
+        : color ??
+            CupertinoDynamicColor.resolve(
+              CupertinoDynamicColor.withBrightness(
+                color: CustomColors.primaryColor,
+                darkColor: CustomColors.primaryColor.withAlpha(80),
+              ),
+              context,
+            );
     Timer? _debounce;
     return Padding(
       padding: const EdgeInsets.all(8.0),
