@@ -61,34 +61,33 @@ class ButtonCustom extends StatelessWidget {
             CupertinoDynamicColor.resolve(
               CupertinoDynamicColor.withBrightness(
                 color: CustomColors.primaryColor,
-                darkColor: CustomColors.primaryColor.withAlpha(80),
+                darkColor: CustomColors.primaryColor,
               ),
               context,
             );
     Timer? _debounce;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CupertinoButton(
-        onPressed: !loading && enabled
-            ? () => {
-                  if (_debounce?.isActive == true) {_debounce?.cancel()},
-                  _debounce = Timer(Duration(milliseconds: 200), () {
-                    onTap();
-                  })
-                }
-            : null,
-        disabledColor: Colors.grey.shade50,
-        color: buttonColor,
-        child: loading
-            ? CupertinoActivityIndicator(
-                color: CustomColors.primaryColor,
-              )
-            : Text(
-                text,
-                style: textStyle!.copyWith(color: textColor),
-                textAlign: TextAlign.center,
-              ),
-      ),
+    return CupertinoButton(
+      // minSize: 100,
+      padding: width == null ? EdgeInsets.only(left: 10, right: 10) : null,
+      onPressed: !loading && enabled
+          ? () => {
+                if (_debounce?.isActive == true) {_debounce?.cancel()},
+                _debounce = Timer(Duration(milliseconds: 200), () {
+                  onTap();
+                })
+              }
+          : null,
+      disabledColor: Colors.grey.shade50,
+      color: buttonColor,
+      child: loading
+          ? CupertinoActivityIndicator(
+              color: CustomColors.primaryColor,
+            )
+          : Text(
+              text,
+              style: textStyle!.copyWith(color: textColor),
+              textAlign: TextAlign.center,
+            ),
     );
   }
 }

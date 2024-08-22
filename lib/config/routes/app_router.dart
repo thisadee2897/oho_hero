@@ -1,4 +1,6 @@
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/features/setting_project/setting_company/views/update_company.dart';
+import 'package:oho_hero/features/setting_project/setting_company/widgets/search_sub_district.dart';
 
 import 'package:oho_hero/splash_screen.dart';
 
@@ -47,19 +49,37 @@ final appRouterProvider = Provider<GoRouter>(
           pageBuilder: (context, state) {
             return const NoTransitionPage(child: CompanyScreen());
           },
+          routes: [
+            GoRoute(
+                path: Routes.createCompany,
+                pageBuilder: (context, state) {
+                  return NoTransitionPage(
+                      child: CreateCompanyScreen(Routes.company));
+                },
+                routes: [
+                  GoRoute(
+                    path: SearchSubDistrict.path,
+                    pageBuilder: (context, state) {
+                      return NoTransitionPage(
+                          child: SearchSubDistrict(
+                              '${Routes.company}/${SearchSubDistrict.path}'));
+                    },
+                  ),
+                ]),
+            GoRoute(
+              path: '${Routes.editCompany}/:id',
+              pageBuilder: (context, state) {
+                String? id = state.pathParameters['id'];
+                return NoTransitionPage(child: UpdateCompany(companyId: id!));
+              },
+            ),
+          ],
         ),
         GoRoute(
-          path: Routes.company,
+          path: Routes.rolegroup,
           // parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) {
             return const NoTransitionPage(child: RoleGroupScreen());
-          },
-        ),
-        GoRoute(
-          path: Routes.createCompany,
-          // parentNavigatorKey: _rootNavigatorKey,
-          pageBuilder: (context, state) {
-            return const NoTransitionPage(child: CreateCompanyScreen());
           },
         ),
       ],

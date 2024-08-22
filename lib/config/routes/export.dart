@@ -1,3 +1,5 @@
+export 'package:oho_hero/shared_components/backgroung_container_custom.dart';
+export 'package:oho_hero/shared_components/box_adapter_custom.dart';
 export 'package:oho_hero/features/setting_project/setting_company/views/create_company.dart';
 export 'package:oho_hero/features/main/views/main_screen.dart';
 export 'package:oho_hero/config/routes/route_config.dart';

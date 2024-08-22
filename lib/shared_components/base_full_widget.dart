@@ -4,7 +4,8 @@ import 'package:oho_hero/features/main/views/controllers/menu_controller.dart';
 import 'responsive.dart';
 
 abstract class BaseStatefulWidget extends ConsumerStatefulWidget {
-  const BaseStatefulWidget({Key? key}) : super(key: key);
+  final bool subPage;
+  const BaseStatefulWidget({super.key, this.subPage = false});
 
   @override
   ConsumerState<BaseStatefulWidget> createState();
@@ -15,11 +16,18 @@ abstract class BaseState<T extends BaseStatefulWidget>
   @override
   Widget build(BuildContext context) {
     return Responsive(
-      mobile: (sizing) => ScreenWidget(body: buildMobile(context, sizing)),
-      desktop: (sizing) =>
-          ScreenWidget(body: buildDesktop(context, sizing), isDesktop: true),
+      mobile: (sizing) => ScreenWidget(
+        showToolsBar: widget.subPage,
+        body: buildMobile(context, sizing),
+      ),
+      desktop: (sizing) => ScreenWidget(
+          showToolsBar: widget.subPage,
+          body: buildDesktop(context, sizing),
+          isDesktop: true),
       tablet: (sizing) => ScreenWidget(
-          body: buildTablet(context, sizing) ?? buildMobile(context, sizing)),
+        showToolsBar: widget.subPage,
+        body: buildTablet(context, sizing) ?? buildMobile(context, sizing),
+      ),
     );
   }
 
@@ -39,10 +47,12 @@ class ScreenWidget extends ConsumerStatefulWidget {
     super.key,
     required this.body,
     this.isDesktop = false,
+    this.showToolsBar = true,
   });
 
   final body;
   final bool isDesktop;
+  final bool showToolsBar;
 
   @override
   ConsumerState<ScreenWidget> createState() => _ScreenWidgetState();
@@ -54,7 +64,7 @@ class _ScreenWidgetState extends ConsumerState<ScreenWidget> {
     final menuAsyncValue = ref.watch(menuProvider);
     final isLoggedIn = ref.watch(isLoggedInProvider);
     return CupertinoPageScaffold(
-      navigationBar: isLoggedIn.value != true
+      navigationBar: isLoggedIn.value != true || widget.showToolsBar
           ? null
           : CupertinoNavigationBar(
               leading: Row(

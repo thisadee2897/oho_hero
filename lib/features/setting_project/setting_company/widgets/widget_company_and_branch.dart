@@ -1,7 +1,7 @@
 import 'package:oho_hero/config/routes/export.dart';
 
 class ListCompany extends StatefulWidget {
-
+  final String id;
   final Widget title;
   final Widget details;
   final Widget? subtitle;
@@ -11,6 +11,7 @@ class ListCompany extends StatefulWidget {
     required this.title,
     required this.details,
     this.subtitle,
+    required this.id,
   }) : super(key: key);
 
   @override
@@ -43,20 +44,16 @@ class _ListCompanyState extends State<ListCompany>
                   _isExpanded
                       ? CupertinoIcons.chevron_down
                       : CupertinoIcons.chevron_up,
-                  // color: CupertinoDynamicColor.resolve(
-                  //   CupertinoDynamicColor.withBrightness(
-                  //     color: CupertinoColors.darkBackgroundGray,
-                  //     darkColor: CupertinoColors.lightBackgroundGray,
-                  //   ),
-                  //   context,
-                  // ),
                 ),
               ),
               PullDownButton(
                 itemBuilder: (context) => [
                   PullDownMenuItem(
                     title: 'Edit Comapny',
-                    onTap: () {},
+                    onTap: () {
+                      GoRouter.of(context)
+                          .go('${Routes.company}/${Routes.editCompany}/${widget.id}');
+                    },
                   ),
                   PullDownMenuItem(
                     title: 'Create Branch',

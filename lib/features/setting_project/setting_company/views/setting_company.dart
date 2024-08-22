@@ -41,7 +41,8 @@ class _CompanyScreenState extends BaseState<CompanyScreen> {
                 CupertinoIcons.add_circled,
                 size: 25.0,
               ),
-              onTap: () => context.go(Routes.createCompany),
+              onTap: () => GoRouter.of(context)
+                  .go('${Routes.company}/${Routes.createCompany}'),
             ),
           ),
           SliverToBoxAdapter(
@@ -76,6 +77,7 @@ class _CompanyScreenState extends BaseState<CompanyScreen> {
               ..._buildCompanyList(comP.subCompanies)
           ],
         ),
+        id: comP.id,
       );
     }).toList();
   }
