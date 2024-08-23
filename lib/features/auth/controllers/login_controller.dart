@@ -4,36 +4,47 @@ import 'package:oho_hero/features/auth/repositories/auth_repository.dart';
 import 'package:oho_hero/shared_components/snackbar_custom.dart';
 import 'package:oho_hero/utils/services/local_storage_service.dart';
 
-class LoginController extends StateNotifier<AsyncValue> {
-  LoginController(this.ref) : super(AsyncData(LoginModel()));
+class LoginController extends StateNotifier<AsyncValue<LoginResponse>> {
+  LoginController(this.ref)
+      : super(AsyncValue.data(LoginResponse(status: 200)));
   final Ref ref;
-
-  void login(loginData, context) async {
+  Future<void> login(
+      Map<String, dynamic> loginData, BuildContext context) async {
     state = AsyncValue.loading();
-    state =
-        await AsyncValue.guard(() => ref.read(authRepositoryProvider).login({
-              'username': loginData['user_name'],
-              'password': loginData['pass_word'],
-            }));
+    state = await AsyncValue.guard(() async {
+      final response = await ref.read(authRepositoryProvider).login({
+        'username': loginData['user_name'],
+        'password': loginData['pass_word'],
+      });
+      return response;
+    });
+
     if (state.hasError) {
-      return customAlert(context, state.error.toString());
+      customAlert(context, state.error.toString());
     } else {
-      GoRouter.of(context).go(Routes.home);
-      ref.invalidate(isLoggedInProvider);
+      final loginResponse = state.asData?.value;
+      if (loginResponse?.token?.token != null) {
+        await ref
+            .read(localStorageServiceProvider)
+            .saveToken(loginResponse!.token!.token!);
+        GoRouter.of(context).go(Routes.home);
+        ref.invalidate(isLoggedInProvider);
+      }
     }
   }
 
-  void logout() async {
+  Future<void> logout() async {
     state = AsyncValue.loading();
     await Future.delayed(Duration(seconds: 1));
     await ref.read(localStorageServiceProvider).delete('auth_token');
     ref.invalidate(isLoggedInProvider);
-    state = AsyncData(LoginModel());
+    state = AsyncValue.data(LoginResponse(status: 200));
   }
 }
 
-final loginProvider = StateNotifierProvider<LoginController, AsyncValue>(
-    (ref) => LoginController(ref));
+final loginProvider =
+    StateNotifierProvider<LoginController, AsyncValue<LoginResponse>>(
+        (ref) => LoginController(ref));
 
 final isLoggedInProvider = FutureProvider<bool>((ref) async {
   final token = await ref.watch(localStorageServiceProvider).getToken();

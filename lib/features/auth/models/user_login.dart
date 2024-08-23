@@ -1,86 +1,54 @@
-import 'dart:convert';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-LoginModel userLoginModelFromJson(String str) =>
-    LoginModel.fromJson(json.decode(str));
+part 'user_login.freezed.dart';
+part 'user_login.g.dart';
 
-String userLoginModelToJson(LoginModel data) => json.encode(data.toJson());
+@freezed
+class LoginResponse with _$LoginResponse {
+  const factory LoginResponse({
+    int? status,
+    Token? token,
+    Employee? employee,
+  }) = _LoginResponse;
 
-class LoginModel {
-  String? userLoginId;
-  String? userName;
-  String? passWord;
-  String? userLoginFullname;
-  bool? userLoginActive;
-  dynamic roleGroupId;
-  String? masterCompanyId;
-  dynamic masterEmployeeId;
-  String? userLoginToken;
-  int? userTypeId;
-  String? email;
-  String? masterOrganizationId;
-  String? masterMemberId;
-  dynamic userLoginTel;
-  dynamic masterTransportDriverId;
-  String? masterCarId;
-  dynamic passWordOriginal;
+  factory LoginResponse.fromJson(Map<String, dynamic> json) => _$LoginResponseFromJson(json);
+}
 
-  LoginModel({
-    this.userLoginId,
-    this.userName,
-    this.passWord,
-    this.userLoginFullname,
-    this.userLoginActive,
-    this.roleGroupId,
-    this.masterCompanyId,
-    this.masterEmployeeId,
-    this.userLoginToken,
-    this.userTypeId,
-    this.email,
-    this.masterOrganizationId,
-    this.masterMemberId,
-    this.userLoginTel,
-    this.masterTransportDriverId,
-    this.masterCarId,
-    this.passWordOriginal,
-  });
+@freezed
+class Token with _$Token {
+  const factory Token({
+    String? type,
+    String? token,
+    @JsonKey(name: 'refreshToken') String? refreshToken,
+    @JsonKey(name: 'expires_at') String? expiresAt,
+  }) = _Token;
 
-  factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
-        userLoginId: json["user_login_id"],
-        userName: json["user_name"],
-        passWord: json["pass_word"],
-        userLoginFullname: json["user_login_fullname"],
-        userLoginActive: json["user_login_active"],
-        roleGroupId: json["role_group_id"],
-        masterCompanyId: json["master_company_id"],
-        masterEmployeeId: json["master_employee_id"],
-        userLoginToken: json["user_login_token"],
-        userTypeId: json["user_type_id"],
-        email: json["email"],
-        masterOrganizationId: json["master_organization_id"],
-        masterMemberId: json["master_member_id"],
-        userLoginTel: json["user_login_tel"],
-        masterTransportDriverId: json["master_transport_driver_id"],
-        masterCarId: json["master_car_id"],
-        passWordOriginal: json["pass_word_original"],
-      );
+  factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);
+}
 
-  Map<String, dynamic> toJson() => {
-        "user_login_id": userLoginId,
-        "user_name": userName,
-        "pass_word": passWord,
-        "user_login_fullname": userLoginFullname,
-        "user_login_active": userLoginActive,
-        "role_group_id": roleGroupId,
-        "master_company_id": masterCompanyId,
-        "master_employee_id": masterEmployeeId,
-        "user_login_token": userLoginToken,
-        "user_type_id": userTypeId,
-        "email": email,
-        "master_organization_id": masterOrganizationId,
-        "master_member_id": masterMemberId,
-        "user_login_tel": userLoginTel,
-        "master_transport_driver_id": masterTransportDriverId,
-        "master_car_id": masterCarId,
-        "pass_word_original": passWordOriginal,
-      };
+@freezed
+class Employee with _$Employee {
+  const factory Employee({
+    @JsonKey(name: 'object') String? object,
+    @JsonKey(name: 'id') String? id,
+    @JsonKey(name: 'no') String? no,
+    @JsonKey(name: 'company_id') String? companyId,
+    @JsonKey(name: 'branch_id') String? branchId,
+    @JsonKey(name: 'pin') String? pin,
+    @JsonKey(name: 'username') String? username,
+    @JsonKey(name: 'first_name') String? firstName,
+    @JsonKey(name: 'last_name') String? lastName,
+    @JsonKey(name: 'phone_number') String? phoneNumber,
+    @JsonKey(name: 'email') String? email,
+    @JsonKey(name: 'role_id') String? roleId,
+    @JsonKey(name: 'avatar') String? avatar,
+    @JsonKey(name: 'active') int? active,
+    @JsonKey(name: 'started_at') String? startedAt,
+    @JsonKey(name: 'created_by') String? createdBy,
+    @JsonKey(name: 'updated_by') String? updatedBy,
+    @JsonKey(name: 'created_at') String? createdAt,
+    @JsonKey(name: 'updated_at') String? updatedAt,
+  }) = _Employee;
+
+  factory Employee.fromJson(Map<String, dynamic> json) => _$EmployeeFromJson(json);
 }

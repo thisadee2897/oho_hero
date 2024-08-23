@@ -68,7 +68,7 @@ dev_dependencies:
   riverpod_generator: ^2.4.3
   custom_lint: ^0.6.5
   riverpod_lint: ^2.3.13
-  #### flutter pub run build_runner build --delete-conflicting-outputs
+  #### dart run build_runner build --delete-conflicting-outputs
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
