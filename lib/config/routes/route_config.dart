@@ -17,4 +17,9 @@ class Routes {
   static const String createRolegroup = 'create';
   static const String detailRolegroup = 'detail';
   static const String editRolegroup = 'update';
+  //Dashboard
+  static const String allDashboard = '/dashboard';
+  static const String dashEmission = 'dashboard-footprint';
+  static const String dashReduction = 'dashboard-carbon-project';
+  static const String dashMarket = 'dashboard-market';
 }

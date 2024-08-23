@@ -65,6 +65,17 @@ class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
                               context.go(Routes.company);
                             case 'setting-account-security':
                               context.go(Routes.account);
+                            case 'dashboard':
+                              context.go(Routes.allDashboard);
+                            case 'dashboard-footprint':
+                              context.go(
+                                  "${Routes.allDashboard}/${Routes.dashEmission}/1");
+                            case 'dashboard-carbon-project':
+                              context.go(
+                                  "${Routes.allDashboard}/${Routes.dashReduction}/2");
+                            case 'dashboard-market':
+                              context.go(
+                                  "${Routes.allDashboard}/${Routes.dashMarket}/3");
                           }
                         },
                       );
