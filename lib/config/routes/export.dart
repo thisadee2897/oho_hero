@@ -15,7 +15,6 @@ export 'package:responsive_builder/src/sizing_information.dart';
 export 'package:oho_hero/config/themes/themes.dart';
 export 'package:oho_hero/shared_components/base_full_widget.dart';
 export 'package:oho_hero/config/translation/generated/l10n.dart';
-export 'package:oho_hero/features/auth/repositories/auth_repository.dart';
 export 'package:oho_hero/shared_components/cupertino_textformfield_custom.dart';
 export 'package:oho_hero/shared_components/menu_and_profile.dart';
 export 'package:pull_down_button/pull_down_button.dart';

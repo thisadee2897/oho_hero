@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 class CompanyScreen extends BaseStatefulWidget {
@@ -8,6 +9,7 @@ class CompanyScreen extends BaseStatefulWidget {
 }
 
 class _CompanyScreenState extends BaseState<CompanyScreen> {
+  TextEditingController searchCompany = TextEditingController();
   @override
   Widget buildDesktop(
       BuildContext context, SizingInformation sizingInformation) {
@@ -35,7 +37,12 @@ class _CompanyScreenState extends BaseState<CompanyScreen> {
         slivers: [
           CupertinoSliverNavigationBar(
             automaticallyImplyLeading: false,
-            largeTitle: CupertinoSearchTextField(),
+            largeTitle: CupertinoSearchTextField(
+              controller: searchCompany,
+              onChanged: (value) {
+                print(value);
+              },
+            ),
             trailing: GestureDetector(
               child: Icon(
                 CupertinoIcons.add_circled,
@@ -65,7 +72,15 @@ class _CompanyScreenState extends BaseState<CompanyScreen> {
   List<ListCompany> _buildCompanyList(List<Company>? company) {
     return company!.map((comP) {
       return ListCompany(
-        title: Text(comP.companyName),
+        title: Text(
+          comP.companyName,
+          style: GoogleFonts.openSans(
+            textStyle: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.normal,
+                ),
+          ),
+        ),
         subtitle: Text(comP.id),
         details: Column(
           mainAxisSize: MainAxisSize.max,

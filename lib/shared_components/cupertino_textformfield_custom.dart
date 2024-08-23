@@ -1,4 +1,5 @@
-import '../config/routes/export.dart';
+
+import 'package:oho_hero/config/routes/export.dart';
 
 enum FormType { search, filled }
 

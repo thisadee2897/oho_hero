@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../config/constants/api_path.dart';
+import 'package:oho_hero/config/constants/api_path.dart';
 import 'local_storage_service.dart';
 
 export 'package:dio/dio.dart';

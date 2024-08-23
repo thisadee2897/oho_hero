@@ -7,8 +7,8 @@ class ShowCompanyScreen extends BaseStatefulWidget {
   _ShowCompanyScreenState createState() => _ShowCompanyScreenState();
 }
 
-
 class _ShowCompanyScreenState extends BaseState<ShowCompanyScreen> {
+  TextEditingController provinceCtl = TextEditingController();
   @override
   Widget buildDesktop(
       BuildContext context, SizingInformation sizingInformation) {

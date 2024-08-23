@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../config/constants/constants.dart';
-import '../config/themes/themes.dart';
+import 'package:oho_hero/config/constants/constants.dart';
+import 'package:oho_hero/config/themes/custom_colors.dart';
 
 enum ButtonType { outlined, filled }
 
