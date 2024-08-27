@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 void main() {

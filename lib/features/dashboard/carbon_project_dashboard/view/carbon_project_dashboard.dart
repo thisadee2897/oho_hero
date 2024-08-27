@@ -44,7 +44,7 @@ class _CarbonProjectDashboardScreenState
                 child: Center(
                   child: Text(
                     'CarbonProjectDashboardScreen ${index + 1}',
-                    style: CustomTextStyles.header1,
+                    style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
                   ),
                 ),
               ),

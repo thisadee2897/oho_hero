@@ -26,6 +26,24 @@ showLogOut(BuildContext context, WidgetRef ref) {
   );
 }
 
+void swichCaseOnTapRoute(BuildContext context, SubMenu subMenu) {
+  print(subMenu.path);
+  switch (subMenu.path) {
+    case 'setting-company':
+      context.go(Routes.company);
+    case 'setting-account-security':
+      context.go(Routes.account);
+    case 'dashboard':
+      context.go(Routes.allDashboard);
+    case 'dashboard-footprint':
+      context.go("${Routes.allDashboard}/${Routes.dashEmission}/1");
+    case 'dashboard-carbon-project':
+      context.go("${Routes.allDashboard}/${Routes.dashReduction}/2");
+    case 'dashboard-market':
+      context.go("${Routes.allDashboard}/${Routes.dashMarket}/3");
+  }
+}
+
 class MenuForDesktop extends ConsumerStatefulWidget {
   const MenuForDesktop({
     super.key,
@@ -58,32 +76,16 @@ class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
                     itemBuilder: (context) => menus[i].subMenu.map((subMenu) {
                       return PullDownMenuItem(
                         title: subMenu.name,
-                        onTap: () {
-                          print(subMenu.path);
-                          switch (subMenu.path) {
-                            case 'setting-company':
-                              context.go(Routes.company);
-                            case 'setting-account-security':
-                              context.go(Routes.account);
-                            case 'dashboard':
-                              context.go(Routes.allDashboard);
-                            case 'dashboard-footprint':
-                              context.go(
-                                  "${Routes.allDashboard}/${Routes.dashEmission}/1");
-                            case 'dashboard-carbon-project':
-                              context.go(
-                                  "${Routes.allDashboard}/${Routes.dashReduction}/2");
-                            case 'dashboard-market':
-                              context.go(
-                                  "${Routes.allDashboard}/${Routes.dashMarket}/3");
-                          }
-                        },
+                        onTap: () => swichCaseOnTapRoute(context, subMenu),
                       );
                     }).toList(),
                     buttonBuilder: (context, showMenu) => CupertinoButton(
                       onPressed: showMenu,
                       padding: EdgeInsets.zero,
-                      child: Text(menus[i].name),
+                      child: Text(
+                        menus[i].name,
+                        style: CupertinoTheme.of(context).textTheme.textStyle,
+                      ),
                     ),
                   ),
                 ),
@@ -140,14 +142,8 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
                           actions: main.subMenu.map((subMenu) {
                             return CupertinoActionSheetAction(
                               onPressed: () {
-                                print(subMenu.path);
-                                switch (subMenu.path) {
-                                  case 'setting-company':
-                                    context.go(Routes.company);
-                                  case 'setting-account-security':
-                                    context.go(Routes.account);
-                                }
-                                Navigator.pop(context);
+                                swichCaseOnTapRoute(context, subMenu);
+                                context.pop();
                               },
                               child: Text(subMenu.name),
                             );

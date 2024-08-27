@@ -1,94 +1,117 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:oho_hero/config/routes/export.dart';
 
-class CustomCupertinoDropdown extends StatefulWidget {
-  @override
-  _CustomCupertinoDropdownState createState() => _CustomCupertinoDropdownState();
-}
+class CustomDroupdownFormfield extends StatelessWidget {
+  CustomDroupdownFormfield({
+    super.key,
+    required this.title,
+    required this.controller,
+    this.require = false,
+    this.validator,
+    this.readOnly = false,
+    required this.data,
+    this.selectId,
+  });
 
-class _CustomCupertinoDropdownState extends State<CustomCupertinoDropdown> {
-  String _selectedOption = 'Select an option';
-  final List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
-
-  void _showPicker() {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (_) => Container(
-        height: 300,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(16),
-              child: Text(
-                'Choose an Option',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-            ),
-            Divider(height: 1, color: Colors.grey),
-            Expanded(
-              child: CupertinoPicker(
-                backgroundColor: Colors.white,
-                itemExtent: 40,
-                onSelectedItemChanged: (index) {
-                  setState(() {
-                    _selectedOption = _options[index];
-                  });
-                },
-                children: _options.map((option) => Center(child: Text(option))).toList(),
-              ),
-            ),
-            CupertinoButton(
-              child: Text('Confirm'),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  final String title;
+  final TextEditingController controller;
+  final bool require;
+  final String? Function(String?)? validator;
+  final readOnly;
+  final ScrollController _scrollController = ScrollController();
+  final List<Map<String, dynamic>> data;
+  final String? Function(String?)? selectId;
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text('Custom Dropdown'),
-      ),
-      child: Center(
-        child: GestureDetector(
-          onTap: _showPicker,
-          child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            decoration: BoxDecoration(
-              color: CupertinoColors.systemGrey5,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: CupertinoColors.systemGrey4, width: 1),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Row(
+          children: [
+            if (require)
+              Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
+            Text(
+              "$title",
+              style: TextStyle(
+                fontSize: 14,
+                color: readOnly
+                    ? CupertinoColors.systemGrey3
+                    : CupertinoDynamicColor.resolve(
+                        CupertinoDynamicColor.withBrightness(
+                          color: CupertinoColors.darkBackgroundGray,
+                          darkColor:
+                              CupertinoColors.systemGrey3.highContrastColor,
+                        ),
+                        context,
+                      ),
+              ),
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  _selectedOption,
-                  style: TextStyle(fontSize: 16, color: CupertinoColors.black),
-                ),
-                SizedBox(width: 8),
-                Icon(
-                  CupertinoIcons.chevron_down,
-                  color: CupertinoColors.systemGrey,
-                ),
-              ],
+          ],
+        ),
+        IgnorePointer(
+          ignoring: readOnly,
+          child: PullDownButton(
+            itemsOrder: PullDownMenuItemsOrder.downwards,
+            scrollController: _scrollController,
+            itemBuilder: (BuildContext context) => List.generate(
+              data.length,
+              (i) => PullDownMenuItem(
+                title: '${data[i]['name']}',
+                onTap: () {
+                  controller.text = data[i]['name'];
+                  selectId!(data[i]['id']);
+                },
+              ),
             ),
+            buttonBuilder:
+                (BuildContext context, Future<void> Function() showMenu) {
+              return CupertinoButton(
+                onPressed: showMenu,
+                padding: EdgeInsets.zero,
+                child: IgnorePointer(
+                  child: Stack(
+                    children: [
+                      CupertinoTextFormFieldRow(
+                        readOnly: readOnly,
+                        placeholderStyle: placeholderStyleCustom(
+                            context: context, readOnly: readOnly),
+                        textAlignVertical: TextAlignVertical.center,
+                        controller: controller,
+                        cursorColor: CustomColors.primaryColor,
+                        style: styleCustom(context),
+                        padding: paddingCustom(),
+                        decoration: decorationCustom(
+                            context: context, readOnly: readOnly),
+                        autovalidateMode: AutovalidateMode.always,
+                        validator: validator,
+                        placeholder: title,
+                      ),
+                      Positioned(
+                        top: 11,
+                        right: 10,
+                        child: Icon(
+                          Icons.keyboard_arrow_down_rounded,
+                          color: CupertinoColors.systemGrey2,
+                        ),
+                      ),
+                      Positioned(
+                        bottom: 11,
+                        right: 10,
+                        child: Icon(
+                          Icons.keyboard_arrow_up_rounded,
+                          color: CupertinoColors.systemGrey2,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ),
-      ),
+      ],
     );
   }
 }

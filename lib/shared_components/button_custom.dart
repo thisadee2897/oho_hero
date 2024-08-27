@@ -42,12 +42,6 @@ class ButtonCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final borderColor =
-        enabled ? CustomColors.primaryColor : Colors.transparent;
-
-    final textColor = this.textColor ??
-        (buttonType == ButtonType.outlined ? borderColor : Colors.white);
-
     final buttonColor = buttonType == ButtonType.outlined
         ? color ??
             CupertinoDynamicColor.resolve(
@@ -85,7 +79,7 @@ class ButtonCustom extends StatelessWidget {
             )
           : Text(
               text,
-              style: textStyle!.copyWith(color: textColor),
+              style: CupertinoTheme.of(context).textTheme.textStyle,
               textAlign: TextAlign.center,
             ),
     );

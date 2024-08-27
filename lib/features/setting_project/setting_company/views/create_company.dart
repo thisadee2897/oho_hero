@@ -2,6 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
 import 'package:oho_hero/features/setting_project/setting_company/widgets/search_sub_district.dart';
+import 'package:oho_hero/shared_components/drop_down_custom.dart';
 import 'package:oho_hero/utils/extension/extension.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -33,6 +34,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   TextEditingController districtCtl = TextEditingController();
   TextEditingController provinceCtl = TextEditingController();
   TextEditingController postcodeCtl = TextEditingController(text: '45000');
+  final ScrollController _scrollController = ScrollController();
   final createCompanyKey = GlobalKey<FormState>();
   @override
   Widget buildDesktop(
@@ -87,6 +89,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                 ),
                 largeTitle: Text('Create company'),
               ),
+
               BoxAdapterCustom(
                 buildDesktop: buildDesktop,
                 child: SizedBox(height: 16),
@@ -97,7 +100,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Company',
-                    style: CustomTextStyles.header3,
+                    style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                   ),
                 ),
               ),
@@ -115,45 +118,29 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                             lg: 4,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: PullDownButton(
-                                itemBuilder: (BuildContext context) => [
-                                  PullDownMenuItem(
-                                    title: 'comapnytypeCtl 1',
-                                    onTap: () {
-                                      comapnytypeCtl.text = 'comapnytypeCtl 1';
-                                    },
-                                  ),
-                                  PullDownMenuItem(
-                                    title: 'comapnytypeCtl 2',
-                                    onTap: () {
-                                      comapnytypeCtl.text = 'comapnytypeCtl 2';
-                                    },
-                                  ),
-                                  PullDownMenuItem(
-                                    title: 'comapnytypeCtl 3',
-                                    onTap: () {
-                                      comapnytypeCtl.text = 'comapnytypeCtl 3';
-                                    },
-                                  ),
+                              child: CustomDroupdownFormfield(
+                                require: true,
+                                title: 'เลือกประเภทธุรกิจ',
+                                controller: comapnytypeCtl,
+                                data: [
+                                  {
+                                    'id': '1',
+                                    'name': 'ประเภทธุรกิจ 1',
+                                  },
+                                  {
+                                    'id': '2',
+                                    'name': 'ประเภทธุรกิจ 2',
+                                  },
+                                  {
+                                    'id': '3',
+                                    'name': 'ประเภทธุรกิจ 3',
+                                  }
                                 ],
-                                buttonBuilder: (BuildContext context,
-                                    Future<void> Function() showMenu) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      showMenu();
-                                    },
-                                    child: CupertinoButton(
-                                      onPressed: showMenu,
-                                      padding: EdgeInsets.zero,
-                                      child: IgnorePointer(
-                                        child: CustomTextFormfield(
-                                          require: true,
-                                          title: 'อุตสาหกรรม',
-                                          controller: comapnytypeCtl,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                selectId: (String? value) {
+                                  setState(() {
+                                    comapnyGroupCtl.clear();
+                                  });
+                                  return;
                                 },
                               ),
                             ),
@@ -164,48 +151,28 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                             lg: 4,
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: PullDownButton(
-                                itemBuilder: (BuildContext context) => [
-                                  PullDownMenuItem(
-                                    title: 'comapnyGroupCtl 1',
-                                    onTap: () {
-                                      comapnyGroupCtl.text =
-                                          'comapnyGroupCtl 1';
-                                    },
-                                  ),
-                                  PullDownMenuItem(
-                                    title: 'comapnyGroupCtl 2',
-                                    onTap: () {
-                                      comapnyGroupCtl.text =
-                                          'comapnyGroupCtl 2';
-                                    },
-                                  ),
-                                  PullDownMenuItem(
-                                    title: 'comapnyGroupCtl 3',
-                                    onTap: () {
-                                      comapnyGroupCtl.text =
-                                          'comapnyGroupCtl 3';
-                                    },
-                                  ),
+                              child: CustomDroupdownFormfield(
+                                readOnly: comapnytypeCtl.text.isEmpty,
+                                require: true,
+                                title: 'เลือกหมวดธุรกิจ',
+                                controller: comapnyGroupCtl,
+                                data: [
+                                  {
+                                    'id': '1',
+                                    'name': 'หมวดธุรกิจ 1',
+                                  },
+                                  {
+                                    'id': '2',
+                                    'name': 'หมวดธุรกิจ 2',
+                                  },
+                                  {
+                                    'id': '3',
+                                    'name': 'หมวดธุรกิจ 3',
+                                  }
                                 ],
-                                buttonBuilder: (BuildContext context,
-                                    Future<void> Function() showMenu) {
-                                  return GestureDetector(
-                                    onTap: () {
-                                      showMenu();
-                                    },
-                                    child: CupertinoButton(
-                                      onPressed: showMenu,
-                                      padding: EdgeInsets.zero,
-                                      child: IgnorePointer(
-                                        child: CustomTextFormfield(
-                                          require: true,
-                                          title: 'หมวดธุรกิจ',
-                                          controller: comapnyGroupCtl,
-                                        ),
-                                      ),
-                                    ),
-                                  );
+                                selectId: (String? value) {
+                                  print('Selectid : $value');
+                                  return;
                                 },
                               ),
                             ),
@@ -333,7 +300,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     'Address',
-                    style: CustomTextStyles.header3,
+                    style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                   ),
                 ),
               ),
@@ -523,7 +490,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 'Project type',
-                                style: CustomTextStyles.header3,
+                                style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                               ),
                             ),
                             BackgroundCustom(
@@ -574,7 +541,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 'Document',
-                                style: CustomTextStyles.header3,
+                                style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                               ),
                             ),
                             BackgroundCustom(
@@ -718,6 +685,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       ),
     );
   }
+
 }
 
 class CustomCupertinoToolbarExample extends StatelessWidget {

@@ -1,8 +1,5 @@
 import 'package:oho_hero/config/routes/export.dart';
 import 'package:oho_hero/features/main/views/controllers/menu_json.dart';
-import 'package:oho_hero/features/main/views/model/menu_model.dart';
-
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MenuController extends StateNotifier<AsyncValue<List<MainMenu>>> {
   MenuController(this.ref) : super(const AsyncValue.loading()) {

@@ -35,7 +35,7 @@ class _ShowCompanyScreenState extends BaseState<ShowCompanyScreen> {
           child: Center(
         child: Text(
           'ShowCompanyScreen',
-          style: CustomTextStyles.content1,
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
         ),
       )),
     );

@@ -1,4 +1,3 @@
-import 'package:google_fonts/google_fonts.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 class CompanyScreen extends BaseStatefulWidget {
@@ -74,12 +73,7 @@ class _CompanyScreenState extends BaseState<CompanyScreen> {
       return ListCompany(
         title: Text(
           comP.companyName,
-          style: GoogleFonts.openSans(
-            textStyle: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-                ),
-          ),
+          style: CupertinoTheme.of(context).textTheme.textStyle,
         ),
         subtitle: Text(comP.id),
         details: Column(

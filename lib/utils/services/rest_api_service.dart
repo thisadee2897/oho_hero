@@ -23,8 +23,7 @@ class ApiInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     var token = await ref.read(localStorageServiceProvider).getToken();
     if (token != null) {
-      options.headers["Authorization"] =
-          "Bearer ${token}";
+      options.headers["Authorization"] = "Bearer ${token}";
     }
     // var lang = ref.read(languageProvider);
     // options.queryParameters = {...options.queryParameters, "lang": lang};
@@ -40,16 +39,22 @@ class ApiInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
-    ///TODO:
     }
     handler.reject(err);
   }
 }
 
-class ApiClient{
+class ApiClient {
   Dio baseUrl(ProviderRef<Dio> ref) {
     Dio dio = Dio();
     dio.options.baseUrl = prod;
+    dio.interceptors.add(ApiInterceptor(ref: ref));
+    return dio;
+  }
+
+  Dio baseUrlImage(ProviderRef<Dio> ref) {
+    Dio dio = Dio();
+    dio.options.baseUrl = prodImage;
     dio.interceptors.add(ApiInterceptor(ref: ref));
     return dio;
   }
@@ -57,4 +62,9 @@ class ApiClient{
 
 final apiClientProvider = Provider<Dio>((ref) {
   return ApiClient().baseUrl(ref);
+});
+
+
+final apiClientImageProvider = Provider<Dio>((ref) {
+  return ApiClient().baseUrlImage(ref);
 });

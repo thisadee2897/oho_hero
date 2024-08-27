@@ -44,7 +44,7 @@ class _FootprintDashboardScreenState
                 child: Center(
                   child: Text(
                     'FootprintDashboardScreen ${index+1}',
-                    style: CustomTextStyles.header1,
+                    style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
                   ),
                 ),
               ),

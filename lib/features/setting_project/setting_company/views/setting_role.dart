@@ -35,7 +35,7 @@ class _RoleGroupScreenState extends BaseState<RoleGroupScreen> {
           child: Center(
         child: Text(
           'RoleGroupScreen',
-          style: CustomTextStyles.content1,
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
         ),
       )),
     );

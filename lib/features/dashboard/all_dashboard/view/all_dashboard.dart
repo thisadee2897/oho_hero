@@ -42,7 +42,7 @@ class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
                 child: Center(
                   child: Text(
                     'MarketDashboardScreen ${index+1}',
-                    style: CustomTextStyles.header1,
+                    style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
                   ),
                 ),
               ),

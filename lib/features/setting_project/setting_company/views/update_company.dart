@@ -34,7 +34,7 @@ class _UpdateCompanyState extends BaseState<UpdateCompany> {
       child: Center(
         child: Text(
           'UpdateCompany \n${widget.companyId}',
-          style: CustomTextStyles.content1,
+          style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
         ),
       ),
     );
