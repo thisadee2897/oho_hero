@@ -79,7 +79,7 @@ class ButtonCustom extends StatelessWidget {
             )
           : Text(
               text,
-              style: CupertinoTheme.of(context).textTheme.textStyle,
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Colors.white),
               textAlign: TextAlign.center,
             ),
     );

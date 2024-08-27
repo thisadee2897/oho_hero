@@ -145,7 +145,7 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
                                 swichCaseOnTapRoute(context, subMenu);
                                 context.pop();
                               },
-                              child: Text(subMenu.name),
+                              child: Text(subMenu.name,style: CupertinoTheme.of(context).textTheme.textStyle,),
                             );
                           }).toList(),
                           cancelButton: CupertinoActionSheetAction(
