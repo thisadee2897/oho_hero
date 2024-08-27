@@ -19,11 +19,12 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     GoRouter appRouter = ref.watch(appRouterProvider);
+    final locale = ref.watch(localeProvider);
     return CupertinoApp.router(
       debugShowCheckedModeBanner: false,
       title: 'OHO HERO',
       theme: CustomThemes.mainTheme,
-      // locale: ref.watch(languageProvider),
+      locale: locale,
       builder: (context, child) => ResponsiveBreakpoints.builder(
         child: child!,
         breakpoints: [
@@ -44,3 +45,13 @@ class _MyAppState extends ConsumerState<MyApp> {
     );
   }
 }
+
+void switchLanguage(WidgetRef ref, Locale newLocale) {
+  ref.read(localeProvider.notifier).state = newLocale;
+}
+final localeProvider = StateProvider<Locale>((ref) => Locale('th'));
+
+final languageProvider = StateProvider<Locale>((ref) {
+  final locale = ref.watch(localeProvider);
+  return locale;
+});
