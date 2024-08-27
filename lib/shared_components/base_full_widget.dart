@@ -50,7 +50,7 @@ class ScreenWidget extends ConsumerStatefulWidget {
     this.showToolsBar = true,
   });
 
-  final body;
+  final Widget body;
   final bool isDesktop;
   final bool showToolsBar;
 

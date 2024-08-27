@@ -8,7 +8,7 @@ class Routes {
   static const String detailCompany = 'detail';
   static const String editCompany = 'update';
   //Employee
-  static const String account = '/account-security';
+  static const String account = '/setting-account-security';
   static const String createAccount = 'create';
   static const String detailAccount = 'detail';
   static const String editAccount = 'update';

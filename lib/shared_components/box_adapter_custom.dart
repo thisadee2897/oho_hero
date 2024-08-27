@@ -13,7 +13,7 @@ class BoxAdapterCustom extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Center(
-        child: SizedBox(
+        child: Container(
           width: buildDesktop ? 1200 : null,
           child: child,
         ),

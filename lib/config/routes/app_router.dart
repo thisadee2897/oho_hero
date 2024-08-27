@@ -3,6 +3,7 @@ import 'package:oho_hero/features/dashboard/all_dashboard/view/all_dashboard.dar
 import 'package:oho_hero/features/dashboard/carbon_project_dashboard/view/carbon_project_dashboard.dart';
 import 'package:oho_hero/features/dashboard/footprint_dashboard/view/show_footprint_dashboard.dart';
 import 'package:oho_hero/features/dashboard/market_dashboard/view/all_dashboard.dart';
+
 import 'package:oho_hero/features/setting_project/setting_company/views/update_company.dart';
 import 'package:oho_hero/features/setting_project/setting_company/widgets/search_sub_district.dart';
 
@@ -84,6 +85,14 @@ final appRouterProvider = Provider<GoRouter>(
           // parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) {
             return const NoTransitionPage(child: RoleGroupScreen());
+          },
+        ),
+        //setting-account-security
+        GoRoute(
+          path: Routes.account,
+          // parentNavigatorKey: _rootNavigatorKey,
+          pageBuilder: (context, state) {
+            return const NoTransitionPage(child: AccountSecurityScreen());
           },
         ),
         //Dashboard
