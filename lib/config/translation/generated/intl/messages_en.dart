@@ -22,8 +22,48 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "create_company__addressDetail":
+            MessageLookupByLibrary.simpleMessage("Address Detail"),
+        "create_company__company_abbreviation_en":
+            MessageLookupByLibrary.simpleMessage("Company Abbreviation"),
+        "create_company__district":
+            MessageLookupByLibrary.simpleMessage("District"),
+        "create_company__email": MessageLookupByLibrary.simpleMessage("E mail"),
+        "create_company__name_en":
+            MessageLookupByLibrary.simpleMessage("Company Name (English)"),
+        "create_company__name_th":
+            MessageLookupByLibrary.simpleMessage("Company Name (Thai)"),
+        "create_company__phone_number":
+            MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "create_company__postalCode":
+            MessageLookupByLibrary.simpleMessage("Postal Code"),
+        "create_company__province":
+            MessageLookupByLibrary.simpleMessage("Province"),
+        "create_company__region":
+            MessageLookupByLibrary.simpleMessage("Region"),
+        "create_company__searchSubDistrict":
+            MessageLookupByLibrary.simpleMessage("Search Sub District"),
+        "create_company__select_business_category":
+            MessageLookupByLibrary.simpleMessage("Select Business Category"),
+        "create_company__select_industry_type":
+            MessageLookupByLibrary.simpleMessage("Select industry type"),
+        "create_company__subDistrict":
+            MessageLookupByLibrary.simpleMessage("Sub District"),
+        "create_company__tax_id":
+            MessageLookupByLibrary.simpleMessage("Tax ID"),
+        "create_company__titleAddress":
+            MessageLookupByLibrary.simpleMessage("Address"),
+        "create_company__titleDocument":
+            MessageLookupByLibrary.simpleMessage("Document"),
+        "create_company__titleProjectType":
+            MessageLookupByLibrary.simpleMessage("Project Type"),
+        "create_company__title_Company":
+            MessageLookupByLibrary.simpleMessage("Company"),
         "login__button_login": MessageLookupByLibrary.simpleMessage("LOGIN"),
         "login__button_ok": MessageLookupByLibrary.simpleMessage("OK"),
-        "login__title_Login": MessageLookupByLibrary.simpleMessage("LOGIN PAGE")
+        "login__title_Login":
+            MessageLookupByLibrary.simpleMessage("LOGIN PAGE"),
+        "pleasInputData":
+            MessageLookupByLibrary.simpleMessage("Pleas Input Data")
       };
 }

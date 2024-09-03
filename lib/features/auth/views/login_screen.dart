@@ -10,18 +10,10 @@ class LoginScreen extends BaseStatefulWidget {
 class _LoginScreenState extends BaseState<LoginScreen> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  _onLoginTab() {
-    final loginData = {
-      'user_name': usernameController.text,
-      'pass_word': passwordController.text,
-    };
-    ref.read(loginProvider.notifier).login(loginData, context);
-  }
 
   @override
   Widget buildTablet(
       BuildContext context, SizingInformation sizingInformation) {
-    final loginState = ref.watch(loginProvider);
     return CupertinoPageScaffold(
       child: Center(
         child: SizedBox(
@@ -29,7 +21,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           height: 400,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: content(context, loginState),
+            child: content(),
           ),
         ),
       ),
@@ -39,7 +31,6 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   @override
   Widget buildDesktop(
       BuildContext context, SizingInformation sizingInformation) {
-    final loginState = ref.watch(loginProvider);
     return CupertinoPageScaffold(
       child: Center(
         child: SizedBox(
@@ -47,7 +38,7 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           height: 400,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: content(context, loginState),
+            child: content(),
           ),
         ),
       ),
@@ -57,7 +48,6 @@ class _LoginScreenState extends BaseState<LoginScreen> {
   @override
   Widget buildMobile(
       BuildContext context, SizingInformation sizingInformation) {
-    final loginState = ref.watch(loginProvider);
     return CupertinoPageScaffold(
       child: Center(
         child: SizedBox(
@@ -65,14 +55,16 @@ class _LoginScreenState extends BaseState<LoginScreen> {
           height: 400,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: content(context, loginState),
+            child: content(),
           ),
         ),
       ),
     );
   }
 
-  Center content(BuildContext context, AsyncValue<dynamic> loginState) {
+  Center content() {
+    AsyncValue<UserLogin> loginState = ref.watch(loginProvider);
+    _handleLoginState(context, loginState);
     return Center(
       child: BackgroundCustom(
         child: Column(
@@ -105,5 +97,30 @@ class _LoginScreenState extends BaseState<LoginScreen> {
         ),
       ),
     );
+  }
+
+  _onLoginTab() {
+    final loginData = {
+      'user_name': usernameController.text,
+      'pass_word': passwordController.text,
+    };
+    ref.read(loginProvider.notifier).login(loginData);
+  }
+
+  _handleLoginState(BuildContext context, AsyncValue<UserLogin> loginState) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (loginState.hasError) {
+        customAlert(context, loginState.error.toString());
+      } else {
+        UserLogin? loginResponse = loginState.asData?.value;
+        if (loginResponse?.loginToken != null) {
+          ref
+              .read(localStorageServiceProvider)
+              .saveToken(loginResponse!.loginToken!);
+          GoRouter.of(context).go(Routes.home);
+          ref.invalidate(isLoggedInProvider);
+        }
+      }
+    });
   }
 }

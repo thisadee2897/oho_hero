@@ -22,10 +22,49 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "create_company__addressDetail":
+            MessageLookupByLibrary.simpleMessage("ข้อมูลที่อยู่"),
+        "create_company__company_abbreviation_en":
+            MessageLookupByLibrary.simpleMessage("ชื่อย่อบริษัท"),
+        "create_company__district":
+            MessageLookupByLibrary.simpleMessage("อำเภอ/เขต"),
+        "create_company__email": MessageLookupByLibrary.simpleMessage("อีเมล"),
+        "create_company__name_en":
+            MessageLookupByLibrary.simpleMessage("ชิื่อบริษัท (ภาษาอังกฤษ)"),
+        "create_company__name_th":
+            MessageLookupByLibrary.simpleMessage("ชิื่อบริษัท (ภาษาไทย)"),
+        "create_company__phone_number":
+            MessageLookupByLibrary.simpleMessage("หมายเลขโทรศัพท์"),
+        "create_company__postalCode":
+            MessageLookupByLibrary.simpleMessage("รหัสไปรษณีย์"),
+        "create_company__province":
+            MessageLookupByLibrary.simpleMessage("จังหวัด"),
+        "create_company__region":
+            MessageLookupByLibrary.simpleMessage("ภูมิภาค"),
+        "create_company__searchSubDistrict":
+            MessageLookupByLibrary.simpleMessage("ค้นหาตำบล/แขวง"),
+        "create_company__select_business_category":
+            MessageLookupByLibrary.simpleMessage("Select Business Category"),
+        "create_company__select_industry_type":
+            MessageLookupByLibrary.simpleMessage("เลือกประเภทอุตสาหกรรม"),
+        "create_company__subDistrict":
+            MessageLookupByLibrary.simpleMessage("ตำบล/แขวง"),
+        "create_company__tax_id":
+            MessageLookupByLibrary.simpleMessage("เลขประจำตัวผู้เสียภาษี"),
+        "create_company__titleAddress":
+            MessageLookupByLibrary.simpleMessage("ที่อยู่"),
+        "create_company__titleDocument":
+            MessageLookupByLibrary.simpleMessage("เอกสาร"),
+        "create_company__titleProjectType":
+            MessageLookupByLibrary.simpleMessage("ประเภทโครงการ"),
+        "create_company__title_Company":
+            MessageLookupByLibrary.simpleMessage("บริษัท"),
         "login__button_login":
             MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
         "login__button_ok": MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
         "login__title_Login":
-            MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ")
+            MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
+        "pleasInputData":
+            MessageLookupByLibrary.simpleMessage("กรุณากรอกข้อมูล")
       };
 }

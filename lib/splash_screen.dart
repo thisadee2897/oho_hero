@@ -15,3 +15,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     );
   }
 }
+
+int findSmallestInt(List<int> arr) {
+  arr.sort();
+  return arr.first;
+}

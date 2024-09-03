@@ -55,3 +55,59 @@ final companyDataProvider = Provider<List<Company>>((ref) {
     ),
   ];
 });
+
+class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
+  CompanyController(this.ref) : super(AsyncValue.data([]));
+  final Ref ref;
+
+  Future<void> create({required CompanyForm data}) async {
+    state = AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      CompanyForm newCompany = await ref.read(companyProvider).create({
+        'main_master_company': data.toJson(),
+        'update_password': data.passwordOriginal,
+      });
+      List<CompanyForm> currentList = state.value ?? [];
+      currentList.add(newCompany);
+      return currentList;
+    });
+  }
+
+  Future<void> update({required CompanyForm data}) async {
+    state = AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      CompanyForm updatedCompany = await ref.read(companyProvider).update({
+        'main_master_company': data.toJson(),
+        'update_password': data.passwordOriginal,
+      });
+      List<CompanyForm> currentList = state.value ?? [];
+      int index =
+          currentList.indexWhere((company) => company.id == updatedCompany.id);
+      if (index != -1) {
+        currentList[index] = updatedCompany;
+      }
+      return currentList;
+    });
+  }
+
+  Future<void> read({required CompanyForm data}) async {
+    state = AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      List<CompanyForm> response = await ref.read(companyProvider).read({
+        'main_master_company': data.toJson(),
+        'update_password': data.passwordOriginal,
+      });
+      return response;
+    });
+  }
+
+  Future<void> detail({required String id}) async {
+    state = AsyncValue.loading();
+    state = await AsyncValue.guard(() async {
+      CompanyForm company = await ref.read(companyProvider).create({
+        'main_master_company_id': id,
+      });
+      return [company];
+    });
+  }
+}

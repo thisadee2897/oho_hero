@@ -79,6 +79,206 @@ class Trans {
       args: [],
     );
   }
+
+  /// `บริษัท`
+  String get create_company__title_Company {
+    return Intl.message(
+      'บริษัท',
+      name: 'create_company__title_Company',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `เลือกประเภทอุตสาหกรรม`
+  String get create_company__select_industry_type {
+    return Intl.message(
+      'เลือกประเภทอุตสาหกรรม',
+      name: 'create_company__select_industry_type',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Select Business Category`
+  String get create_company__select_business_category {
+    return Intl.message(
+      'Select Business Category',
+      name: 'create_company__select_business_category',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ชิื่อบริษัท (ภาษาไทย)`
+  String get create_company__name_th {
+    return Intl.message(
+      'ชิื่อบริษัท (ภาษาไทย)',
+      name: 'create_company__name_th',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ชิื่อบริษัท (ภาษาอังกฤษ)`
+  String get create_company__name_en {
+    return Intl.message(
+      'ชิื่อบริษัท (ภาษาอังกฤษ)',
+      name: 'create_company__name_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ชื่อย่อบริษัท`
+  String get create_company__company_abbreviation_en {
+    return Intl.message(
+      'ชื่อย่อบริษัท',
+      name: 'create_company__company_abbreviation_en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `เลขประจำตัวผู้เสียภาษี`
+  String get create_company__tax_id {
+    return Intl.message(
+      'เลขประจำตัวผู้เสียภาษี',
+      name: 'create_company__tax_id',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `อีเมล`
+  String get create_company__email {
+    return Intl.message(
+      'อีเมล',
+      name: 'create_company__email',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `หมายเลขโทรศัพท์`
+  String get create_company__phone_number {
+    return Intl.message(
+      'หมายเลขโทรศัพท์',
+      name: 'create_company__phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ที่อยู่`
+  String get create_company__titleAddress {
+    return Intl.message(
+      'ที่อยู่',
+      name: 'create_company__titleAddress',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ภูมิภาค`
+  String get create_company__region {
+    return Intl.message(
+      'ภูมิภาค',
+      name: 'create_company__region',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ข้อมูลที่อยู่`
+  String get create_company__addressDetail {
+    return Intl.message(
+      'ข้อมูลที่อยู่',
+      name: 'create_company__addressDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ตำบล/แขวง`
+  String get create_company__subDistrict {
+    return Intl.message(
+      'ตำบล/แขวง',
+      name: 'create_company__subDistrict',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ค้นหาตำบล/แขวง`
+  String get create_company__searchSubDistrict {
+    return Intl.message(
+      'ค้นหาตำบล/แขวง',
+      name: 'create_company__searchSubDistrict',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `อำเภอ/เขต`
+  String get create_company__district {
+    return Intl.message(
+      'อำเภอ/เขต',
+      name: 'create_company__district',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `จังหวัด`
+  String get create_company__province {
+    return Intl.message(
+      'จังหวัด',
+      name: 'create_company__province',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `รหัสไปรษณีย์`
+  String get create_company__postalCode {
+    return Intl.message(
+      'รหัสไปรษณีย์',
+      name: 'create_company__postalCode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ประเภทโครงการ`
+  String get create_company__titleProjectType {
+    return Intl.message(
+      'ประเภทโครงการ',
+      name: 'create_company__titleProjectType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `เอกสาร`
+  String get create_company__titleDocument {
+    return Intl.message(
+      'เอกสาร',
+      name: 'create_company__titleDocument',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `กรุณากรอกข้อมูล`
+  String get pleasInputData {
+    return Intl.message(
+      'กรุณากรอกข้อมูล',
+      name: 'pleasInputData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Trans> {

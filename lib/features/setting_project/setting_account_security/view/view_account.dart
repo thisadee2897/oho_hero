@@ -34,63 +34,108 @@ class _AccountSecurityScreenState extends BaseState<AccountSecurityScreen> {
   Widget content({bool buildDesktop = false}) {
     return SafeArea(
       child: Center(
-        child: Column(
-          children: [
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  BoxAdapterCustom(
-                    buildDesktop: buildDesktop,
-                    child: CupertinoListSection.insetGrouped(
-                      backgroundColor:
-                          CupertinoTheme.of(context).barBackgroundColor,
-                      header: Row(
-                        children: [
-                          Expanded(child: CupertinoSearchTextField()),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: IconButton(
-                              icon: Icon(CupertinoIcons.list_bullet),
-                              onPressed: () {},
-                            ),
-                          )
-                        ],
-                      ),
-                      children: List.generate(
-                        50,
-                        (index) => CupertinoListTile(
-                          leading: Text((index + 1).toString()),
-                          title: Text('Firstname Lastname ${index + 1}',
-                              style: CupertinoTheme.of(context)
-                                  .textTheme
-                                  .textStyle),
-                          subtitle: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (buildDesktop) Text('Comapny : TCS'),
-                              if (buildDesktop) Text('Branch : KKC'),
-                              Text('Role : Admin'),
-                              Text('Statue : Active'),
-                              // CupertinoSwitch(
-                              //     value: true, onChanged: (value) {}),
-                            ],
-                          ),
-                          trailing: IconButton(onPressed: (){}, icon: Icon(CupertinoIcons.right_chevron)),
-                        ),
+        child: SizedBox(
+          width: buildDesktop ? 1200 : null,
+          child: Column(
+            children: [
+              Container(
+                color: CupertinoTheme.of(context).barBackgroundColor,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                        icon: Icon(CupertinoIcons.list_bullet),
+                        onPressed: () {},
                       ),
                     ),
-                  ),
-                ],
+                    Expanded(child: CupertinoSearchTextField()),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                        icon: Icon(CupertinoIcons.add_circled),
+                        onPressed: () {},
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            footer(
-              context: context,
-              widget: widget,
-              buildDesktop: buildDesktop,
-              currentPage: 1,
-              totalPage: 10,
-            ),
-          ],
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    BoxAdapterCustom(
+                      buildDesktop: buildDesktop,
+                      child: CustomTableCupertino(context: context),
+                    ),
+                  ],
+                ),
+              ),
+              footer(
+                context: context,
+                widget: widget,
+                buildDesktop: buildDesktop,
+                currentPage: 1,
+                totalPage: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTableCupertino extends StatelessWidget {
+  const CustomTableCupertino({
+    super.key,
+    required this.context,
+  });
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return CupertinoListSection.insetGrouped(
+      backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+      children: List.generate(
+        50,
+        (index) => CupertinoListTile(
+          leading: Text((index + 1).toString()),
+          title: Text('Firstname Lastname ${index + 1}',
+              style: CupertinoTheme.of(context).textTheme.textStyle),
+          subtitle: Row(
+            children: [
+              if (true)
+                Expanded(
+                  flex: 4,
+                  child: Text('Company : TCS'),
+                ),
+              if (true)
+                Expanded(
+                  flex: 4,
+                  child: Text('Branch : KKC'),
+                ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: const EdgeInsets.only(
+                    right: 8,
+                    left: 8,
+                  ),
+                  child: Text(
+                    'Role : Admin',
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: 1,
+                child: Text('Status : Active'),
+              ),
+            ],
+          ),
+          trailing: IconButton(
+              onPressed: () {}, icon: Icon(CupertinoIcons.right_chevron)),
         ),
       ),
     );
@@ -141,7 +186,8 @@ class _footerState extends State<footer> {
                   },
             icon: const Icon(Icons.arrow_left_sharp),
           ),
-          Text('หน้า${widget.currentPage}/${widget.totalPage}',style: CupertinoTheme.of(context).textTheme.textStyle),
+          Text('หน้า${widget.currentPage}/${widget.totalPage}',
+              style: CupertinoTheme.of(context).textTheme.textStyle),
           IconButton(
             onPressed: widget.totalPage - widget.currentPage == 0
                 ? null

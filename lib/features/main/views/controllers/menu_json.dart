@@ -112,6 +112,36 @@ Map<String, dynamic> jsonMenu = {
         },
         {
           "sub_menu_id": 1,
+          "sub_menu_name": "Industry Type",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
+          "sub_menu_name": "Business Category",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
+          "sub_menu_name": "Emission Factor Group",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
+          "sub_menu_name": "Emission Factor Value",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
+          "sub_menu_name": "Unit",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
+          "sub_menu_name": "Actitivires",
+          "sub_menu_path": "setting-company"
+        },
+        {
+          "sub_menu_id": 1,
           "sub_menu_name": "Account Security",
           "sub_menu_path": "setting-account-security"
         },

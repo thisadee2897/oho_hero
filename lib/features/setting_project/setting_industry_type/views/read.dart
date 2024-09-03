@@ -1,14 +1,12 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class AllDashboardScreen extends BaseStatefulWidget {
-  static String path = 'all-dashboard';
-  const AllDashboardScreen({Key? key}) : super(key: key);
-
+class IndustryTypeRead extends BaseStatefulWidget {
+  const IndustryTypeRead({Key? key}) : super(key: key);
   @override
-  _AllDashboardScreenState createState() => _AllDashboardScreenState();
+  _IndustryTypeReadState createState() => _IndustryTypeReadState();
 }
 
-class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
+class _IndustryTypeReadState extends BaseState<IndustryTypeRead> {
   TextEditingController provinceCtl = TextEditingController();
   @override
   Widget buildDesktop(
@@ -31,7 +29,6 @@ class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
   }
 
   Widget content({bool buildDesktop = false}) {
-    final loginState = ref.watch(loginProvider);
     return SafeArea(
       child: Center(
         child: CustomScrollView(
@@ -39,13 +36,11 @@ class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
             50,
             (index) => BoxAdapterCustom(
               child: Padding(
-                padding: const EdgeInsets.only(top: 50, bottom: 50),
+                padding: const EdgeInsets.only(top: 50,bottom: 50),
                 child: Center(
                   child: Text(
-                    'MarketDashboardScreen ${index + 1}${loginState.value?.id}',
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .navLargeTitleTextStyle,
+                    'IndustryTypeRead ${index+1}',
+                    style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
                   ),
                 ),
               ),

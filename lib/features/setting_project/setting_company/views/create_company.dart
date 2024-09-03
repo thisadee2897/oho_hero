@@ -118,69 +118,71 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
           children: [
             ResponsiveGridRow(
               children: [
-                ResponsiveGridCol(
-                  sm: 6,
-                  md: 6,
-                  lg: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomDateTimePickerFormfield(
-                      initialDate: DateTime.now(),
-                      buildDesktop: buildDesktop,
-                      maximumYear: DateTime.now().year,
-                      // require: true,
-                      title: 'วัน/เดือน/ปีเกิด เวลา',
-                      controller: dateCtl,
-                      onSave: (String? value) {
-                        print(value);
-                        return;
-                      },
-                    ),
-                  ),
-                ),
-                ResponsiveGridCol(
-                  sm: 6,
-                  md: 6,
-                  lg: 4,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomDatePickerFormfield(
-                            initialDate: DateTime.now(),
-                            buildDesktop: buildDesktop,
-                            maximumYear: DateTime.now().year,
-                            // require: true,
-                            title: 'วัน/เดือน/ปีเกิด',
-                            controller: dateCtl,
-                            onSave: (String? value) {
-                              print(value);
-                              return;
-                            },
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 130,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CustomTimePickerFormfield(
-                            initialDate: DateTime.now(),
-                            buildDesktop: buildDesktop,
-                            maximumYear: DateTime.now().year,
-                            title: 'เวลา',
-                            controller: timeCtl,
-                            onSave: (String? value) {
-                              print(value);
-                              return;
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                //
+                // ResponsiveGridCol(
+                //   sm: 6,
+                //   md: 6,
+                //   lg: 4,
+                //   child: Padding(
+                //     padding: const EdgeInsets.all(8.0),
+                //     child: CustomDateTimePickerFormfield(
+                //       initialDate: DateTime.now(),
+                //       buildDesktop: buildDesktop,
+                //       maximumYear: DateTime.now().year,
+                //       // require: true,
+                //       title: 'วัน/เดือน/ปีเกิด เวลา',
+                //       controller: dateCtl,
+                //       onSave: (String? value) {
+                //         print(value);
+                //         return;
+                //       },
+                //     ),
+                //   ),
+                // ),
+                // ResponsiveGridCol(
+                //   sm: 6,
+                //   md: 6,
+                //   lg: 4,
+                //   child: Row(
+                //     children: [
+                //       Expanded(
+                //         child: Padding(
+                //           padding: const EdgeInsets.all(8.0),
+                //           child: CustomDatePickerFormfield(
+                //             initialDate: DateTime.now(),
+                //             buildDesktop: buildDesktop,
+                //             maximumYear: DateTime.now().year,
+                //             // require: true,
+                //             title: 'วัน/เดือน/ปีเกิด',
+                //             controller: dateCtl,
+                //             onSave: (String? value) {
+                //               print(value);
+                //               return;
+                //             },
+                //           ),
+                //         ),
+                //       ),
+                //       SizedBox(
+                //         width: 130,
+                //         child: Padding(
+                //           padding: const EdgeInsets.all(8.0),
+                //           child: CustomTimePickerFormfield(
+                //             initialDate: DateTime.now(),
+                //             buildDesktop: buildDesktop,
+                //             maximumYear: DateTime.now().year,
+                //             title: 'เวลา',
+                //             controller: timeCtl,
+                //             onSave: (String? value) {
+                //               print(value);
+                //               return;
+                //             },
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+                //
                 ResponsiveGridCol(
                   sm: 6,
                   md: 6,
@@ -189,7 +191,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomDroupdownFormfield(
                       require: true,
-                      title: 'เลือกประเภทธุรกิจ',
+                      title: Trans.of(context)
+                          .create_company__select_industry_type,
                       controller: comapnytypeCtl,
                       data: [
                         {
@@ -223,7 +226,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     child: CustomDroupdownFormfield(
                       readOnly: comapnytypeCtl.text.isEmpty,
                       require: true,
-                      title: 'เลือกหมวดธุรกิจ',
+                      title: Trans.of(context)
+                          .create_company__select_business_category,
                       controller: comapnyGroupCtl,
                       data: [
                         {
@@ -253,7 +257,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
-                      title: 'Company TH',
+                      title: Trans.of(context).create_company__name_th,
                       controller: nameTHCtl,
                     ),
                   ),
@@ -266,11 +270,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: 'Company EN',
+                      title: Trans.of(context).create_company__name_en,
                       controller: nameENCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Pleas input Data.';
+                          return Trans.of(context).pleasInputData;
                         }
                         return null;
                       },
@@ -285,11 +289,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: 'Company Abbreviation EN',
+                      title: Trans.of(context)
+                          .create_company__company_abbreviation_en,
                       controller: nameAbbeviationCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Pleas input Data.';
+                          return Trans.of(context).pleasInputData;
                         }
                         return null;
                       },
@@ -304,11 +309,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: 'Tax ID',
+                      title: Trans.of(context).create_company__tax_id,
                       controller: taxIDCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Pleas input Data.';
+                          return Trans.of(context).pleasInputData;
                         }
                         return null;
                       },
@@ -323,11 +328,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: 'Email',
+                      title: Trans.of(context).create_company__email,
                       controller: emailCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Pleas input Data.';
+                          return Trans.of(context).pleasInputData;
                         } else if (value.isEmail()) {
                           return null;
                         }
@@ -344,11 +349,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: 'Phone Number',
+                      title: Trans.of(context).create_company__phone_number,
                       controller: phoneNumberCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
-                          return 'Please input Data.';
+                          return Trans.of(context).pleasInputData;
                         }
                         return null;
                       },
@@ -379,11 +384,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextFormfield(
                     require: true,
-                    title: 'Region',
+                    title: Trans.of(context).create_company__region,
                     controller: regionCtl,
                     validator: (String? value) {
                       if (value!.isEmpty) {
-                        return 'Pleas input Data.';
+                        return Trans.of(context).pleasInputData;
                       }
                       return null;
                     },
@@ -397,56 +402,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: CustomTextFormfield(
-                    title: 'Building/Village',
+                    title: Trans.of(context).create_company__addressDetail,
                     controller: buildingCtl,
-                  ),
-                ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    title: 'Room Number',
-                    controller: roomNumberCtl,
-                  ),
-                ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    title: 'Floor Number',
-                    controller: floorNumberCtl,
-                  ),
-                ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    title: 'Alley/Soi',
-                    controller: alleyCtl,
-                  ),
-                ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    title: 'Road',
-                    controller: rordCtl,
                   ),
                 ),
               ),
@@ -467,11 +424,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                       child: CustomTextFormfield(
                         require: true,
                         title: subDistrictCtl.text.isEmpty
-                            ? 'Search Subdistrict'
-                            : 'Sub district/Quarter',
+                            ? Trans.of(context)
+                                .create_company__searchSubDistrict
+                            : Trans.of(context).create_company__subDistrict,
                         validator: (String? value) {
                           // if (value!.isEmpty) {
-                          //   return 'Pleas input Data.';
+                          //   return Trans.of(context).pleasInputData;
                           // }
                           return null;
                         },
@@ -490,7 +448,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   child: IgnorePointer(
                     child: CustomTextFormfield(
                       readOnly: true,
-                      title: 'District',
+                      title: Trans.of(context).create_company__district,
                       controller: districtCtl,
                     ),
                   ),
@@ -505,7 +463,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   child: IgnorePointer(
                     child: CustomTextFormfield(
                       readOnly: true,
-                      title: 'Province',
+                      title: Trans.of(context).create_company__province,
                       controller: provinceCtl,
                     ),
                   ),
@@ -520,7 +478,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   child: IgnorePointer(
                     child: CustomTextFormfield(
                       readOnly: true,
-                      title: 'Postal Code',
+                      title: Trans.of(context).create_company__postalCode,
                       controller: postcodeCtl,
                     ),
                   ),
@@ -550,7 +508,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Project type',
+                      Trans.of(context).create_company__titleProjectType,
                       style: CupertinoTheme.of(context)
                           .textTheme
                           .tabLabelTextStyle,
@@ -601,7 +559,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Document',
+                      Trans.of(context).create_company__titleDocument,
                       style: CupertinoTheme.of(context)
                           .textTheme
                           .tabLabelTextStyle,
@@ -723,7 +681,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          'Address',
+          Trans.of(context).create_company__titleAddress,
           style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
         ),
       ),
@@ -736,7 +694,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
-          'Company',
+          Trans.of(context).create_company__title_Company,
           style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
         ),
       ),

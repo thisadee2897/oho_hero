@@ -6,81 +6,40 @@ part of 'user_login.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$LoginResponseImpl _$$LoginResponseImplFromJson(Map<String, dynamic> json) =>
-    _$LoginResponseImpl(
-      status: (json['status'] as num?)?.toInt(),
-      token: json['token'] == null
-          ? null
-          : Token.fromJson(json['token'] as Map<String, dynamic>),
-      employee: json['employee'] == null
-          ? null
-          : Employee.fromJson(json['employee'] as Map<String, dynamic>),
+_$UserLoginImpl _$$UserLoginImplFromJson(Map<String, dynamic> json) =>
+    _$UserLoginImpl(
+      id: json['user_login_id'] as String?,
+      username: json['user_name'] as String?,
+      password: json['pass_word'] as String?,
+      firstName: json['user_login_fullname'] as String?,
+      active: json['user_login_active'] as bool?,
+      roleGroupId: json['role_group_id'] as String?,
+      companyId: json['main_master_company_id'] as String?,
+      loginToken: json['user_login_token'] as String?,
+      userTypeId: (json['user_type_id'] as num?)?.toInt(),
+      email: json['user_email'] as String?,
+      phoneNumber: json['user_login_tel'] as String?,
+      passwordOriginal: json['pass_word_original'] as String?,
+      employeeId: json['master_employee_id'] as String?,
+      customerId: json['master_custumer_id'] as String?,
+      savetime: json['savetime'] as String?,
     );
 
-Map<String, dynamic> _$$LoginResponseImplToJson(_$LoginResponseImpl instance) =>
+Map<String, dynamic> _$$UserLoginImplToJson(_$UserLoginImpl instance) =>
     <String, dynamic>{
-      'status': instance.status,
-      'token': instance.token,
-      'employee': instance.employee,
-    };
-
-_$TokenImpl _$$TokenImplFromJson(Map<String, dynamic> json) => _$TokenImpl(
-      type: json['type'] as String?,
-      token: json['token'] as String?,
-      refreshToken: json['refreshToken'] as String?,
-      expiresAt: json['expires_at'] as String?,
-    );
-
-Map<String, dynamic> _$$TokenImplToJson(_$TokenImpl instance) =>
-    <String, dynamic>{
-      'type': instance.type,
-      'token': instance.token,
-      'refreshToken': instance.refreshToken,
-      'expires_at': instance.expiresAt,
-    };
-
-_$EmployeeImpl _$$EmployeeImplFromJson(Map<String, dynamic> json) =>
-    _$EmployeeImpl(
-      object: json['object'] as String?,
-      id: json['id'] as String?,
-      no: json['no'] as String?,
-      companyId: json['company_id'] as String?,
-      branchId: json['branch_id'] as String?,
-      pin: json['pin'] as String?,
-      username: json['username'] as String?,
-      firstName: json['first_name'] as String?,
-      lastName: json['last_name'] as String?,
-      phoneNumber: json['phone_number'] as String?,
-      email: json['email'] as String?,
-      roleId: json['role_id'] as String?,
-      avatar: json['avatar'] as String?,
-      active: (json['active'] as num?)?.toInt(),
-      startedAt: json['started_at'] as String?,
-      createdBy: json['created_by'] as String?,
-      updatedBy: json['updated_by'] as String?,
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-    );
-
-Map<String, dynamic> _$$EmployeeImplToJson(_$EmployeeImpl instance) =>
-    <String, dynamic>{
-      'object': instance.object,
-      'id': instance.id,
-      'no': instance.no,
-      'company_id': instance.companyId,
-      'branch_id': instance.branchId,
-      'pin': instance.pin,
-      'username': instance.username,
-      'first_name': instance.firstName,
-      'last_name': instance.lastName,
-      'phone_number': instance.phoneNumber,
-      'email': instance.email,
-      'role_id': instance.roleId,
-      'avatar': instance.avatar,
-      'active': instance.active,
-      'started_at': instance.startedAt,
-      'created_by': instance.createdBy,
-      'updated_by': instance.updatedBy,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
+      'user_login_id': instance.id,
+      'user_name': instance.username,
+      'pass_word': instance.password,
+      'user_login_fullname': instance.firstName,
+      'user_login_active': instance.active,
+      'role_group_id': instance.roleGroupId,
+      'main_master_company_id': instance.companyId,
+      'user_login_token': instance.loginToken,
+      'user_type_id': instance.userTypeId,
+      'user_email': instance.email,
+      'user_login_tel': instance.phoneNumber,
+      'pass_word_original': instance.passwordOriginal,
+      'master_employee_id': instance.employeeId,
+      'master_custumer_id': instance.customerId,
+      'savetime': instance.savetime,
     };

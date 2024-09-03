@@ -1,4 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/main.dart';
 
 showLogOut(BuildContext context, WidgetRef ref) {
   return showCupertinoDialog(
@@ -61,6 +63,7 @@ class MenuForDesktop extends ConsumerStatefulWidget {
 class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
   @override
   Widget build(BuildContext context) {
+    final locale = ref.watch(localeProvider);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -101,6 +104,16 @@ class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
             showLogOut(context, widget.ref);
           },
           child: Icon(CupertinoIcons.person),
+        ),
+        CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            Locale newLocale = locale.languageCode == 'th'
+                ? const Locale('en')
+                : const Locale('th');
+            switchLanguage(ref, newLocale);
+          },
+          child: Text(locale.languageCode == 'th' ? 'TH' : 'EN'),
         ),
       ],
     );
@@ -145,7 +158,12 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
                                 swichCaseOnTapRoute(context, subMenu);
                                 context.pop();
                               },
-                              child: Text(subMenu.name,style: CupertinoTheme.of(context).textTheme.textStyle,),
+                              child: Text(
+                                subMenu.name,
+                                style: CupertinoTheme.of(context)
+                                    .textTheme
+                                    .textStyle,
+                              ),
                             );
                           }).toList(),
                           cancelButton: CupertinoActionSheetAction(

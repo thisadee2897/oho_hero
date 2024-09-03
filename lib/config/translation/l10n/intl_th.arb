@@ -1,5 +1,25 @@
 {
-       "login__button_login":"เข้าสู่ระบบ",
-       "login__button_ok":"เข้าสู่ระบบ",
-       "login__title_Login":"เข้าสู่ระบบ"
+       "login__button_login": "เข้าสู่ระบบ",
+       "login__button_ok": "เข้าสู่ระบบ",
+       "login__title_Login": "เข้าสู่ระบบ",
+       "create_company__title_Company": "บริษัท",
+       "create_company__select_industry_type": "เลือกประเภทอุตสาหกรรม",
+       "create_company__select_business_category": "Select Business Category",
+       "create_company__name_th": "ชิื่อบริษัท (ภาษาไทย)",
+       "create_company__name_en": "ชิื่อบริษัท (ภาษาอังกฤษ)",
+       "create_company__company_abbreviation_en": "ชื่อย่อบริษัท",
+       "create_company__tax_id": "เลขประจำตัวผู้เสียภาษี",
+       "create_company__email": "อีเมล",
+       "create_company__phone_number": "หมายเลขโทรศัพท์",
+       "create_company__titleAddress": "ที่อยู่",
+       "create_company__region": "ภูมิภาค",
+       "create_company__addressDetail": "ข้อมูลที่อยู่",
+       "create_company__subDistrict": "ตำบล/แขวง",
+       "create_company__searchSubDistrict": "ค้นหาตำบล/แขวง",
+       "create_company__district": "อำเภอ/เขต",
+       "create_company__province": "จังหวัด",
+       "create_company__postalCode": "รหัสไปรษณีย์",
+       "create_company__titleProjectType": "ประเภทโครงการ",
+       "create_company__titleDocument": "เอกสาร",
+       "pleasInputData": "กรุณากรอกข้อมูล"
 }
