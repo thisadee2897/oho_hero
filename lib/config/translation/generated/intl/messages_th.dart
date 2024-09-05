@@ -44,7 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "create_company__searchSubDistrict":
             MessageLookupByLibrary.simpleMessage("ค้นหาตำบล/แขวง"),
         "create_company__select_business_category":
-            MessageLookupByLibrary.simpleMessage("Select Business Category"),
+            MessageLookupByLibrary.simpleMessage("เลือกหมวดหมู่ธุรกิจ"),
         "create_company__select_industry_type":
             MessageLookupByLibrary.simpleMessage("เลือกประเภทอุตสาหกรรม"),
         "create_company__subDistrict":

@@ -100,10 +100,10 @@ class Trans {
     );
   }
 
-  /// `Select Business Category`
+  /// `เลือกหมวดหมู่ธุรกิจ`
   String get create_company__select_business_category {
     return Intl.message(
-      'Select Business Category',
+      'เลือกหมวดหมู่ธุรกิจ',
       name: 'create_company__select_business_category',
       desc: '',
       args: [],
