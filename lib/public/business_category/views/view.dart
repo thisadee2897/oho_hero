@@ -1,26 +1,26 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class IndustryGrorupDropDown extends ConsumerStatefulWidget {
-  const IndustryGrorupDropDown(
+class BusinessCategoryDropDown extends ConsumerStatefulWidget {
+  const BusinessCategoryDropDown(
       {super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
-  final Function(IndustryGrorupDropDownModel) onchanged;
+  final Function(BusinessCategoryDropDownModel) onchanged;
 
   @override
-  ConsumerState<IndustryGrorupDropDown> createState() =>
+  ConsumerState<BusinessCategoryDropDown> createState() =>
       _IndustryGrorupDropDownState();
 }
 
 class _IndustryGrorupDropDownState
-    extends ConsumerState<IndustryGrorupDropDown> {
+    extends ConsumerState<BusinessCategoryDropDown> {
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<IndustryGrorupDropDownModel>> industryList =
-        ref.watch(industryGroupDropdownProvider);
+    AsyncValue<List<BusinessCategoryDropDownModel>> listData =
+        ref.watch(businessCategoryDropdownProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: industryList.when(
+        child: listData.when(
           loading: _loading,
           error: (error, stack) => _error(context, error),
           data: (data) => _data(context, data),
@@ -38,12 +38,12 @@ class _IndustryGrorupDropDownState
 
   Widget _loading() {
     return LoadingTextField(
-      title: Trans.of(context).create_company__select_industry_type,
+      title: Trans.of(context).create_company__select_business_category,
       require: true,
     );
   }
 
-  Widget _data(BuildContext context, List<IndustryGrorupDropDownModel> data) {
+  Widget _data(BuildContext context, List<BusinessCategoryDropDownModel> data) {
     String? initialText;
     if (widget.selectedID != null && data.isNotEmpty) {
       var selected = data.firstWhere(
@@ -54,7 +54,7 @@ class _IndustryGrorupDropDownState
     return CustomDroupdownFormfield(
       initId: widget.selectedID,
       require: true,
-      title: Trans.of(context).create_company__select_industry_type,
+      title: Trans.of(context).create_company__select_business_category,
       controller: TextEditingController(
         text: initialText ?? '',
       ),

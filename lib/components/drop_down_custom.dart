@@ -11,6 +11,7 @@ class CustomDroupdownFormfield extends StatelessWidget {
     this.readOnly = false,
     required this.data,
     this.selectId,
+    this.initId,
   });
 
   final String title;
@@ -22,6 +23,7 @@ class CustomDroupdownFormfield extends StatelessWidget {
   final List<Map<String, dynamic>> data;
   final String? Function(String?)? selectId;
 
+  final String? initId;
   @override
   Widget build(BuildContext context) {
     return Column(

@@ -1,8 +1,8 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/public/business_category/views/view.dart';
 import 'package:oho_hero/screens/setting_project/setting_company/widgets/search_sub_district.dart';
-
 import 'package:oho_hero/utils/extension/extension.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -10,7 +10,6 @@ class CreateCompanyScreen extends BaseStatefulWidget {
   final String previousPageTitle;
   const CreateCompanyScreen(this.previousPageTitle, {Key? key})
       : super(key: key, subPage: true);
-
   @override
   _CreateCompanyScreenState createState() => _CreateCompanyScreenState();
 }
@@ -119,8 +118,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formCompany(bool buildDesktop) {
-    AsyncValue<List<IndustryGrorupDropDownModel>> industryList =
-        ref.watch(industryGroupDropdownProvider);
     var company = ref.read(companyProvider.notifier);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
@@ -134,39 +131,27 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   sm: 6,
                   md: 6,
                   lg: 4,
-                  child: selectIndustryType(industryList, company),
+                  child: IndustryGrorupDropDown(
+                    selectedID: company.dataCompany.industryGroupId,
+                    onchanged: (data) {
+                      company.updateForm(company.dataCompany
+                          .copyWith(industryGroupId: data.id));
+                      ref
+                          .read(businessCategoryDropdownProvider.notifier)
+                          .read(industryGroupId: data.id);
+                    },
+                  ),
                 ),
                 ResponsiveGridCol(
                   sm: 6,
                   md: 6,
                   lg: 4,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomDroupdownFormfield(
-                      readOnly: comapnytypeCtl.text.isEmpty,
-                      require: true,
-                      title: Trans.of(context)
-                          .create_company__select_business_category,
-                      controller: comapnyGroupCtl,
-                      data: [
-                        {
-                          'id': '1',
-                          'name': 'หมวดธุรกิจ 1',
-                        },
-                        {
-                          'id': '2',
-                          'name': 'หมวดธุรกิจ 2',
-                        },
-                        {
-                          'id': '3',
-                          'name': 'หมวดธุรกิจ 3',
-                        }
-                      ],
-                      selectId: (String? value) {
-                        print('Selectid : $value');
-                        return;
-                      },
-                    ),
+                  child: BusinessCategoryDropDown(
+                    selectedID: company.dataCompany.businessCategoryId,
+                    onchanged: (data) {
+                      company.updateForm(company.dataCompany
+                          .copyWith(businessCategoryId: data.id));
+                    },
                   ),
                 ),
                 ResponsiveGridCol(
@@ -291,44 +276,45 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       AsyncValue<List<IndustryGrorupDropDownModel>> industryList,
       CompanyController company) {
     return Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: industryList.when(
-          data: (data) {
-            return CustomDroupdownFormfield(
-              require: true,
-              title: Trans.of(context).create_company__select_industry_type,
-              controller: comapnytypeCtl,
-              data: List.generate(
-                  industryList.requireValue.length,
-                  (index) => {
-                        'id': industryList.requireValue[index].id,
-                        'name': industryList.requireValue[index].name,
-                      }),
-              selectId: (String? value) {
-                if (value != null) {
-                  company.updateForm(
-                    company.dataCompany.copyWith(
-                      industryGroupId: value,
-                    ),
-                  );
-                  setState(() {
-                    comapnyGroupCtl.clear();
-                  });
-                }
-                return;
-              },
-            );
-          },
-          loading: () => CupertinoActivityIndicator(
-            color: CustomColors.primaryColor,
-          ),
-          error: (error, stack) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              customAlert(context, error.toString());
-            });
-            return Text(error.toString());
-          },
-        ));
+      padding: const EdgeInsets.all(8.0),
+      child: industryList.when(
+        data: (data) {
+          return CustomDroupdownFormfield(
+            require: true,
+            title: Trans.of(context).create_company__select_industry_type,
+            controller: comapnytypeCtl,
+            data: List.generate(
+                industryList.requireValue.length,
+                (index) => {
+                      'id': industryList.requireValue[index].id,
+                      'name': industryList.requireValue[index].name,
+                    }),
+            selectId: (String? value) {
+              if (value != null) {
+                company.updateForm(
+                  company.dataCompany.copyWith(
+                    industryGroupId: value,
+                  ),
+                );
+                setState(() {
+                  comapnyGroupCtl.clear();
+                });
+              }
+              return;
+            },
+          );
+        },
+        loading: () => CupertinoActivityIndicator(
+          color: CustomColors.primaryColor,
+        ),
+        error: (error, stack) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            customAlert(context, error.toString());
+          });
+          return Text(error.toString());
+        },
+      ),
+    );
   }
 
   Widget formAddress(bool buildDesktop) {
