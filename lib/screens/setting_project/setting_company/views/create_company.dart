@@ -1,8 +1,10 @@
+import 'dart:convert';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
+
 import 'package:oho_hero/public/business_category/views/view.dart';
-import 'package:oho_hero/screens/setting_project/setting_company/widgets/search_sub_district.dart';
 import 'package:oho_hero/utils/extension/extension.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -318,6 +320,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formAddress(bool buildDesktop) {
+    var company = ref.read(companyProvider.notifier);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: BackgroundCustom(
@@ -362,29 +365,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                 lg: 3,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: GestureDetector(
-                    onTap: () {
-                      print('object');
-                      context.go(
-                          '${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}');
+                  child: SubDistrictFormfield(
+                    selectedID: company.dataCompany.prefectureId,
+                    onchanged: (SubdistrictModel) {
+                      print(jsonEncode(SubdistrictModel.id));
                     },
-                    child: AbsorbPointer(
-                      absorbing: true,
-                      child: CustomTextFormfield(
-                        require: true,
-                        title: subDistrictCtl.text.isEmpty
-                            ? Trans.of(context)
-                                .create_company__searchSubDistrict
-                            : Trans.of(context).create_company__subDistrict,
-                        validator: (String? value) {
-                          // if (value!.isEmpty) {
-                          //   return Trans.of(context).pleasInputData;
-                          // }
-                          return null;
-                        },
-                        controller: subDistrictCtl,
-                      ),
-                    ),
                   ),
                 ),
               ),

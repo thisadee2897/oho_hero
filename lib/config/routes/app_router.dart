@@ -5,7 +5,7 @@ import 'package:oho_hero/screens/dashboard/footprint_dashboard/view/show_footpri
 import 'package:oho_hero/screens/dashboard/market_dashboard/view/all_dashboard.dart';
 
 import 'package:oho_hero/screens/setting_project/setting_company/views/update_company.dart';
-import 'package:oho_hero/screens/setting_project/setting_company/widgets/search_sub_district.dart';
+import 'package:oho_hero/public/address/views/search_sub_district.dart';
 
 import 'package:oho_hero/splash_screen.dart';
 
