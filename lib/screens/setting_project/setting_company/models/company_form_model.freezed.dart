@@ -55,11 +55,11 @@ mixin _$CompanyForm {
   @JsonKey(name: 'main_master_company_attach_cert')
   String? get attachCert => throw _privateConstructorUsedError;
   @JsonKey(name: 'main_master_company_attach_boj5')
-  int? get attachBoj5 => throw _privateConstructorUsedError;
+  String? get attachBoj5 => throw _privateConstructorUsedError;
   @JsonKey(name: 'main_master_company_pp20')
   String? get pp20 => throw _privateConstructorUsedError;
   @JsonKey(name: 'master_application_type_id')
-  String? get type_id => throw _privateConstructorUsedError;
+  String? get typeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'application_version')
   String? get version => throw _privateConstructorUsedError;
   @JsonKey(name: 'master_application_type_id_update')
@@ -69,7 +69,7 @@ mixin _$CompanyForm {
   @JsonKey(name: 'pass_word_original')
   String? get passwordOriginal => throw _privateConstructorUsedError;
   @JsonKey(name: 'user_login_id')
-  String? get CompanyFormId => throw _privateConstructorUsedError;
+  String? get userLoginId => throw _privateConstructorUsedError;
   @JsonKey(name: 'master_project_type_id')
   String? get projectTypeId => throw _privateConstructorUsedError;
   @JsonKey(name: 'contract_start_date')
@@ -111,14 +111,14 @@ abstract class $CompanyFormCopyWith<$Res> {
       @JsonKey(name: 'master_industry_group_id') String? industryGroupId,
       @JsonKey(name: 'master_business_category_id') String? businessCategoryId,
       @JsonKey(name: 'main_master_company_attach_cert') String? attachCert,
-      @JsonKey(name: 'main_master_company_attach_boj5') int? attachBoj5,
+      @JsonKey(name: 'main_master_company_attach_boj5') String? attachBoj5,
       @JsonKey(name: 'main_master_company_pp20') String? pp20,
-      @JsonKey(name: 'master_application_type_id') String? type_id,
+      @JsonKey(name: 'master_application_type_id') String? typeId,
       @JsonKey(name: 'application_version') String? version,
       @JsonKey(name: 'master_application_type_id_update') String? typeIdIpdate,
       @JsonKey(name: 'application_version_update') String? versionUpdate,
       @JsonKey(name: 'pass_word_original') String? passwordOriginal,
-      @JsonKey(name: 'user_login_id') String? CompanyFormId,
+      @JsonKey(name: 'user_login_id') String? userLoginId,
       @JsonKey(name: 'master_project_type_id') String? projectTypeId,
       @JsonKey(name: 'contract_start_date') String? startDate,
       @JsonKey(name: 'contract_end_date') String? endDate});
@@ -158,12 +158,12 @@ class _$CompanyFormCopyWithImpl<$Res, $Val extends CompanyForm>
     Object? attachCert = freezed,
     Object? attachBoj5 = freezed,
     Object? pp20 = freezed,
-    Object? type_id = freezed,
+    Object? typeId = freezed,
     Object? version = freezed,
     Object? typeIdIpdate = freezed,
     Object? versionUpdate = freezed,
     Object? passwordOriginal = freezed,
-    Object? CompanyFormId = freezed,
+    Object? userLoginId = freezed,
     Object? projectTypeId = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
@@ -240,14 +240,14 @@ class _$CompanyFormCopyWithImpl<$Res, $Val extends CompanyForm>
       attachBoj5: freezed == attachBoj5
           ? _value.attachBoj5
           : attachBoj5 // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       pp20: freezed == pp20
           ? _value.pp20
           : pp20 // ignore: cast_nullable_to_non_nullable
               as String?,
-      type_id: freezed == type_id
-          ? _value.type_id
-          : type_id // ignore: cast_nullable_to_non_nullable
+      typeId: freezed == typeId
+          ? _value.typeId
+          : typeId // ignore: cast_nullable_to_non_nullable
               as String?,
       version: freezed == version
           ? _value.version
@@ -265,9 +265,9 @@ class _$CompanyFormCopyWithImpl<$Res, $Val extends CompanyForm>
           ? _value.passwordOriginal
           : passwordOriginal // ignore: cast_nullable_to_non_nullable
               as String?,
-      CompanyFormId: freezed == CompanyFormId
-          ? _value.CompanyFormId
-          : CompanyFormId // ignore: cast_nullable_to_non_nullable
+      userLoginId: freezed == userLoginId
+          ? _value.userLoginId
+          : userLoginId // ignore: cast_nullable_to_non_nullable
               as String?,
       projectTypeId: freezed == projectTypeId
           ? _value.projectTypeId
@@ -311,14 +311,14 @@ abstract class _$$CompanyFormImplCopyWith<$Res>
       @JsonKey(name: 'master_industry_group_id') String? industryGroupId,
       @JsonKey(name: 'master_business_category_id') String? businessCategoryId,
       @JsonKey(name: 'main_master_company_attach_cert') String? attachCert,
-      @JsonKey(name: 'main_master_company_attach_boj5') int? attachBoj5,
+      @JsonKey(name: 'main_master_company_attach_boj5') String? attachBoj5,
       @JsonKey(name: 'main_master_company_pp20') String? pp20,
-      @JsonKey(name: 'master_application_type_id') String? type_id,
+      @JsonKey(name: 'master_application_type_id') String? typeId,
       @JsonKey(name: 'application_version') String? version,
       @JsonKey(name: 'master_application_type_id_update') String? typeIdIpdate,
       @JsonKey(name: 'application_version_update') String? versionUpdate,
       @JsonKey(name: 'pass_word_original') String? passwordOriginal,
-      @JsonKey(name: 'user_login_id') String? CompanyFormId,
+      @JsonKey(name: 'user_login_id') String? userLoginId,
       @JsonKey(name: 'master_project_type_id') String? projectTypeId,
       @JsonKey(name: 'contract_start_date') String? startDate,
       @JsonKey(name: 'contract_end_date') String? endDate});
@@ -356,12 +356,12 @@ class __$$CompanyFormImplCopyWithImpl<$Res>
     Object? attachCert = freezed,
     Object? attachBoj5 = freezed,
     Object? pp20 = freezed,
-    Object? type_id = freezed,
+    Object? typeId = freezed,
     Object? version = freezed,
     Object? typeIdIpdate = freezed,
     Object? versionUpdate = freezed,
     Object? passwordOriginal = freezed,
-    Object? CompanyFormId = freezed,
+    Object? userLoginId = freezed,
     Object? projectTypeId = freezed,
     Object? startDate = freezed,
     Object? endDate = freezed,
@@ -438,14 +438,14 @@ class __$$CompanyFormImplCopyWithImpl<$Res>
       attachBoj5: freezed == attachBoj5
           ? _value.attachBoj5
           : attachBoj5 // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       pp20: freezed == pp20
           ? _value.pp20
           : pp20 // ignore: cast_nullable_to_non_nullable
               as String?,
-      type_id: freezed == type_id
-          ? _value.type_id
-          : type_id // ignore: cast_nullable_to_non_nullable
+      typeId: freezed == typeId
+          ? _value.typeId
+          : typeId // ignore: cast_nullable_to_non_nullable
               as String?,
       version: freezed == version
           ? _value.version
@@ -463,9 +463,9 @@ class __$$CompanyFormImplCopyWithImpl<$Res>
           ? _value.passwordOriginal
           : passwordOriginal // ignore: cast_nullable_to_non_nullable
               as String?,
-      CompanyFormId: freezed == CompanyFormId
-          ? _value.CompanyFormId
-          : CompanyFormId // ignore: cast_nullable_to_non_nullable
+      userLoginId: freezed == userLoginId
+          ? _value.userLoginId
+          : userLoginId // ignore: cast_nullable_to_non_nullable
               as String?,
       projectTypeId: freezed == projectTypeId
           ? _value.projectTypeId
@@ -506,12 +506,12 @@ class _$CompanyFormImpl implements _CompanyForm {
       @JsonKey(name: 'main_master_company_attach_cert') this.attachCert,
       @JsonKey(name: 'main_master_company_attach_boj5') this.attachBoj5,
       @JsonKey(name: 'main_master_company_pp20') this.pp20,
-      @JsonKey(name: 'master_application_type_id') this.type_id,
+      @JsonKey(name: 'master_application_type_id') this.typeId,
       @JsonKey(name: 'application_version') this.version,
       @JsonKey(name: 'master_application_type_id_update') this.typeIdIpdate,
       @JsonKey(name: 'application_version_update') this.versionUpdate,
       @JsonKey(name: 'pass_word_original') this.passwordOriginal,
-      @JsonKey(name: 'user_login_id') this.CompanyFormId,
+      @JsonKey(name: 'user_login_id') this.userLoginId,
       @JsonKey(name: 'master_project_type_id') this.projectTypeId,
       @JsonKey(name: 'contract_start_date') this.startDate,
       @JsonKey(name: 'contract_end_date') this.endDate});
@@ -572,13 +572,13 @@ class _$CompanyFormImpl implements _CompanyForm {
   final String? attachCert;
   @override
   @JsonKey(name: 'main_master_company_attach_boj5')
-  final int? attachBoj5;
+  final String? attachBoj5;
   @override
   @JsonKey(name: 'main_master_company_pp20')
   final String? pp20;
   @override
   @JsonKey(name: 'master_application_type_id')
-  final String? type_id;
+  final String? typeId;
   @override
   @JsonKey(name: 'application_version')
   final String? version;
@@ -593,7 +593,7 @@ class _$CompanyFormImpl implements _CompanyForm {
   final String? passwordOriginal;
   @override
   @JsonKey(name: 'user_login_id')
-  final String? CompanyFormId;
+  final String? userLoginId;
   @override
   @JsonKey(name: 'master_project_type_id')
   final String? projectTypeId;
@@ -606,7 +606,7 @@ class _$CompanyFormImpl implements _CompanyForm {
 
   @override
   String toString() {
-    return 'CompanyForm(id: $id, name: $name, nameEn: $nameEn, taxId: $taxId, email: $email, phoneNumber: $phoneNumber, address: $address, districtId: $districtId, prefectureId: $prefectureId, provinceId: $provinceId, postcodeId: $postcodeId, regionId: $regionId, active: $active, logoPath: $logoPath, industryGroupId: $industryGroupId, businessCategoryId: $businessCategoryId, attachCert: $attachCert, attachBoj5: $attachBoj5, pp20: $pp20, type_id: $type_id, version: $version, typeIdIpdate: $typeIdIpdate, versionUpdate: $versionUpdate, passwordOriginal: $passwordOriginal, CompanyFormId: $CompanyFormId, projectTypeId: $projectTypeId, startDate: $startDate, endDate: $endDate)';
+    return 'CompanyForm(id: $id, name: $name, nameEn: $nameEn, taxId: $taxId, email: $email, phoneNumber: $phoneNumber, address: $address, districtId: $districtId, prefectureId: $prefectureId, provinceId: $provinceId, postcodeId: $postcodeId, regionId: $regionId, active: $active, logoPath: $logoPath, industryGroupId: $industryGroupId, businessCategoryId: $businessCategoryId, attachCert: $attachCert, attachBoj5: $attachBoj5, pp20: $pp20, typeId: $typeId, version: $version, typeIdIpdate: $typeIdIpdate, versionUpdate: $versionUpdate, passwordOriginal: $passwordOriginal, userLoginId: $userLoginId, projectTypeId: $projectTypeId, startDate: $startDate, endDate: $endDate)';
   }
 
   @override
@@ -644,7 +644,7 @@ class _$CompanyFormImpl implements _CompanyForm {
             (identical(other.attachBoj5, attachBoj5) ||
                 other.attachBoj5 == attachBoj5) &&
             (identical(other.pp20, pp20) || other.pp20 == pp20) &&
-            (identical(other.type_id, type_id) || other.type_id == type_id) &&
+            (identical(other.typeId, typeId) || other.typeId == typeId) &&
             (identical(other.version, version) || other.version == version) &&
             (identical(other.typeIdIpdate, typeIdIpdate) ||
                 other.typeIdIpdate == typeIdIpdate) &&
@@ -652,8 +652,8 @@ class _$CompanyFormImpl implements _CompanyForm {
                 other.versionUpdate == versionUpdate) &&
             (identical(other.passwordOriginal, passwordOriginal) ||
                 other.passwordOriginal == passwordOriginal) &&
-            (identical(other.CompanyFormId, CompanyFormId) ||
-                other.CompanyFormId == CompanyFormId) &&
+            (identical(other.userLoginId, userLoginId) ||
+                other.userLoginId == userLoginId) &&
             (identical(other.projectTypeId, projectTypeId) ||
                 other.projectTypeId == projectTypeId) &&
             (identical(other.startDate, startDate) ||
@@ -684,12 +684,12 @@ class _$CompanyFormImpl implements _CompanyForm {
         attachCert,
         attachBoj5,
         pp20,
-        type_id,
+        typeId,
         version,
         typeIdIpdate,
         versionUpdate,
         passwordOriginal,
-        CompanyFormId,
+        userLoginId,
         projectTypeId,
         startDate,
         endDate
@@ -732,15 +732,16 @@ abstract class _CompanyForm implements CompanyForm {
       final String? businessCategoryId,
       @JsonKey(name: 'main_master_company_attach_cert')
       final String? attachCert,
-      @JsonKey(name: 'main_master_company_attach_boj5') final int? attachBoj5,
+      @JsonKey(name: 'main_master_company_attach_boj5')
+      final String? attachBoj5,
       @JsonKey(name: 'main_master_company_pp20') final String? pp20,
-      @JsonKey(name: 'master_application_type_id') final String? type_id,
+      @JsonKey(name: 'master_application_type_id') final String? typeId,
       @JsonKey(name: 'application_version') final String? version,
       @JsonKey(name: 'master_application_type_id_update')
       final String? typeIdIpdate,
       @JsonKey(name: 'application_version_update') final String? versionUpdate,
       @JsonKey(name: 'pass_word_original') final String? passwordOriginal,
-      @JsonKey(name: 'user_login_id') final String? CompanyFormId,
+      @JsonKey(name: 'user_login_id') final String? userLoginId,
       @JsonKey(name: 'master_project_type_id') final String? projectTypeId,
       @JsonKey(name: 'contract_start_date') final String? startDate,
       @JsonKey(name: 'contract_end_date')
@@ -802,13 +803,13 @@ abstract class _CompanyForm implements CompanyForm {
   String? get attachCert;
   @override
   @JsonKey(name: 'main_master_company_attach_boj5')
-  int? get attachBoj5;
+  String? get attachBoj5;
   @override
   @JsonKey(name: 'main_master_company_pp20')
   String? get pp20;
   @override
   @JsonKey(name: 'master_application_type_id')
-  String? get type_id;
+  String? get typeId;
   @override
   @JsonKey(name: 'application_version')
   String? get version;
@@ -823,7 +824,7 @@ abstract class _CompanyForm implements CompanyForm {
   String? get passwordOriginal;
   @override
   @JsonKey(name: 'user_login_id')
-  String? get CompanyFormId;
+  String? get userLoginId;
   @override
   @JsonKey(name: 'master_project_type_id')
   String? get projectTypeId;

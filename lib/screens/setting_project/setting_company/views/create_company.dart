@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
 
 import 'package:oho_hero/public/business_category/views/view.dart';
+import 'package:oho_hero/screens/setting_project/setting_company/logic/create.dart';
 import 'package:oho_hero/utils/extension/extension.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -112,7 +113,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formCompany(bool buildDesktop) {
-    var dataComapny = ref.watch(companydataProvider);
+    CompanyLogicCreateController company = ref.watch(companyLogicCreateProvider);
+    CompanyLogicCreateController setCompany = ref.read(companyLogicCreateProvider);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: BackgroundCustom(
@@ -126,12 +128,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 6,
                   lg: 4,
                   child: IndustryGrorupDropDown(
-                    selectedID: dataComapny.industryGroupId,
+                    selectedID: company.industryGroupId,
                     onchanged: (data) {
-                      // company.updateForm(company.dataCompany.copyWith(industryGroupId: data.id));
+                      setCompany.industryGroupId = data.id;
+                      setCompany.businessCategoryId = null;
                       ref.read(businessCategoryDropdownProvider.notifier).read(industryGroupId: data.id);
-                      //     ref.read(companydataProvider.notifier).industryGroupId = data.name;
-                      // ref.read(businessCategoryDropdownProvider.notifier).read(industryGroupId: data.id);
                     },
                   ),
                 ),
@@ -140,9 +141,9 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 6,
                   lg: 4,
                   child: BusinessCategoryDropDown(
-                    selectedID: null,
+                    selectedID: company.businessCategoryId,
                     onchanged: (data) {
-                      // company.updateForm(company.dataCompany.copyWith(businessCategoryId: data.id));
+                      setCompany.businessCategoryId = data.id;
                     },
                   ),
                 ),
