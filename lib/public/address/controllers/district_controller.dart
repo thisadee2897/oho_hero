@@ -1,7 +1,7 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class DistrictController extends StateNotifier<AsyncValue<List<DistrictModel>>> {
-  DistrictController(this.ref) : super(AsyncValue.data([]));
+class DistrictController extends StateNotifier<AsyncValue<DistrictModel>> {
+  DistrictController(this.ref) : super(AsyncValue.data(DistrictModel()));
   final Ref ref;
   Future<void> read({required String? subDistrictId}) async {
     state = AsyncValue.loading();
@@ -10,7 +10,7 @@ class DistrictController extends StateNotifier<AsyncValue<List<DistrictModel>>> 
         var res = await ref.read(addressApi).readDistrict({
           'master_addr_district_id': subDistrictId,
         });
-        return res;
+        return res.first;
       } catch (e) {
         throw e;
       }
@@ -19,4 +19,4 @@ class DistrictController extends StateNotifier<AsyncValue<List<DistrictModel>>> 
 }
 
 final districtProvider =
-    StateNotifierProvider<DistrictController, AsyncValue<List<DistrictModel>>>((ref) => DistrictController(ref));
+    StateNotifierProvider<DistrictController, AsyncValue<DistrictModel>>((ref) => DistrictController(ref));

@@ -11,8 +11,20 @@ class SubDistrictFormfield extends ConsumerStatefulWidget {
 
 class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
   @override
+  void initState() {
+    super.initState();
+    if (widget.selectedID != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(Duration.zero, () {
+          ref.read(subDistrictForIdProvider.notifier).read(id: widget.selectedID);
+        });
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    AsyncValue<List<SubdistrictModel>> listData = ref.watch(subDistrictProvider);
+    AsyncValue<List<SubdistrictModel>> listData = ref.watch(subDistrictForIdProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -34,24 +46,20 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
 
   Widget _loading() {
     return LoadingTextField(
-      title: Trans.of(context).create_company__select_industry_type,
+      title: widget.selectedID == null
+          ? Trans.of(context).create_company__searchSubDistrict
+          : Trans.of(context).create_company__subDistrict,
       require: true,
     );
   }
 
   Widget _data(BuildContext context, List<SubdistrictModel> data) {
     String initialText = '';
-    if (widget.selectedID != null &&
-        data.isNotEmpty &&
-        data
-            .where(
-              (e) => e.id == widget.selectedID,
-            )
-            .isNotEmpty) {
-      var selected = data.firstWhere(
-        (e) => e.id == widget.selectedID,
-      );
-      initialText = selected.name ?? '';
+    if (widget.selectedID != null && data.isNotEmpty && initialText != data.first.name) {
+      if (data.isNotEmpty && initialText.isEmpty) {
+        initialText = data.first.name ?? '';
+        // widget.onchanged(data.first);
+      }
     }
     return GestureDetector(
       onTap: () async {
@@ -59,7 +67,10 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
           '${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}',
         );
         if (selectedSubDistrict != null) {
+          ref.read(subDistrictForIdProvider.notifier).read(id: selectedSubDistrict.id);
+          initialText = selectedSubDistrict.name ?? '';
           widget.onchanged(selectedSubDistrict);
+          return;
         }
       },
       child: AbsorbPointer(

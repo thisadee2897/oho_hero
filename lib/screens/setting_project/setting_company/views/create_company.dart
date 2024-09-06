@@ -1,8 +1,5 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/utils/extension/extension.dart';
-import 'package:responsive_grid/responsive_grid.dart';
 
 class CreateCompanyScreen extends BaseStatefulWidget {
   final String previousPageTitle;
@@ -97,10 +94,10 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
           text: 'Create',
           onTap: () {
             print(createCompanyKey.currentState!.validate());
-            if (createCompanyKey.currentState != null && createCompanyKey.currentState!.validate()) {}
+            if (createCompanyKey.currentState != null && createCompanyKey.currentState!.validate()) {
+              context.pop();
+            }
           },
-          // enabled: createCompanyKey.currentState?.validate() ?? false,
-          // loading: createCompanyKey.currentState!.validate(),
         ),
       ),
       largeTitle: Text('Create company'),
@@ -314,31 +311,13 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
             ResponsiveGridRow(
               children: [
                 ResponsiveGridCol(
-                  sm: 4,
-                  md: 3,
-                  lg: 3,
+                  sm: 12,
+                  md: 12,
+                  lg: 12,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: Trans.of(context).create_company__region,
-                      controller: regionCtl,
-                      validator: (String? value) {
-                        if (value!.isEmpty) {
-                          return Trans.of(context).pleasInputData;
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ),
-                ResponsiveGridCol(
-                  sm: 4,
-                  md: 3,
-                  lg: 3,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: CustomTextFormfield(
                       title: Trans.of(context).create_company__addressDetail,
                       controller: buildingCtl,
                     ),
@@ -355,8 +334,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                         setCompany.districtId = data.id;
                         setCompany.prefectureId = data.districtId;
                         setCompany.provinceId = data.provinceId;
-                        ref.read(districtProvider.notifier).read(subDistrictId: data.id);
-                        ref.read(provinceProvider.notifier).read(districtId: data.districtId);
+                        Future.delayed(Duration.zero, () {
+                          ref.read(districtProvider.notifier).read(subDistrictId: data.id);
+                          ref.read(provinceProvider.notifier).read(districtId: data.districtId);
+                          ref.read(postcodeProvider.notifier).read(id: data.id);
+                          // ref.read(regionProvider.notifier).read();
+                        });
                       }
                     },
                   ),
@@ -376,7 +359,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   lg: 3,
                   child: ProvinceFormfield(
                     selectedID: company.provinceId,
-                    onchanged: (data) {},
+                    onchanged: (data) {
+                      if (data.regionId != null) {
+                        setCompany.regionId = data.regionId;
+                      }
+                    },
                   ),
                 ),
                 ResponsiveGridCol(
@@ -384,7 +371,18 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 3,
                   lg: 3,
                   child: PostCodeFormfield(
-                    selectedID: company.provinceId,
+                    selectedID: company.districtId,
+                    onchanged: (data) {
+                      setCompany.provinceId = data.id;
+                    },
+                  ),
+                ),
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: RegionFormfield(
+                    selectedID: company.regionId,
                     onchanged: (data) {},
                   ),
                 ),

@@ -1,23 +1,24 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class DistrictFormfield extends ConsumerStatefulWidget {
-  const DistrictFormfield({super.key, this.selectedID, required this.onchanged});
+class RegionFormfield extends ConsumerStatefulWidget {
+  const RegionFormfield({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
-  final Function(DistrictModel) onchanged;
+  final Function(PostCodeModel) onchanged;
 
   @override
-  ConsumerState<DistrictFormfield> createState() => _IndustryGrorupDropDownState();
+  ConsumerState<RegionFormfield> createState() => _IndustryGrorupDropDownState();
 }
 
-class _IndustryGrorupDropDownState extends ConsumerState<DistrictFormfield> {
+class _IndustryGrorupDropDownState extends ConsumerState<RegionFormfield> {
   TextEditingController districtCtl = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    AsyncValue<DistrictModel> district = ref.watch(districtProvider);
+    AsyncValue<ProvinceModel> dataprovince = ref.watch(provinceProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: district.when(
+        child: dataprovince.when(
           loading: _loading,
           error: (error, stack) => _error(context, error),
           data: (data) => _data(context, data),
@@ -35,21 +36,20 @@ class _IndustryGrorupDropDownState extends ConsumerState<DistrictFormfield> {
 
   Widget _loading() {
     return LoadingTextField(
-      title: Trans.of(context).create_company__district,
+      title: Trans.of(context).create_company__region,
       require: true,
     );
   }
 
-  Widget _data(BuildContext context, DistrictModel data) {
+  Widget _data(BuildContext context, ProvinceModel data) {
     String? initialText = '';
     if (widget.selectedID != null) {
-      initialText = data.name ?? '';
-      widget.onchanged(data);
+      initialText = data.regionName;
     }
     return IgnorePointer(
       child: CustomTextFormfield(
         readOnly: true,
-        title: Trans.of(context).create_company__district,
+        title: Trans.of(context).create_company__region,
         controller: TextEditingController(
           text: initialText,
         ),

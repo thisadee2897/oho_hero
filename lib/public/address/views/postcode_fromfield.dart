@@ -1,10 +1,8 @@
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/public/address/controllers/province_controller.dart';
-
 class PostCodeFormfield extends ConsumerStatefulWidget {
   const PostCodeFormfield({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
-  final Function(ProvinceModel) onchanged;
+  final Function(PostCodeModel) onchanged;
 
   @override
   ConsumerState<PostCodeFormfield> createState() => _IndustryGrorupDropDownState();
@@ -12,9 +10,20 @@ class PostCodeFormfield extends ConsumerStatefulWidget {
 
 class _IndustryGrorupDropDownState extends ConsumerState<PostCodeFormfield> {
   TextEditingController districtCtl = TextEditingController();
+
+  @override
+  void initState() {
+    if (widget.selectedID != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(postcodeProvider.notifier).read(id: widget.selectedID);
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<ProvinceModel>> listData = ref.watch(provinceProvider);
+    AsyncValue<PostCodeModel> listData = ref.watch(postcodeProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -41,14 +50,10 @@ class _IndustryGrorupDropDownState extends ConsumerState<PostCodeFormfield> {
     );
   }
 
-  Widget _data(BuildContext context, List<ProvinceModel> data) {
+  Widget _data(BuildContext context, PostCodeModel data) {
     String? initialText = '';
-    if (widget.selectedID != null && data.isNotEmpty) {
-      var selected = data.firstWhere(
-        (e) => e.id == widget.selectedID,
-      );
-      initialText = selected.name ?? '';
-      widget.onchanged(selected);
+    if (widget.selectedID != null) {
+      initialText = data.code ?? '';
     }
     return IgnorePointer(
       child: CustomTextFormfield(

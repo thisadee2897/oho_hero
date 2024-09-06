@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/public/address/controllers/district_controller.dart';
 
 class SearchSubDistrict extends BaseStatefulWidget {
   static String path = 'search-sub-district';
@@ -103,6 +102,7 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
           onTap: () {
             ref.read(districtProvider.notifier).read(subDistrictId: (data[index].id));
             if (district.hasValue) {
+              ref.read(subDistrictForIdProvider.notifier).read(id: data[index].id);
               Navigator.pop(context, data[index]);
             }
           },
@@ -132,7 +132,7 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
       alwaysShowMiddle: false,
       automaticallyImplyTitle: false,
       // middle: !buildDesktop ? Text('Subdistrict/Quarter') : null,
-      trailing: !buildDesktop ? Text('Subdistrict/Quarter') : null,
+      // trailing: !buildDesktop ? Text('Subdistrict/Quarter') : null,
       largeTitle: Center(
         child: SizedBox(
           width: buildDesktop ? 1200 : null,
@@ -147,9 +147,10 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
                     controller: textSearch,
                     placeholder: 'Please input the Subdistrict/Quarter',
                     onChanged: (value) {
-                      // ref
-                      //     .read(subDistrictProvider.notifier)
-                      //     .read(search: value);
+                      final RegExp regExp = RegExp(r'^[a-zA-Zก-๙\s]+$');
+                      if (!regExp.hasMatch(value)) {
+                        return;
+                      }
                       if (_debounce?.isActive ?? false) _debounce!.cancel();
                       _debounce = Timer(const Duration(milliseconds: 300), () {
                         ref.read(subDistrictProvider.notifier).read(search: value);

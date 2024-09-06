@@ -1,5 +1,4 @@
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/public/address/controllers/province_controller.dart';
 
 class ProvinceFormfield extends ConsumerStatefulWidget {
   const ProvinceFormfield({super.key, this.selectedID, required this.onchanged});
@@ -14,11 +13,11 @@ class _IndustryGrorupDropDownState extends ConsumerState<ProvinceFormfield> {
   TextEditingController districtCtl = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<ProvinceModel>> listData = ref.watch(provinceProvider);
+    AsyncValue<ProvinceModel> dataprovince = ref.watch(provinceProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: listData.when(
+        child: dataprovince.when(
           loading: _loading,
           error: (error, stack) => _error(context, error),
           data: (data) => _data(context, data),
@@ -41,14 +40,13 @@ class _IndustryGrorupDropDownState extends ConsumerState<ProvinceFormfield> {
     );
   }
 
-  Widget _data(BuildContext context, List<ProvinceModel> data) {
+  Widget _data(BuildContext context, ProvinceModel data) {
     String? initialText = '';
-    if (widget.selectedID != null && data.isNotEmpty) {
-      var selected = data.firstWhere(
-        (e) => e.id == widget.selectedID,
-      );
-      initialText = selected.name ?? '';
-      widget.onchanged(selected);
+    if (widget.selectedID != null) {
+      initialText = data.name ?? '';
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onchanged(data);
+      });
     }
     return IgnorePointer(
       child: CustomTextFormfield(
