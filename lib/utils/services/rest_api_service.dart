@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oho_hero/config/constants/api_path.dart';
-import 'local_storage_service.dart';
-
 export 'package:dio/dio.dart';
 
 /// Do call the rest API to get, store data on a remote database for that we need
@@ -19,12 +17,9 @@ class ApiInterceptor extends Interceptor {
   });
 
   @override
-  Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    var token = await ref.read(localStorageServiceProvider).getToken();
-    if (token != null) {
-      options.headers["Authorization"] = "Bearer ${token}";
-    }
+  Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    String token = "sK!wLWgVHta4%vteQoiBD9QZFPVZbW4aQ8HkLKm7x2a@7sJJH74P2MX!qH95&xfMP75cpoZHH25wi5%tZXNv5*QgjPj2q";
+    options.headers["Authorization"] = "Bearer $token";
     // var lang = ref.read(languageProvider);
     // options.queryParameters = {...options.queryParameters, "lang": lang};
 
@@ -38,8 +33,7 @@ class ApiInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response?.statusCode == 401) {
-    }
+    if (err.response?.statusCode == 401) {}
     handler.reject(err);
   }
 }
@@ -63,7 +57,6 @@ class ApiClient {
 final apiClientProvider = Provider<Dio>((ref) {
   return ApiClient().baseUrl(ref);
 });
-
 
 final apiClientImageProvider = Provider<Dio>((ref) {
   return ApiClient().baseUrlImage(ref);

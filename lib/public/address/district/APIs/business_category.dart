@@ -16,10 +16,7 @@ class BusinessCategoryDroupdown {
   Future<List<BusinessCategoryDropDownModel>> _list(String endpoint, Map<String, dynamic> body) async {
     Response<dynamic> res = await _companyRequest(endpoint, body);
     return List<BusinessCategoryDropDownModel>.from(
-      List<dynamic>.from(res.data).map(
-        (item) => BusinessCategoryDropDownModel.fromJson(item),
-      ),
-    );
+        List<dynamic>.from(res.data).map((item) => BusinessCategoryDropDownModel.fromJson(item)));
   }
 
   Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {

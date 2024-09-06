@@ -21,11 +21,7 @@ class IndustryGroupDroupdown {
 
   Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {
     try {
-      return await ref.read(apiClientProvider).post(
-            endpoint,
-            data: body,
-            options: opttion,
-          );
+      return await ref.read(apiClientProvider).post(endpoint, data: body);
     } on DioException catch (e) {
       throw e;
     }

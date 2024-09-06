@@ -39,7 +39,6 @@ class AddressApi {
       return await ref.read(apiClientProvider).post(
             endpoint,
             data: body,
-            options: opttion,
           );
     } on DioException catch (e) {
       throw e;

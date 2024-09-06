@@ -23,32 +23,23 @@ class IndustryProvider {
     return _list(_read, body);
   }
 
-  Future<CompanyForm> _single(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<CompanyForm> _single(String endpoint, Map<String, dynamic> body) async {
     Response<dynamic> res = await _companyRequest(endpoint, body);
     return CompanyForm.fromJson(res.data['data'][0]);
   }
 
-  Future<List<CompanyForm>> _list(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<List<CompanyForm>> _list(String endpoint, Map<String, dynamic> body) async {
     Response<dynamic> res = await _companyRequest(endpoint, body);
-    return List<CompanyForm>.from(List<dynamic>.from(res.data['data'])
-        .map((item) => CompanyForm.fromJson(item)));
+    return List<CompanyForm>.from(List<dynamic>.from(res.data['data']).map((item) => CompanyForm.fromJson(item)));
   }
 
-  Future<Response<dynamic>> _companyRequest(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {
     try {
-      return await ref.read(apiClientProvider).post(
-            endpoint,
-            data: body,
-            options: opttion,
-          );
+      return await ref.read(apiClientProvider).post(endpoint, data: body);
     } on DioException catch (e) {
       throw e;
     }
   }
 }
 
-final industryProvider =
-    Provider<IndustryProvider>((ref) => IndustryProvider(ref: ref));
+final industryProvider = Provider<IndustryProvider>((ref) => IndustryProvider(ref: ref));
