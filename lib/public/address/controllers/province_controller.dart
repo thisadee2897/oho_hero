@@ -1,7 +1,6 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class DistrictController
-    extends StateNotifier<AsyncValue<List<DistrictModel>>> {
+class DistrictController extends StateNotifier<AsyncValue<List<DistrictModel>>> {
   DistrictController(this.ref) : super(AsyncValue.data([]));
   final Ref ref;
   Future<void> read({required String? districtId}) async {
@@ -20,5 +19,4 @@ class DistrictController
 }
 
 final districtProvider =
-    StateNotifierProvider<DistrictController, AsyncValue<List<DistrictModel>>>(
-        (ref) => DistrictController(ref));
+    StateNotifierProvider<DistrictController, AsyncValue<List<DistrictModel>>>((ref) => DistrictController(ref));

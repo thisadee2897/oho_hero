@@ -30,9 +30,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("อำเภอ/เขต"),
         "create_company__email": MessageLookupByLibrary.simpleMessage("อีเมล"),
         "create_company__name_en":
-            MessageLookupByLibrary.simpleMessage("ชิื่อบริษัท (ภาษาอังกฤษ)"),
+            MessageLookupByLibrary.simpleMessage("ชื่อบริษัท (ภาษาอังกฤษ)"),
         "create_company__name_th":
-            MessageLookupByLibrary.simpleMessage("ชิื่อบริษัท (ภาษาไทย)"),
+            MessageLookupByLibrary.simpleMessage("ชื่อบริษัท (ภาษาไทย)"),
         "create_company__phone_number":
             MessageLookupByLibrary.simpleMessage("หมายเลขโทรศัพท์"),
         "create_company__postalCode":

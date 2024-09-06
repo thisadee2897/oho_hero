@@ -12,6 +12,5 @@ class ProvinceModel with _$ProvinceModel {
     @JsonKey(name: 'master_addr_region_name') String? regionName,
   }) = _ProvinceModel;
 
-  factory ProvinceModel.fromJson(Map<String, dynamic> json) =>
-      _$ProvinceModelFromJson(json);
+  factory ProvinceModel.fromJson(Map<String, dynamic> json) => _$ProvinceModelFromJson(json);
 }

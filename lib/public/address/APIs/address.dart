@@ -7,12 +7,10 @@ class AddressApi {
   final String _province = 'MasterDataAll/Get_master_addr_province';
   AddressApi({required this.ref});
 
-  Future<List<SubdistrictModel>> readSubDistrict(
-      Map<String, dynamic> body) async {
+  Future<List<SubdistrictModel>> readSubDistrict(Map<String, dynamic> body) async {
     try {
       Response<dynamic> res = await _companyRequest(_subSistrict, body);
-      return List<SubdistrictModel>.from(List<dynamic>.from(res.data)
-          .map((item) => SubdistrictModel.fromJson(item)));
+      return List<SubdistrictModel>.from(List<dynamic>.from(res.data).map((item) => SubdistrictModel.fromJson(item)));
     } catch (e) {
       throw e;
     }
@@ -21,8 +19,7 @@ class AddressApi {
   Future<List<DistrictModel>> readDistrict(Map<String, dynamic> body) async {
     try {
       Response<dynamic> res = await _companyRequest(_district, body);
-      return List<DistrictModel>.from(List<dynamic>.from(res.data)
-          .map((item) => DistrictModel.fromJson(item)));
+      return List<DistrictModel>.from(List<dynamic>.from(res.data).map((item) => DistrictModel.fromJson(item)));
     } catch (e) {
       throw e;
     }
@@ -31,15 +28,13 @@ class AddressApi {
   Future<List<ProvinceModel>> readProvince(Map<String, dynamic> body) async {
     try {
       Response<dynamic> res = await _companyRequest(_province, body);
-      return List<ProvinceModel>.from(List<dynamic>.from(res.data)
-          .map((item) => ProvinceModel.fromJson(item)));
+      return List<ProvinceModel>.from(List<dynamic>.from(res.data).map((item) => ProvinceModel.fromJson(item)));
     } catch (e) {
       throw e;
     }
   }
 
-  Future<Response<dynamic>> _companyRequest(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {
     try {
       return await ref.read(apiClientProvider).post(
             endpoint,

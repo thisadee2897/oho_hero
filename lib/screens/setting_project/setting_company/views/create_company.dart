@@ -10,8 +10,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 class CreateCompanyScreen extends BaseStatefulWidget {
   final String previousPageTitle;
-  const CreateCompanyScreen(this.previousPageTitle, {Key? key})
-      : super(key: key, subPage: true);
+  const CreateCompanyScreen(this.previousPageTitle, {Key? key}) : super(key: key, subPage: true);
   @override
   _CreateCompanyScreenState createState() => _CreateCompanyScreenState();
 }
@@ -48,8 +47,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   @override
-  Widget buildDesktop(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget buildDesktop(BuildContext context, SizingInformation sizingInformation) {
     return content(
       crossAxisCount: 2,
       paddingDesktop: 8,
@@ -58,21 +56,16 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   @override
-  Widget? buildTablet(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget? buildTablet(BuildContext context, SizingInformation sizingInformation) {
     return content();
   }
 
   @override
-  Widget buildMobile(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget buildMobile(BuildContext context, SizingInformation sizingInformation) {
     return content();
   }
 
-  Widget content(
-      {int crossAxisCount = 1,
-      double paddingDesktop = 0.0,
-      bool buildDesktop = false}) {
+  Widget content({int crossAxisCount = 1, double paddingDesktop = 0.0, bool buildDesktop = false}) {
     return SafeArea(
       child: Form(
         key: createCompanyKey,
@@ -108,8 +101,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
           text: 'Create',
           onTap: () {
             print(createCompanyKey.currentState!.validate());
-            if (createCompanyKey.currentState != null &&
-                createCompanyKey.currentState!.validate()) {}
+            if (createCompanyKey.currentState != null && createCompanyKey.currentState!.validate()) {}
           },
           // enabled: createCompanyKey.currentState?.validate() ?? false,
           // loading: createCompanyKey.currentState!.validate(),
@@ -120,7 +112,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formCompany(bool buildDesktop) {
-    var company = ref.read(companyProvider.notifier);
+    var dataComapny = ref.watch(companydataProvider);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: BackgroundCustom(
@@ -134,13 +126,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 6,
                   lg: 4,
                   child: IndustryGrorupDropDown(
-                    selectedID: company.dataCompany.industryGroupId,
+                    selectedID: dataComapny.industryGroupId,
                     onchanged: (data) {
-                      company.updateForm(company.dataCompany
-                          .copyWith(industryGroupId: data.id));
-                      ref
-                          .read(businessCategoryDropdownProvider.notifier)
-                          .read(industryGroupId: data.id);
+                      // company.updateForm(company.dataCompany.copyWith(industryGroupId: data.id));
+                      ref.read(businessCategoryDropdownProvider.notifier).read(industryGroupId: data.id);
+                      //     ref.read(companydataProvider.notifier).industryGroupId = data.name;
+                      // ref.read(businessCategoryDropdownProvider.notifier).read(industryGroupId: data.id);
                     },
                   ),
                 ),
@@ -149,10 +140,9 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 6,
                   lg: 4,
                   child: BusinessCategoryDropDown(
-                    selectedID: company.dataCompany.businessCategoryId,
+                    selectedID: null,
                     onchanged: (data) {
-                      company.updateForm(company.dataCompany
-                          .copyWith(businessCategoryId: data.id));
+                      // company.updateForm(company.dataCompany.copyWith(businessCategoryId: data.id));
                     },
                   ),
                 ),
@@ -195,8 +185,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormfield(
                       require: true,
-                      title: Trans.of(context)
-                          .create_company__company_abbreviation_en,
+                      title: Trans.of(context).create_company__company_abbreviation_en,
                       controller: nameAbbeviationCtl,
                       validator: (String? value) {
                         if (value!.isEmpty) {
@@ -274,9 +263,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
     );
   }
 
-  Padding selectIndustryType(
-      AsyncValue<List<IndustryGrorupDropDownModel>> industryList,
-      CompanyController company) {
+  Padding selectIndustryType(AsyncValue<List<IndustryGrorupDropDownModel>> industryList, CompanyController company) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: industryList.when(
@@ -293,11 +280,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     }),
             selectId: (String? value) {
               if (value != null) {
-                company.updateForm(
-                  company.dataCompany.copyWith(
-                    industryGroupId: value,
-                  ),
-                );
+                // company.updateForm(
+                //   company.dataCompany.copyWith(
+                //     industryGroupId: value,
+                //   ),
+                // );
                 setState(() {
                   comapnyGroupCtl.clear();
                 });
@@ -320,7 +307,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formAddress(bool buildDesktop) {
-    var company = ref.read(companyProvider.notifier);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: BackgroundCustom(
@@ -366,7 +352,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: SubDistrictFormfield(
-                    selectedID: company.dataCompany.prefectureId,
+                    selectedID: null,
                     onchanged: (SubdistrictModel) {
                       print(jsonEncode(SubdistrictModel.id));
                     },
@@ -443,9 +429,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       Trans.of(context).create_company__titleProjectType,
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .tabLabelTextStyle,
+                      style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                     ),
                   ),
                   BackgroundCustom(
@@ -458,14 +442,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
-                                CupertinoCheckbox(
-                                    value: index == 2, onChanged: (value) {}),
+                                CupertinoCheckbox(value: index == 2, onChanged: (value) {}),
                                 const SizedBox(width: 8),
                                 Expanded(
                                   child: IgnorePointer(
                                     child: CupertinoTextFormFieldRow(
-                                      placeholder:
-                                          'ประเภทโครงการที่ ${index + 1}',
+                                      placeholder: 'ประเภทโครงการที่ ${index + 1}',
                                     ),
                                   ),
                                 )
@@ -485,8 +467,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
             md: 12,
             lg: 6,
             child: Padding(
-              padding: EdgeInsets.only(
-                  left: paddingDesktop, top: paddingDesktop == 0 ? 16 : 0),
+              padding: EdgeInsets.only(left: paddingDesktop, top: paddingDesktop == 0 ? 16 : 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -494,9 +475,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       Trans.of(context).create_company__titleDocument,
-                      style: CupertinoTheme.of(context)
-                          .textTheme
-                          .tabLabelTextStyle,
+                      style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
                     ),
                   ),
                   BackgroundCustom(
@@ -508,8 +487,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                           children: [
                             IconButton(
                               onPressed: () async {
-                                FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
                                   allowedExtensions: ['pdf'],
                                 );
@@ -539,8 +517,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                           children: [
                             IconButton(
                               onPressed: () async {
-                                FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
                                   allowedExtensions: ['pdf'],
                                 );
@@ -570,8 +547,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                           children: [
                             IconButton(
                               onPressed: () async {
-                                FilePickerResult? result =
-                                    await FilePicker.platform.pickFiles(
+                                FilePickerResult? result = await FilePicker.platform.pickFiles(
                                   type: FileType.custom,
                                   allowedExtensions: ['pdf'],
                                 );

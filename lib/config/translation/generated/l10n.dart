@@ -110,20 +110,20 @@ class Trans {
     );
   }
 
-  /// `ชิื่อบริษัท (ภาษาไทย)`
+  /// `ชื่อบริษัท (ภาษาไทย)`
   String get create_company__name_th {
     return Intl.message(
-      'ชิื่อบริษัท (ภาษาไทย)',
+      'ชื่อบริษัท (ภาษาไทย)',
       name: 'create_company__name_th',
       desc: '',
       args: [],
     );
   }
 
-  /// `ชิื่อบริษัท (ภาษาอังกฤษ)`
+  /// `ชื่อบริษัท (ภาษาอังกฤษ)`
   String get create_company__name_en {
     return Intl.message(
-      'ชิื่อบริษัท (ภาษาอังกฤษ)',
+      'ชื่อบริษัท (ภาษาอังกฤษ)',
       name: 'create_company__name_en',
       desc: '',
       args: [],

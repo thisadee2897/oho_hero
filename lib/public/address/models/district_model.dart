@@ -11,6 +11,5 @@ class DistrictModel with _$DistrictModel {
     @JsonKey(name: 'master_addr_province_id') String? provinceId,
   }) = _DistrictModelModel;
 
-  factory DistrictModel.fromJson(Map<String, dynamic> json) =>
-      _$DistrictModelFromJson(json);
+  factory DistrictModel.fromJson(Map<String, dynamic> json) => _$DistrictModelFromJson(json);
 }

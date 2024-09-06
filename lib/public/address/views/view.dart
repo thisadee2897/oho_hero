@@ -1,22 +1,18 @@
 import 'package:oho_hero/config/routes/export.dart';
 
 class BusinessCategoryDropDown extends ConsumerStatefulWidget {
-  const BusinessCategoryDropDown(
-      {super.key, this.selectedID, required this.onchanged});
+  const BusinessCategoryDropDown({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
   final Function(BusinessCategoryDropDownModel) onchanged;
 
   @override
-  ConsumerState<BusinessCategoryDropDown> createState() =>
-      _IndustryGrorupDropDownState();
+  ConsumerState<BusinessCategoryDropDown> createState() => _IndustryGrorupDropDownState();
 }
 
-class _IndustryGrorupDropDownState
-    extends ConsumerState<BusinessCategoryDropDown> {
+class _IndustryGrorupDropDownState extends ConsumerState<BusinessCategoryDropDown> {
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<BusinessCategoryDropDownModel>> listData =
-        ref.watch(businessCategoryDropdownProvider);
+    AsyncValue<List<BusinessCategoryDropDownModel>> listData = ref.watch(businessCategoryDropdownProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),

@@ -5,8 +5,7 @@ class IndustryGroupDroupdown {
   final String _read = 'security/login/Getmaster_industry_group';
   IndustryGroupDroupdown({required this.ref});
 
-  Future<List<IndustryGrorupDropDownModel>> readApi(
-      Map<String, dynamic> body) async {
+  Future<List<IndustryGrorupDropDownModel>> readApi(Map<String, dynamic> body) async {
     try {
       return await _list(_read, body);
     } catch (e) {
@@ -14,15 +13,13 @@ class IndustryGroupDroupdown {
     }
   }
 
-  Future<List<IndustryGrorupDropDownModel>> _list(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<List<IndustryGrorupDropDownModel>> _list(String endpoint, Map<String, dynamic> body) async {
     Response<dynamic> res = await _companyRequest(endpoint, body);
-    return List<IndustryGrorupDropDownModel>.from(List<dynamic>.from(res.data)
-        .map((item) => IndustryGrorupDropDownModel.fromJson(item)));
+    return List<IndustryGrorupDropDownModel>.from(
+        List<dynamic>.from(res.data).map((item) => IndustryGrorupDropDownModel.fromJson(item)));
   }
 
-  Future<Response<dynamic>> _companyRequest(
-      String endpoint, Map<String, dynamic> body) async {
+  Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {
     try {
       return await ref.read(apiClientProvider).post(
             endpoint,
@@ -35,5 +32,4 @@ class IndustryGroupDroupdown {
   }
 }
 
-final industryGroupDroupdown =
-    Provider<IndustryGroupDroupdown>((ref) => IndustryGroupDroupdown(ref: ref));
+final industryGroupDroupdown = Provider<IndustryGroupDroupdown>((ref) => IndustryGroupDroupdown(ref: ref));

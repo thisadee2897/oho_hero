@@ -1,23 +1,19 @@
 import 'package:oho_hero/config/routes/export.dart';
 
 class SubDistrictFormfield extends ConsumerStatefulWidget {
-  const SubDistrictFormfield(
-      {super.key, this.selectedID, required this.onchanged});
+  const SubDistrictFormfield({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
   final Function(SubdistrictModel) onchanged;
 
   @override
-  ConsumerState<SubDistrictFormfield> createState() =>
-      _IndustryGrorupDropDownState();
+  ConsumerState<SubDistrictFormfield> createState() => _IndustryGrorupDropDownState();
 }
 
-class _IndustryGrorupDropDownState
-    extends ConsumerState<SubDistrictFormfield> {
+class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
   TextEditingController subDistrictCtl = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<SubdistrictModel>> listData =
-        ref.watch(subDistrictProvider);
+    AsyncValue<List<SubdistrictModel>> listData = ref.watch(subDistrictProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -55,8 +51,7 @@ class _IndustryGrorupDropDownState
     return GestureDetector(
       onTap: () {
         print('object');
-        context.go(
-            '${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}');
+        context.go('${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}');
       },
       child: AbsorbPointer(
         absorbing: true,
@@ -76,5 +71,4 @@ class _IndustryGrorupDropDownState
       ),
     );
   }
-
 }

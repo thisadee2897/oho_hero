@@ -59,17 +59,17 @@ final companyDataProvider = Provider<List<Company>>((ref) {
 class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
   CompanyController(this.ref) : super(AsyncValue.data([]));
   final Ref ref;
-  CompanyForm dataCompany = CompanyForm();
-  void updateForm(CompanyForm updatedForm) {
-    dataCompany = updatedForm;
-  }
 
   Future<void> create() async {
+    var data = ref.read(companydataProvider);
     state = AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       CompanyForm newCompany = await ref.read(companyAPI).create({
-        'main_master_company': dataCompany.toJson(),
-        'update_password': dataCompany.passwordOriginal,
+        'main_master_company': CompanyForm(
+          name: data.name,
+          industryGroupId: data.industryGroupId,
+        ).toJson(),
+        'update_password': data.name,
       });
       List<CompanyForm> currentList = state.value ?? [];
       currentList.add(newCompany);
@@ -85,8 +85,7 @@ class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
         'update_password': data.passwordOriginal,
       });
       List<CompanyForm> currentList = state.value ?? [];
-      int index =
-          currentList.indexWhere((company) => company.id == updatedCompany.id);
+      int index = currentList.indexWhere((company) => company.id == updatedCompany.id);
       if (index != -1) {
         currentList[index] = updatedCompany;
       }
@@ -106,16 +105,36 @@ class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
   }
 
   Future<void> detail({required String id}) async {
+    var data = ref.read(companydataProvider);
     state = AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       CompanyForm company = await ref.read(companyAPI).create({
         'main_master_company_id': id,
       });
+      data.name = company.name;
       return [company];
     });
   }
 }
 
 final companyProvider =
-    StateNotifierProvider<CompanyController, AsyncValue<List<CompanyForm>>>(
-        (ref) => CompanyController(ref));
+    StateNotifierProvider<CompanyController, AsyncValue<List<CompanyForm>>>((ref) => CompanyController(ref));
+
+class CompanyDataController extends ChangeNotifier {
+  CompanyForm _companyData = CompanyForm();
+  String? _name;
+  String? _industryGroupId;
+  String? get name => _name;
+  set name(String? value) {
+    _name = value;
+    notifyListeners();
+  }
+
+  String? get industryGroupId => _name;
+  set industryGroupId(String? value) {
+    _industryGroupId = value;
+    notifyListeners();
+  }
+}
+
+final companydataProvider = ChangeNotifierProvider((ref) => CompanyDataController());

@@ -14,6 +14,5 @@ class SubdistrictModel with _$SubdistrictModel {
     @JsonKey(name: 'master_addr_province_name') String? provinceName,
   }) = _SubdistrictModel;
 
-  factory SubdistrictModel.fromJson(Map<String, dynamic> json) =>
-      _$SubdistrictModelFromJson(json);
+  factory SubdistrictModel.fromJson(Map<String, dynamic> json) => _$SubdistrictModelFromJson(json);
 }

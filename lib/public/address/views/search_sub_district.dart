@@ -33,31 +33,24 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
   }
 
   @override
-  Widget buildDesktop(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget buildDesktop(BuildContext context, SizingInformation sizingInformation) {
     return Center(
       child: SizedBox(width: 1200, child: content(buildDesktop: true)),
     );
   }
 
   @override
-  Widget? buildTablet(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget? buildTablet(BuildContext context, SizingInformation sizingInformation) {
     return content();
   }
 
   @override
-  Widget buildMobile(
-      BuildContext context, SizingInformation sizingInformation) {
+  Widget buildMobile(BuildContext context, SizingInformation sizingInformation) {
     return content();
   }
 
-  Widget content(
-      {int crossAxisCount = 1,
-      double paddingDesktop = 0.0,
-      bool buildDesktop = false}) {
-    AsyncValue<List<SubdistrictModel>> listData =
-        ref.watch(subDistrictProvider);
+  Widget content({int crossAxisCount = 1, double paddingDesktop = 0.0, bool buildDesktop = false}) {
+    AsyncValue<List<SubdistrictModel>> listData = ref.watch(subDistrictProvider);
     return SafeArea(
       child: CupertinoPageScaffold(
         child: CustomScrollView(
@@ -101,10 +94,7 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
         (i) => CupertinoListTile(
           title: Text(data[i].name ?? ''),
           subtitle: Row(
-            children: [
-              Text(data[i].districtName ?? ''),
-              Text(data[i].provinceName ?? '')
-            ],
+            children: [Text(data[i].districtName ?? ''), Text(data[i].provinceName ?? '')],
           ),
         ),
       ),
@@ -136,10 +126,8 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
                       //     .read(subDistrictProvider.notifier)
                       //     .read(search: value);
                       if (_debounce?.isActive ?? false) _debounce!.cancel();
-                      _debounce = Timer(const Duration(seconds: 1), () {
-                        ref
-                            .read(subDistrictProvider.notifier)
-                            .read(search: value);
+                      _debounce = Timer(const Duration(milliseconds: 300), () {
+                        ref.read(subDistrictProvider.notifier).read(search: value);
                       });
                     },
                   ),

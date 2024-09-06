@@ -1,3 +1,8 @@
+export 'package:oho_hero/screens/dashboard/all_dashboard/view/all_dashboard.dart';
+export 'package:oho_hero/screens/dashboard/carbon_project_dashboard/view/carbon_project_dashboard.dart';
+export 'package:oho_hero/screens/dashboard/footprint_dashboard/view/show_footprint_dashboard.dart';
+export 'package:oho_hero/screens/dashboard/market_dashboard/view/all_dashboard.dart';
+export 'package:oho_hero/screens/setting_project/setting_company/views/update_company.dart';
 export 'package:oho_hero/public/address/views/sub_district_fromfield.dart';
 export 'package:oho_hero/public/address/views/search_sub_district.dart';
 export 'package:oho_hero/public/address/controllers/sub_district_controller.dart';
