@@ -1,6 +1,6 @@
 import 'dart:async';
-
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/public/address/controllers/district_controller.dart';
 
 class SearchSubDistrict extends BaseStatefulWidget {
   static String path = 'search-sub-district';
@@ -88,13 +88,38 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
   }
 
   Widget _data(BuildContext context, List<SubdistrictModel> data) {
-    return Column(
+    var district = ref.watch(districtProvider);
+    if (data.isEmpty) {
+      return Center(
+        child: Text('ไม่พบ', style: CupertinoTheme.of(context).textTheme.textStyle),
+      );
+    }
+    return CupertinoListSection.insetGrouped(
+      backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
       children: List.generate(
         data.length,
-        (i) => CupertinoListTile(
-          title: Text(data[i].name ?? ''),
+        (index) => CupertinoListTile(
+          leading: Icon(CupertinoIcons.map_pin_ellipse),
+          onTap: () {
+            ref.read(districtProvider.notifier).read(subDistrictId: (data[index].id));
+            if (district.hasValue) {
+              Navigator.pop(context, data[index]);
+            }
+          },
+          title: Text(data[index].name ?? '', style: CupertinoTheme.of(context).textTheme.textStyle),
           subtitle: Row(
-            children: [Text(data[i].districtName ?? ''), Text(data[i].provinceName ?? '')],
+            children: [
+              if (true)
+                Expanded(
+                  flex: 1,
+                  child: Text(data[index].districtName ?? ''),
+                ),
+              if (true)
+                Expanded(
+                  flex: 1,
+                  child: Text(data[index].provinceName ?? ''),
+                ),
+            ],
           ),
         ),
       ),

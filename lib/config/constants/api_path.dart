@@ -1,7 +1,7 @@
 
 
-// const prod = 'https://techcaresolution-ssl.com/oho-hero-api/';
-const prod = 'http://localhost:9098/';
+const prod = 'https://techcaresolution-ssl.com/oho-hero-api/';
+// const prod = 'http://localhost:9098/';
 const prodImage = 'https://lobster-app-bgjxe.ondigitalocean.app/image/v1/';
 //Login
 const login = '${prod}security/login/login';

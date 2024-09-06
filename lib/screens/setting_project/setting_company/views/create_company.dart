@@ -1,11 +1,6 @@
-import 'dart:convert';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
-
-import 'package:oho_hero/public/business_category/views/view.dart';
-import 'package:oho_hero/screens/setting_project/setting_company/logic/create.dart';
 import 'package:oho_hero/utils/extension/extension.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -308,104 +303,93 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget formAddress(bool buildDesktop) {
+    CompanyLogicCreateController company = ref.watch(companyLogicCreateProvider);
+    CompanyLogicCreateController setCompany = ref.read(companyLogicCreateProvider);
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: BackgroundCustom(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ResponsiveGridRow(children: [
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    require: true,
-                    title: Trans.of(context).create_company__region,
-                    controller: regionCtl,
-                    validator: (String? value) {
-                      if (value!.isEmpty) {
-                        return Trans.of(context).pleasInputData;
-                      }
-                      return null;
-                    },
+            ResponsiveGridRow(
+              children: [
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomTextFormfield(
+                      require: true,
+                      title: Trans.of(context).create_company__region,
+                      controller: regionCtl,
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return Trans.of(context).pleasInputData;
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                 ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CustomTextFormfield(
-                    title: Trans.of(context).create_company__addressDetail,
-                    controller: buildingCtl,
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CustomTextFormfield(
+                      title: Trans.of(context).create_company__addressDetail,
+                      controller: buildingCtl,
+                    ),
                   ),
                 ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
                   child: SubDistrictFormfield(
-                    selectedID: null,
-                    onchanged: (SubdistrictModel) {
-                      print(jsonEncode(SubdistrictModel.id));
+                    selectedID: company.districtId,
+                    onchanged: (data) {
+                      if (data.id != null) {
+                        setCompany.districtId = data.id;
+                        setCompany.prefectureId = data.districtId;
+                        setCompany.provinceId = data.provinceId;
+                        ref.read(districtProvider.notifier).read(subDistrictId: data.id);
+                        ref.read(provinceProvider.notifier).read(districtId: data.districtId);
+                      }
                     },
                   ),
                 ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IgnorePointer(
-                    child: CustomTextFormfield(
-                      readOnly: true,
-                      title: Trans.of(context).create_company__district,
-                      controller: districtCtl,
-                    ),
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: DistrictFormfield(
+                    selectedID: company.prefectureId,
+                    onchanged: (data) {},
                   ),
                 ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IgnorePointer(
-                    child: CustomTextFormfield(
-                      readOnly: true,
-                      title: Trans.of(context).create_company__province,
-                      controller: provinceCtl,
-                    ),
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: ProvinceFormfield(
+                    selectedID: company.provinceId,
+                    onchanged: (data) {},
                   ),
                 ),
-              ),
-              ResponsiveGridCol(
-                sm: 4,
-                md: 3,
-                lg: 3,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: IgnorePointer(
-                    child: CustomTextFormfield(
-                      readOnly: true,
-                      title: Trans.of(context).create_company__postalCode,
-                      controller: postcodeCtl,
-                    ),
+                ResponsiveGridCol(
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                  child: PostCodeFormfield(
+                    selectedID: company.provinceId,
+                    onchanged: (data) {},
                   ),
                 ),
-              ),
-            ]),
+              ],
+            ),
           ],
         ),
       ),

@@ -10,7 +10,6 @@ class SubDistrictFormfield extends ConsumerStatefulWidget {
 }
 
 class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
-  TextEditingController subDistrictCtl = TextEditingController();
   @override
   Widget build(BuildContext context) {
     AsyncValue<List<SubdistrictModel>> listData = ref.watch(subDistrictProvider);
@@ -42,16 +41,26 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
 
   Widget _data(BuildContext context, List<SubdistrictModel> data) {
     String initialText = '';
-    if (widget.selectedID != null && data.isNotEmpty) {
+    if (widget.selectedID != null &&
+        data.isNotEmpty &&
+        data
+            .where(
+              (e) => e.id == widget.selectedID,
+            )
+            .isNotEmpty) {
       var selected = data.firstWhere(
         (e) => e.id == widget.selectedID,
       );
       initialText = selected.name ?? '';
     }
     return GestureDetector(
-      onTap: () {
-        print('object');
-        context.go('${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}');
+      onTap: () async {
+        SubdistrictModel? selectedSubDistrict = await context.push(
+          '${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}',
+        );
+        if (selectedSubDistrict != null) {
+          widget.onchanged(selectedSubDistrict);
+        }
       },
       child: AbsorbPointer(
         absorbing: true,
@@ -66,7 +75,9 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
             // }
             return null;
           },
-          controller: subDistrictCtl,
+          controller: TextEditingController(
+            text: initialText,
+          ),
         ),
       ),
     );
