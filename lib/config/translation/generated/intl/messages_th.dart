@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addProjectType":
+            MessageLookupByLibrary.simpleMessage("เพิ่มประเภทโครงการ"),
         "create_company__addressDetail":
             MessageLookupByLibrary.simpleMessage("ข้อมูลที่อยู่"),
         "create_company__company_abbreviation_en":
@@ -47,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("เลือกหมวดหมู่ธุรกิจ"),
         "create_company__select_industry_type":
             MessageLookupByLibrary.simpleMessage("เลือกประเภทอุตสาหกรรม"),
+        "create_company__select_project_type":
+            MessageLookupByLibrary.simpleMessage("เลือกประเภทโครงการ"),
         "create_company__subDistrict":
             MessageLookupByLibrary.simpleMessage("ตำบล/แขวง"),
         "create_company__tax_id":
@@ -59,12 +63,17 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ประเภทโครงการ"),
         "create_company__title_Company":
             MessageLookupByLibrary.simpleMessage("บริษัท"),
+        "endDate": MessageLookupByLibrary.simpleMessage("วันสิ้นสุด"),
         "login__button_login":
             MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
         "login__button_ok": MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
         "login__title_Login":
             MessageLookupByLibrary.simpleMessage("เข้าสู่ระบบ"),
         "pleasInputData":
-            MessageLookupByLibrary.simpleMessage("กรุณากรอกข้อมูล")
+            MessageLookupByLibrary.simpleMessage("กรุณากรอกข้อมูล"),
+        "pleasSelectData":
+            MessageLookupByLibrary.simpleMessage("กรุณาระบุข้อมูล"),
+        "startDate": MessageLookupByLibrary.simpleMessage("วันเริ่มต้น"),
+        "textCreate": MessageLookupByLibrary.simpleMessage("สร้าง")
       };
 }

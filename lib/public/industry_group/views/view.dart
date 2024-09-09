@@ -54,6 +54,9 @@ class _IndustryGrorupDropDownState extends ConsumerState<IndustryGrorupDropDown>
       controller: TextEditingController(
         text: initialText ?? '',
       ),
+      validator: (String? value) {
+        return value!.isEmpty ? Trans().pleasSelectData : null;
+      },
       data: List.generate(
           data.length,
           (index) => {

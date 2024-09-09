@@ -1,7 +1,6 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class ProjectTypeDroupdownController
-    extends StateNotifier<AsyncValue<List<IndustryGrorupDropDownModel>>> {
+class ProjectTypeDroupdownController extends StateNotifier<AsyncValue<List<ProjectTypeDropdownModel>>> {
   ProjectTypeDroupdownController(this.ref) : super(AsyncValue.data([]));
   final Ref ref;
 
@@ -9,8 +8,7 @@ class ProjectTypeDroupdownController
     state = AsyncValue.loading();
     state = await AsyncValue.guard(() async {
       try {
-        var res = await ref.read(industryGroupDroupdown).readApi({
-        });
+        var res = await ref.read(projectTypeDropdown).readApi({});
         return res;
       } catch (e) {
         throw e;
@@ -19,7 +17,6 @@ class ProjectTypeDroupdownController
   }
 }
 
-final industryGroupDropdownProvider = StateNotifierProvider<
-        ProjectTypeDroupdownController,
-        AsyncValue<List<IndustryGrorupDropDownModel>>>(
-    (ref) => ProjectTypeDroupdownController(ref));
+final projectTypeProvider =
+    StateNotifierProvider<ProjectTypeDroupdownController, AsyncValue<List<ProjectTypeDropdownModel>>>(
+        (ref) => ProjectTypeDroupdownController(ref));

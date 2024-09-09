@@ -1,11 +1,11 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class IndustryGroupDroupdown {
+class ProjectTypeDroupdown {
   final Ref ref;
-  final String _read = 'security/login/Getmaster_industry_group';
-  IndustryGroupDroupdown({required this.ref});
+  final String _read = 'MasterDataAll/Get_master_project_type';
+  ProjectTypeDroupdown({required this.ref});
 
-  Future<List<IndustryGrorupDropDownModel>> readApi(Map<String, dynamic> body) async {
+  Future<List<ProjectTypeDropdownModel>> readApi(Map<String, dynamic> body) async {
     try {
       return await _list(_read, body);
     } catch (e) {
@@ -13,13 +13,13 @@ class IndustryGroupDroupdown {
     }
   }
 
-  Future<List<IndustryGrorupDropDownModel>> _list(String endpoint, Map<String, dynamic> body) async {
-    Response<dynamic> res = await _companyRequest(endpoint, body);
-    return List<IndustryGrorupDropDownModel>.from(
-        List<dynamic>.from(res.data).map((item) => IndustryGrorupDropDownModel.fromJson(item)));
+  Future<List<ProjectTypeDropdownModel>> _list(String endpoint, Map<String, dynamic> body) async {
+    Response<dynamic> res = await _request(endpoint, body);
+    return List<ProjectTypeDropdownModel>.from(
+        List<dynamic>.from(res.data).map((item) => ProjectTypeDropdownModel.fromJson(item)));
   }
 
-  Future<Response<dynamic>> _companyRequest(String endpoint, Map<String, dynamic> body) async {
+  Future<Response<dynamic>> _request(String endpoint, Map<String, dynamic> body) async {
     try {
       return await ref.read(apiClientProvider).post(endpoint, data: body);
     } on DioException catch (e) {
@@ -28,4 +28,4 @@ class IndustryGroupDroupdown {
   }
 }
 
-final industryGroupDroupdown = Provider<IndustryGroupDroupdown>((ref) => IndustryGroupDroupdown(ref: ref));
+final projectTypeDropdown = Provider<ProjectTypeDroupdown>((ref) => ProjectTypeDroupdown(ref: ref));

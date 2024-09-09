@@ -22,6 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "addProjectType":
+            MessageLookupByLibrary.simpleMessage("Add Project Type"),
         "create_company__addressDetail":
             MessageLookupByLibrary.simpleMessage("Address Detail"),
         "create_company__company_abbreviation_en":
@@ -47,6 +49,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Select Business Category"),
         "create_company__select_industry_type":
             MessageLookupByLibrary.simpleMessage("Select industry type"),
+        "create_company__select_project_type":
+            MessageLookupByLibrary.simpleMessage("Select Project  type"),
         "create_company__subDistrict":
             MessageLookupByLibrary.simpleMessage("Sub District"),
         "create_company__tax_id":
@@ -59,11 +63,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Project Type"),
         "create_company__title_Company":
             MessageLookupByLibrary.simpleMessage("Company"),
+        "endDate": MessageLookupByLibrary.simpleMessage("End Date"),
         "login__button_login": MessageLookupByLibrary.simpleMessage("LOGIN"),
         "login__button_ok": MessageLookupByLibrary.simpleMessage("OK"),
         "login__title_Login":
             MessageLookupByLibrary.simpleMessage("LOGIN PAGE"),
         "pleasInputData":
-            MessageLookupByLibrary.simpleMessage("Pleas Input Data")
+            MessageLookupByLibrary.simpleMessage("Pleas Input Data"),
+        "pleasSelectData":
+            MessageLookupByLibrary.simpleMessage("Pleas Select Data"),
+        "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
+        "textCreate": MessageLookupByLibrary.simpleMessage("Create")
       };
 }

@@ -10,7 +10,7 @@ void main() {
 
 class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
-
+  static String version = '0.0.1';
   @override
   ConsumerState<MyApp> createState() => _MyAppState();
 }
@@ -49,6 +49,7 @@ class _MyAppState extends ConsumerState<MyApp> {
 void switchLanguage(WidgetRef ref, Locale newLocale) {
   ref.read(localeProvider.notifier).state = newLocale;
 }
+
 final localeProvider = StateProvider<Locale>((ref) => Locale('th'));
 
 final languageProvider = StateProvider<Locale>((ref) {

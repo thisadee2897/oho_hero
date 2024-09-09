@@ -1,7 +1,7 @@
 import 'package:oho_hero/config/routes/export.dart';
 
 class SubDistrictFormfield extends ConsumerStatefulWidget {
-  const SubDistrictFormfield({super.key, this.selectedID, required this.onchanged});
+  SubDistrictFormfield({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
   final Function(SubdistrictModel) onchanged;
 
@@ -10,16 +10,18 @@ class SubDistrictFormfield extends ConsumerStatefulWidget {
 }
 
 class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
+  String initialText = '';
+  bool hasChanged = false;
   @override
   void initState() {
     super.initState();
-    if (widget.selectedID != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        Future.delayed(Duration.zero, () {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (widget.selectedID != null) {
+        Future.microtask(() {
           ref.read(subDistrictForIdProvider.notifier).read(id: widget.selectedID);
         });
-      });
-    }
+      }
+    });
   }
 
   @override
@@ -54,22 +56,28 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
   }
 
   Widget _data(BuildContext context, List<SubdistrictModel> data) {
-    String initialText = '';
-    if (widget.selectedID != null && data.isNotEmpty && initialText != data.first.name) {
-      if (data.isNotEmpty && initialText.isEmpty) {
+    if (!hasChanged && widget.selectedID != null && data.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
         initialText = data.first.name ?? '';
-        // widget.onchanged(data.first);
-      }
+        widget.onchanged(data.first);
+        setState(() {
+          hasChanged = true;
+        });
+      });
     }
     return GestureDetector(
       onTap: () async {
-        SubdistrictModel? selectedSubDistrict = await context.push(
-          '${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}',
-        );
+        SubdistrictModel? selectedSubDistrict =
+            await context.push('${Routes.company}/${Routes.createCompany}/${SearchSubDistrict.path}');
         if (selectedSubDistrict != null) {
-          ref.read(subDistrictForIdProvider.notifier).read(id: selectedSubDistrict.id);
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ref.read(subDistrictForIdProvider.notifier).read(id: selectedSubDistrict.id);
+          });
           initialText = selectedSubDistrict.name ?? '';
           widget.onchanged(selectedSubDistrict);
+          setState(() {
+            hasChanged = true;
+          });
           return;
         }
       },

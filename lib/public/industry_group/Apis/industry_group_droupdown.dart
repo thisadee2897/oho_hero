@@ -2,12 +2,12 @@ import 'package:oho_hero/config/routes/export.dart';
 
 class IndustryGroupDroupdown {
   final Ref ref;
-  final String _read = 'MasterDataAll/Getmaster_industry_group';
+  final String _readIndustry = 'MasterDataAll/Getmaster_industry_group';
   IndustryGroupDroupdown({required this.ref});
 
   Future<List<IndustryGrorupDropDownModel>> readApi(Map<String, dynamic> body) async {
     try {
-      return await _list(_read, body);
+      return await _list(_readIndustry, body);
     } catch (e) {
       print(e);
       throw e;

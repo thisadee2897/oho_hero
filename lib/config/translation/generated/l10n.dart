@@ -100,6 +100,16 @@ class Trans {
     );
   }
 
+  /// `เลือกประเภทโครงการ`
+  String get create_company__select_project_type {
+    return Intl.message(
+      'เลือกประเภทโครงการ',
+      name: 'create_company__select_project_type',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `เลือกหมวดหมู่ธุรกิจ`
   String get create_company__select_business_category {
     return Intl.message(
@@ -270,11 +280,61 @@ class Trans {
     );
   }
 
+  /// `วันเริ่มต้น`
+  String get startDate {
+    return Intl.message(
+      'วันเริ่มต้น',
+      name: 'startDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `วันสิ้นสุด`
+  String get endDate {
+    return Intl.message(
+      'วันสิ้นสุด',
+      name: 'endDate',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `เพิ่มประเภทโครงการ`
+  String get addProjectType {
+    return Intl.message(
+      'เพิ่มประเภทโครงการ',
+      name: 'addProjectType',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `สร้าง`
+  String get textCreate {
+    return Intl.message(
+      'สร้าง',
+      name: 'textCreate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `กรุณากรอกข้อมูล`
   String get pleasInputData {
     return Intl.message(
       'กรุณากรอกข้อมูล',
       name: 'pleasInputData',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `กรุณาระบุข้อมูล`
+  String get pleasSelectData {
+    return Intl.message(
+      'กรุณาระบุข้อมูล',
+      name: 'pleasSelectData',
       desc: '',
       args: [],
     );

@@ -3,7 +3,7 @@ import 'package:oho_hero/config/routes/export.dart';
 class RegionFormfield extends ConsumerStatefulWidget {
   const RegionFormfield({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
-  final Function(PostCodeModel) onchanged;
+  final Function(ProvinceModel) onchanged;
 
   @override
   ConsumerState<RegionFormfield> createState() => _IndustryGrorupDropDownState();
@@ -11,6 +11,17 @@ class RegionFormfield extends ConsumerStatefulWidget {
 
 class _IndustryGrorupDropDownState extends ConsumerState<RegionFormfield> {
   TextEditingController districtCtl = TextEditingController();
+  String? initialText = '';
+  bool hasChanged = false;
+  @override
+  void initState() {
+    if (widget.selectedID != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(regionProvider.notifier).read();
+      });
+    }
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +53,14 @@ class _IndustryGrorupDropDownState extends ConsumerState<RegionFormfield> {
   }
 
   Widget _data(BuildContext context, ProvinceModel data) {
-    String? initialText = '';
-    if (widget.selectedID != null) {
-      initialText = data.regionName;
+    if (!hasChanged&&data.id!=null) {
+      Future.microtask(() {
+        setState(() {
+          initialText = data.regionName ?? '';
+          hasChanged = true;
+          widget.onchanged(data);
+        });
+      });
     }
     return IgnorePointer(
       child: CustomTextFormfield(

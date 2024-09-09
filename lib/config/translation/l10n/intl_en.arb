@@ -4,6 +4,7 @@
   "login__title_Login": "LOGIN PAGE",
   "create_company__title_Company": "Company",
   "create_company__select_industry_type": "Select industry type",
+  "create_company__select_project_type": "Select Project  type",
   "create_company__select_business_category": "Select Business Category",
   "create_company__name_th": "Company Name (Thai)",
   "create_company__name_en": "Company Name (English)",
@@ -21,5 +22,10 @@
   "create_company__postalCode": "Postal Code",
   "create_company__titleProjectType": "Project Type",
   "create_company__titleDocument": "Document",
-  "pleasInputData": "Pleas Input Data"
+  "startDate": "Start Date",
+  "endDate": "End Date",
+  "addProjectType": "Add Project Type",
+  "textCreate": "Create",
+  "pleasInputData": "Pleas Input Data",
+  "pleasSelectData": "Pleas Select Data"
 }

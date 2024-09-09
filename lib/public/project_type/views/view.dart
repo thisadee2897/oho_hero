@@ -1,26 +1,27 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class IndustryGrorupDropDown extends ConsumerStatefulWidget {
-  const IndustryGrorupDropDown(
+
+class ProjectTypeDropDown extends ConsumerStatefulWidget {
+  const ProjectTypeDropDown(
       {super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
-  final Function(IndustryGrorupDropDownModel) onchanged;
+  final Function(ProjectTypeDropdownModel) onchanged;
 
   @override
-  ConsumerState<IndustryGrorupDropDown> createState() =>
-      _IndustryGrorupDropDownState();
+  ConsumerState<ProjectTypeDropDown> createState() =>
+      _ProjectTypeDropDownState();
 }
 
-class _IndustryGrorupDropDownState
-    extends ConsumerState<IndustryGrorupDropDown> {
+class _ProjectTypeDropDownState
+    extends ConsumerState<ProjectTypeDropDown> {
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<IndustryGrorupDropDownModel>> industryList =
-        ref.watch(industryGroupDropdownProvider);
+    AsyncValue<List<ProjectTypeDropdownModel>> listData =
+        ref.watch(projectTypeProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: industryList.when(
+        child: listData.when(
           loading: _loading,
           error: (error, stack) => _error(context, error),
           data: (data) => _data(context, data),
@@ -38,12 +39,12 @@ class _IndustryGrorupDropDownState
 
   Widget _loading() {
     return LoadingTextField(
-      title: Trans.of(context).create_company__select_industry_type,
+      title: Trans.of(context).create_company__select_project_type,
       require: true,
     );
   }
 
-  Widget _data(BuildContext context, List<IndustryGrorupDropDownModel> data) {
+  Widget _data(BuildContext context, List<ProjectTypeDropdownModel> data) {
     String? initialText;
     if (widget.selectedID != null && data.isNotEmpty) {
       var selected = data.firstWhere(
@@ -54,7 +55,7 @@ class _IndustryGrorupDropDownState
     return CustomDroupdownFormfield(
       initId: widget.selectedID,
       require: true,
-      title: Trans.of(context).create_company__select_industry_type,
+      title: Trans.of(context).create_company__select_project_type,
       controller: TextEditingController(
         text: initialText ?? '',
       ),

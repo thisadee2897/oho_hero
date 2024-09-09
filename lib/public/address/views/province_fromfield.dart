@@ -6,11 +6,23 @@ class ProvinceFormfield extends ConsumerStatefulWidget {
   final Function(ProvinceModel) onchanged;
 
   @override
-  ConsumerState<ProvinceFormfield> createState() => _IndustryGrorupDropDownState();
+  ConsumerState<ProvinceFormfield> createState() => _ProvinceFormfieldState();
 }
 
-class _IndustryGrorupDropDownState extends ConsumerState<ProvinceFormfield> {
+class _ProvinceFormfieldState extends ConsumerState<ProvinceFormfield> {
   TextEditingController districtCtl = TextEditingController();
+  String? initialText = '';
+  bool hasChanged = false;
+  @override
+  void initState() {
+    if (widget.selectedID != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ref.read(provinceProvider.notifier).read(prefectureId: widget.selectedID);
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     AsyncValue<ProvinceModel> dataprovince = ref.watch(provinceProvider);
@@ -41,11 +53,13 @@ class _IndustryGrorupDropDownState extends ConsumerState<ProvinceFormfield> {
   }
 
   Widget _data(BuildContext context, ProvinceModel data) {
-    String? initialText = '';
-    if (widget.selectedID != null) {
-      initialText = data.name ?? '';
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        widget.onchanged(data);
+    if (!hasChanged && data.id != null) {
+      Future.microtask(() {
+        setState(() {
+          widget.onchanged(data);
+          initialText = data.name ?? '';
+          hasChanged = true;
+        });
       });
     }
     return IgnorePointer(

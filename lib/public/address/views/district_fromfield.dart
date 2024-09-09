@@ -11,6 +11,20 @@ class DistrictFormfield extends ConsumerStatefulWidget {
 
 class _IndustryGrorupDropDownState extends ConsumerState<DistrictFormfield> {
   TextEditingController districtCtl = TextEditingController();
+  String? initialText = '';
+  bool hasChanged = false;
+  @override
+  void initState() {
+    if (widget.selectedID != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.microtask(() {
+          ref.read(districtProvider.notifier).read(subDistrictId: widget.selectedID);
+        });
+      });
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     AsyncValue<DistrictModel> district = ref.watch(districtProvider);
@@ -41,10 +55,14 @@ class _IndustryGrorupDropDownState extends ConsumerState<DistrictFormfield> {
   }
 
   Widget _data(BuildContext context, DistrictModel data) {
-    String? initialText = '';
-    if (widget.selectedID != null) {
-      initialText = data.name ?? '';
-      widget.onchanged(data);
+    if (!hasChanged && widget.selectedID != null && data.id != null) {
+      Future.microtask(() {
+        setState(() {
+          initialText = data.name ?? '';
+          hasChanged = true;
+          widget.onchanged(data);
+        });
+      });
     }
     return IgnorePointer(
       child: CustomTextFormfield(

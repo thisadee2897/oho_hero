@@ -34,10 +34,12 @@ class CreateCompanyController extends StateNotifier<AsyncValue<CompanyForm>> {
           versionUpdate: value.versionUpdate,
           passwordOriginal: value.passwordOriginal,
           userLoginId: value.userLoginId,
+          projectTypeId: value.projectTypeId,
           startDate: value.startDate.toString(),
           endDate: value.endDate.toString(),
         ).toJson(),
-        'update_password': value.passwordOriginal,
+        'update_password': false,
+        "master_customer_password": value.passwordOriginal,
       });
       return newCompany;
     });

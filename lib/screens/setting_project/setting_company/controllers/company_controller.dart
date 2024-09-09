@@ -60,23 +60,6 @@ class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
   CompanyController(this.ref) : super(AsyncValue.data([]));
   final Ref ref;
 
-  Future<void> create() async {
-    var data = ref.read(companydataProvider);
-    state = AsyncValue.loading();
-    state = await AsyncValue.guard(() async {
-      CompanyForm newCompany = await ref.read(companyAPI).create({
-        'main_master_company': CompanyForm(
-          name: data.name,
-          industryGroupId: data.industryGroupId,
-        ).toJson(),
-        'update_password': data.name,
-      });
-      List<CompanyForm> currentList = state.value ?? [];
-      currentList.add(newCompany);
-      return currentList;
-    });
-  }
-
   Future<void> update({required CompanyForm data}) async {
     state = AsyncValue.loading();
     state = await AsyncValue.guard(() async {

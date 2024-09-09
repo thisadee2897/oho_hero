@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:oho_hero/config/routes/export.dart';
 
 class CompanyAPI {
@@ -8,6 +10,7 @@ class CompanyAPI {
   CompanyAPI({required this.ref});
 
   Future<CompanyForm> create(Map<String, dynamic> body) async {
+    print(jsonEncode(body));
     return _companyRequestSingle(_create, body);
   }
 

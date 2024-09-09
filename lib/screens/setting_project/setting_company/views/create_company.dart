@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
+import 'package:oho_hero/main.dart';
 
 class CreateCompanyScreen extends BaseStatefulWidget {
   final String previousPageTitle;
@@ -13,28 +14,27 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   TextEditingController timeCtl = TextEditingController();
   TextEditingController comapnytypeCtl = TextEditingController();
   TextEditingController comapnyGroupCtl = TextEditingController();
-  TextEditingController nameTHCtl = TextEditingController();
-  TextEditingController nameENCtl = TextEditingController();
-  TextEditingController nameAbbeviationCtl = TextEditingController();
-  TextEditingController taxIDCtl = TextEditingController();
-  TextEditingController emailCtl = TextEditingController();
-  TextEditingController phoneNumberCtl = TextEditingController();
+  TextEditingController nameTHCtl = TextEditingController(text: 'บริษัท พลังงานบริสุทธิ์ จำกัด (มหาชน)');
+  TextEditingController nameENCtl = TextEditingController(text: 'ENERGY ABSOLUTE PUBLIC COMPANY LIMITED');
+  TextEditingController nameAbbeviationCtl = TextEditingController(text: 'EAP');
+  TextEditingController taxIDCtl = TextEditingController(text: '0107551000061');
+  TextEditingController emailCtl = TextEditingController(text: 'admin@energyabsolute.com');
+  TextEditingController phoneNumberCtl = TextEditingController(text: '0801234556');
+  TextEditingController address =
+      TextEditingController(text: '89 อาคารเอไอเอ แคปปิตอล เซ็นเตอร์ ชั้นที่ 16 ถนนรัชดาภิเษก');
   TextEditingController regionCtl = TextEditingController();
-  TextEditingController buildingCtl = TextEditingController();
-  TextEditingController roomNumberCtl = TextEditingController();
-  TextEditingController floorNumberCtl = TextEditingController();
-  TextEditingController alleyCtl = TextEditingController();
-  TextEditingController rordCtl = TextEditingController();
   TextEditingController subDistrictCtl = TextEditingController();
   TextEditingController districtCtl = TextEditingController();
   TextEditingController provinceCtl = TextEditingController();
   TextEditingController postcodeCtl = TextEditingController(text: '45000');
   final ScrollController _scrollController = ScrollController();
+  int length = 1;
   final createCompanyKey = GlobalKey<FormState>();
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(industryGroupDropdownProvider.notifier).readIndustry();
+      ref.read(projectTypeProvider.notifier).readProjectType();
     });
     super.initState();
   }
@@ -59,6 +59,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   }
 
   Widget content({int crossAxisCount = 1, double paddingDesktop = 0.0, bool buildDesktop = false}) {
+    CompanyLogicCreateController company = ref.watch(companyLogicCreateProvider);
+    CompanyLogicCreateController setCompany = ref.read(companyLogicCreateProvider);
     return SafeArea(
       child: Form(
         key: createCompanyKey,
@@ -73,12 +75,32 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
               titleAddress(buildDesktop),
               formAddress(buildDesktop),
               spasce(buildDesktop),
-              formProjectTypeAndDocument(buildDesktop, paddingDesktop),
+              formProjectTypeAndDocument(buildDesktop, paddingDesktop, company, setCompany),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void submitCreateCompay() async {
+    CompanyLogicCreateController set = ref.read(companyLogicCreateProvider);
+    if (createCompanyKey.currentState!.validate()) {
+      set.name = nameTHCtl.text;
+      set.nameEN = nameENCtl.text;
+      set.taxId = taxIDCtl.text;
+      set.email = emailCtl.text;
+      set.phoneNumber = phoneNumberCtl.text;
+      set.address = address.text;
+      set.active = true;
+      set.version = MyApp.version;
+      set.versionUpdate = MyApp.version;
+      set.userLoginId = ref.watch(loginProvider).requireValue.id;
+      ref.read(createCompanyProvider.notifier).create();
+      if (ref.watch(createCompanyProvider).hasValue) {
+        context.pop();
+      }
+    }
   }
 
   Widget topbar() {
@@ -91,13 +113,9 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
         padding: const EdgeInsets.all(8),
         child: ButtonCustom(
           buttonType: ButtonType.filled,
-          text: 'Create',
-          onTap: () {
-            print(createCompanyKey.currentState!.validate());
-            if (createCompanyKey.currentState != null && createCompanyKey.currentState!.validate()) {
-              context.pop();
-            }
-          },
+          text: Trans().textCreate,
+          loading: ref.watch(createCompanyProvider).isLoading,
+          onTap: submitCreateCompay,
         ),
       ),
       largeTitle: Text('Create company'),
@@ -319,7 +337,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     child: CustomTextFormfield(
                       require: true,
                       title: Trans.of(context).create_company__addressDetail,
-                      controller: buildingCtl,
+                      controller: address,
                     ),
                   ),
                 ),
@@ -329,17 +347,14 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   lg: 3,
                   child: SubDistrictFormfield(
                     selectedID: company.districtId,
-                    onchanged: (data) {
+                    onchanged: (SubdistrictModel data) {
                       if (data.id != null) {
                         setCompany.districtId = data.id;
                         setCompany.prefectureId = data.districtId;
-                        setCompany.provinceId = data.provinceId;
-                        Future.delayed(Duration.zero, () {
-                          ref.read(districtProvider.notifier).read(subDistrictId: data.id);
-                          ref.read(provinceProvider.notifier).read(districtId: data.districtId);
-                          ref.read(postcodeProvider.notifier).read(id: data.id);
-                          // ref.read(regionProvider.notifier).read();
-                        });
+                        ref.read(districtProvider.notifier).read(subDistrictId: company.districtId);
+                        ref.read(provinceProvider.notifier).read(prefectureId: company.prefectureId);
+                        ref.read(postcodeProvider.notifier).read(districtId: company.districtId);
+                        ref.read(regionProvider.notifier).read();
                       }
                     },
                   ),
@@ -349,8 +364,9 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 3,
                   lg: 3,
                   child: DistrictFormfield(
-                    selectedID: company.prefectureId,
-                    onchanged: (data) {},
+                    key: ValueKey(company.districtId),
+                    selectedID: company.districtId,
+                    onchanged: (DistrictModel data) {},
                   ),
                 ),
                 ResponsiveGridCol(
@@ -358,9 +374,11 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 3,
                   lg: 3,
                   child: ProvinceFormfield(
-                    selectedID: company.provinceId,
-                    onchanged: (data) {
-                      if (data.regionId != null) {
+                    key: ValueKey(company.districtId),
+                    selectedID: company.prefectureId,
+                    onchanged: (ProvinceModel data) {
+                      if (data.id != null) {
+                        setCompany.provinceId = data.id;
                         setCompany.regionId = data.regionId;
                       }
                     },
@@ -371,9 +389,12 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 3,
                   lg: 3,
                   child: PostCodeFormfield(
+                    key: ValueKey(company.districtId),
                     selectedID: company.districtId,
-                    onchanged: (data) {
-                      setCompany.provinceId = data.id;
+                    onchanged: (PostCodeModel data) {
+                      if (data.id != null) {
+                        setCompany.postcodeId = data.id;
+                      }
                     },
                   ),
                 ),
@@ -382,7 +403,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 3,
                   lg: 3,
                   child: RegionFormfield(
-                    selectedID: company.regionId,
+                    key: ValueKey(company.districtId),
                     onchanged: (data) {},
                   ),
                 ),
@@ -394,7 +415,8 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
     );
   }
 
-  Widget formProjectTypeAndDocument(bool buildDesktop, double paddingDesktop) {
+  Widget formProjectTypeAndDocument(bool buildDesktop, double paddingDesktop, CompanyLogicCreateController company,
+      CompanyLogicCreateController set) {
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
       child: ResponsiveGridRow(
@@ -407,6 +429,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
               padding: EdgeInsets.only(right: paddingDesktop),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -416,29 +439,84 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                     ),
                   ),
                   BackgroundCustom(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: List.generate(
-                          5,
-                          (index) => Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Row(
-                              children: [
-                                CupertinoCheckbox(value: index == 2, onChanged: (value) {}),
-                                const SizedBox(width: 8),
-                                Expanded(
-                                  child: IgnorePointer(
-                                    child: CupertinoTextFormFieldRow(
-                                      placeholder: 'ประเภทโครงการที่ ${index + 1}',
+                    child: CupertinoListSection.insetGrouped(
+                      margin: EdgeInsets.all(0),
+                      hasLeading: false,
+                      backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+                      children: [
+                        ...List.generate(
+                          length,
+                          (index) => Column(
+                            children: [
+                              ProjectTypeDropDown(
+                                selectedID: company.projectTypeId,
+                                onchanged: (data) {
+                                  set.projectTypeId = data.id;
+                                },
+                              ),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CustomDatePickerFormfield(
+                                        initialDate: company.startDate,
+                                        require: true,
+                                        title: Trans().startDate,
+                                        controller: TextEditingController(
+                                          text: company.startDate == null
+                                              ? ''
+                                              : company.startDate.toString().split(' ')[0],
+                                        ),
+                                        onSave: (String? value) {
+                                          if (value != null) {
+                                            set.startDate = sendToDateTime(value);
+                                          }
+                                          return;
+                                        },
+                                      ),
                                     ),
                                   ),
-                                )
-                              ],
-                            ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: CustomDatePickerFormfield(
+                                        initialDate: company.endDate,
+                                        require: true,
+                                        title: Trans().endDate,
+                                        controller: TextEditingController(
+                                          text: company.endDate == null ? '' : company.endDate.toString().split(' ')[0],
+                                        ),
+                                        onSave: (String? value) {
+                                          if (value != null) {
+                                            print(value);
+                                            set.endDate = sendToDateTime("${value.split(' ')[0]} 23:59:29.000");
+                                          }
+                                          return;
+                                        },
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            ],
                           ),
                         ),
-                      ),
+                        CupertinoListTile(
+                          title: Text(Trans().addProjectType),
+                          leading: const Icon(
+                            Icons.add_circle,
+                            color: Colors.green,
+                          ),
+                          onTap: () {
+                            setState(() {
+                              length++;
+                            });
+                          },
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -475,7 +553,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                   allowedExtensions: ['pdf'],
                                 );
                                 if (result != null) {
-                                  print(result.files.single);
                                   // หากเลือกไฟล์ได้สำเร็จ
                                   // setState(() {
                                   //   _selectedFileName = result.files.single
@@ -505,7 +582,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                   allowedExtensions: ['pdf'],
                                 );
                                 if (result != null) {
-                                  print(result.files.single);
                                   // หากเลือกไฟล์ได้สำเร็จ
                                   // setState(() {
                                   //   _selectedFileName = result.files.single
@@ -535,7 +611,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                   allowedExtensions: ['pdf'],
                                 );
                                 if (result != null) {
-                                  print(result.files.single);
                                   // หากเลือกไฟล์ได้สำเร็จ
                                   // setState(() {
                                   //   _selectedFileName = result.files.single
@@ -571,11 +646,14 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   Widget titleAddress(bool buildDesktop) {
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          Trans.of(context).create_company__titleAddress,
-          style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            Trans.of(context).create_company__titleAddress,
+            style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
+          ),
         ),
       ),
     );
@@ -584,11 +662,14 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
   Widget titleCompany(bool buildDesktop) {
     return BoxAdapterCustom(
       buildDesktop: buildDesktop,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          Trans.of(context).create_company__title_Company,
-          style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            Trans.of(context).create_company__title_Company,
+            style: CupertinoTheme.of(context).textTheme.tabLabelTextStyle,
+          ),
         ),
       ),
     );
