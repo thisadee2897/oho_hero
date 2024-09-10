@@ -1,23 +1,18 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-
 class ProjectTypeDropDown extends ConsumerStatefulWidget {
-  const ProjectTypeDropDown(
-      {super.key, this.selectedID, required this.onchanged});
+  const ProjectTypeDropDown({super.key, this.selectedID, required this.onchanged});
   final String? selectedID;
   final Function(ProjectTypeDropdownModel) onchanged;
 
   @override
-  ConsumerState<ProjectTypeDropDown> createState() =>
-      _ProjectTypeDropDownState();
+  ConsumerState<ProjectTypeDropDown> createState() => _ProjectTypeDropDownState();
 }
 
-class _ProjectTypeDropDownState
-    extends ConsumerState<ProjectTypeDropDown> {
+class _ProjectTypeDropDownState extends ConsumerState<ProjectTypeDropDown> {
   @override
   Widget build(BuildContext context) {
-    AsyncValue<List<ProjectTypeDropdownModel>> listData =
-        ref.watch(projectTypeProvider);
+    AsyncValue<List<ProjectTypeDropdownModel>> listData = ref.watch(projectTypeProvider);
     {
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -50,9 +45,12 @@ class _ProjectTypeDropDownState
       var selected = data.firstWhere(
         (e) => e.id == widget.selectedID,
       );
-      initialText = selected.name;
+      initialText = showText(ref: ref, TH: selected.name, EN: selected.nameEN);
     }
     return CustomDroupdownFormfield(
+      validator: (String? value) {
+        return value!.isEmpty ? Trans().pleasSelectData : null;
+      },
       initId: widget.selectedID,
       require: true,
       title: Trans.of(context).create_company__select_project_type,
@@ -63,7 +61,7 @@ class _ProjectTypeDropDownState
           data.length,
           (index) => {
                 'id': data[index].id,
-                'name': data[index].name,
+                'name': showText(ref: ref, TH: data[index].name, EN: data[index].nameEN),
               }),
       selectId: (String? value) {
         if (value != null) {

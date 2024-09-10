@@ -24,6 +24,8 @@ mixin _$RegionModel {
   String? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'master_addr_region_name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'master_addr_region_name_eng')
+  String? get nameEN => throw _privateConstructorUsedError;
 
   /// Serializes this RegionModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +45,8 @@ abstract class $RegionModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'master_addr_region_id') String? id,
-      @JsonKey(name: 'master_addr_region_name') String? name});
+      @JsonKey(name: 'master_addr_region_name') String? name,
+      @JsonKey(name: 'master_addr_region_name_eng') String? nameEN});
 }
 
 /// @nodoc
@@ -63,6 +66,7 @@ class _$RegionModelCopyWithImpl<$Res, $Val extends RegionModel>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? nameEN = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -72,6 +76,10 @@ class _$RegionModelCopyWithImpl<$Res, $Val extends RegionModel>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nameEN: freezed == nameEN
+          ? _value.nameEN
+          : nameEN // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -87,7 +95,8 @@ abstract class _$$RegionModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'master_addr_region_id') String? id,
-      @JsonKey(name: 'master_addr_region_name') String? name});
+      @JsonKey(name: 'master_addr_region_name') String? name,
+      @JsonKey(name: 'master_addr_region_name_eng') String? nameEN});
 }
 
 /// @nodoc
@@ -105,6 +114,7 @@ class __$$RegionModelImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
+    Object? nameEN = freezed,
   }) {
     return _then(_$RegionModelImpl(
       id: freezed == id
@@ -115,6 +125,10 @@ class __$$RegionModelImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
+      nameEN: freezed == nameEN
+          ? _value.nameEN
+          : nameEN // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -124,7 +138,8 @@ class __$$RegionModelImplCopyWithImpl<$Res>
 class _$RegionModelImpl implements _RegionModel {
   const _$RegionModelImpl(
       {@JsonKey(name: 'master_addr_region_id') this.id,
-      @JsonKey(name: 'master_addr_region_name') this.name});
+      @JsonKey(name: 'master_addr_region_name') this.name,
+      @JsonKey(name: 'master_addr_region_name_eng') this.nameEN});
 
   factory _$RegionModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$RegionModelImplFromJson(json);
@@ -135,10 +150,13 @@ class _$RegionModelImpl implements _RegionModel {
   @override
   @JsonKey(name: 'master_addr_region_name')
   final String? name;
+  @override
+  @JsonKey(name: 'master_addr_region_name_eng')
+  final String? nameEN;
 
   @override
   String toString() {
-    return 'RegionModel(id: $id, name: $name)';
+    return 'RegionModel(id: $id, name: $name, nameEN: $nameEN)';
   }
 
   @override
@@ -147,12 +165,13 @@ class _$RegionModelImpl implements _RegionModel {
         (other.runtimeType == runtimeType &&
             other is _$RegionModelImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.nameEN, nameEN) || other.nameEN == nameEN));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, nameEN);
 
   /// Create a copy of RegionModel
   /// with the given fields replaced by the non-null parameter values.
@@ -173,7 +192,8 @@ class _$RegionModelImpl implements _RegionModel {
 abstract class _RegionModel implements RegionModel {
   const factory _RegionModel(
           {@JsonKey(name: 'master_addr_region_id') final String? id,
-          @JsonKey(name: 'master_addr_region_name') final String? name}) =
+          @JsonKey(name: 'master_addr_region_name') final String? name,
+          @JsonKey(name: 'master_addr_region_name_eng') final String? nameEN}) =
       _$RegionModelImpl;
 
   factory _RegionModel.fromJson(Map<String, dynamic> json) =
@@ -185,6 +205,9 @@ abstract class _RegionModel implements RegionModel {
   @override
   @JsonKey(name: 'master_addr_region_name')
   String? get name;
+  @override
+  @JsonKey(name: 'master_addr_region_name_eng')
+  String? get nameEN;
 
   /// Create a copy of RegionModel
   /// with the given fields replaced by the non-null parameter values.

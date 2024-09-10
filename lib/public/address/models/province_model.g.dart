@@ -13,6 +13,7 @@ _$ProvinceModelImpl _$$ProvinceModelImplFromJson(Map<String, dynamic> json) =>
       nameEN: json['master_addr_province_name_eng'] as String?,
       regionId: json['master_addr_region_id'] as String?,
       regionName: json['master_addr_region_name'] as String?,
+      regionNameEN: json['master_addr_region_name_eng'] as String?,
     );
 
 Map<String, dynamic> _$$ProvinceModelImplToJson(_$ProvinceModelImpl instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$$ProvinceModelImplToJson(_$ProvinceModelImpl instance) =>
       'master_addr_province_name_eng': instance.nameEN,
       'master_addr_region_id': instance.regionId,
       'master_addr_region_name': instance.regionName,
+      'master_addr_region_name_eng': instance.regionNameEN,
     };

@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+import 'package:oho_hero/config/routes/export.dart';
 
 class AppLocalizations {
   final Locale locale;
@@ -11,8 +11,7 @@ class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   late Map<String, String> _localizedStrings;
 
@@ -32,8 +31,7 @@ class AppLocalizations {
   }
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -50,4 +48,13 @@ class _AppLocalizationsDelegate
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
+}
+
+showText({required WidgetRef ref, required String? TH, required String? EN}) {
+  var language = ref.watch(localeProvider).languageCode;
+  if (language == 'th') {
+    return TH;
+  } else {
+    return EN;
+  }
 }

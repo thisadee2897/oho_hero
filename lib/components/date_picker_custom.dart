@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/main.dart';
 import 'package:oho_hero/components/custom_cupertino_date.dart';
 
 class CustomDatePickerFormfield extends ConsumerWidget {
   CustomDatePickerFormfield({
+    super.key,
     required this.title,
     required this.controller,
     this.require = false,
@@ -40,8 +40,7 @@ class CustomDatePickerFormfield extends ConsumerWidget {
       children: [
         Row(
           children: [
-            if (require)
-              Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
+            if (require) Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
             Text(
               "$title",
               style: TextStyle(
@@ -51,8 +50,7 @@ class CustomDatePickerFormfield extends ConsumerWidget {
                     : CupertinoDynamicColor.resolve(
                         CupertinoDynamicColor.withBrightness(
                           color: CupertinoColors.darkBackgroundGray,
-                          darkColor:
-                              CupertinoColors.systemGrey3.highContrastColor,
+                          darkColor: CupertinoColors.systemGrey3.highContrastColor,
                         ),
                         context,
                       ),
@@ -70,11 +68,8 @@ class CustomDatePickerFormfield extends ConsumerWidget {
                   height: 300,
                   width: buildDesktop ? 1200 : null,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(9),
-                        topRight: Radius.circular(9)),
-                    color:
-                        CupertinoColors.systemBackground.resolveFrom(context),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(9), topRight: Radius.circular(9)),
+                    color: CupertinoColors.systemBackground.resolveFrom(context),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -91,8 +86,7 @@ class CustomDatePickerFormfield extends ConsumerWidget {
                           initialDateTime: initialDate,
                           mode: CustomCupertinoDatePickerMode.date,
                           onDateTimeChanged: (DateTime value) {
-                            controller.text =
-                                previewForFormattedDate(date: value, ref: ref);
+                            controller.text = previewForFormattedDate(date: value, ref: ref);
                             onSave!(value.toString().split(' ')[0]);
                           },
                         ),
@@ -108,15 +102,13 @@ class CustomDatePickerFormfield extends ConsumerWidget {
                 children: [
                   CupertinoTextFormFieldRow(
                     readOnly: readOnly,
-                    placeholderStyle: placeholderStyleCustom(
-                        context: context, readOnly: readOnly),
+                    placeholderStyle: placeholderStyleCustom(context: context, readOnly: readOnly),
                     textAlignVertical: TextAlignVertical.center,
                     controller: controller,
                     cursorColor: CustomColors.primaryColor,
                     style: styleCustom(context),
                     padding: paddingCustom(),
-                    decoration:
-                        decorationCustom(context: context, readOnly: readOnly),
+                    decoration: decorationCustom(context: context, readOnly: readOnly),
                     autovalidateMode: AutovalidateMode.always,
                     validator: validator,
                     placeholder: title,
@@ -175,8 +167,7 @@ class CustomTimePickerFormfield extends ConsumerWidget {
       children: [
         Row(
           children: [
-            if (require)
-              Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
+            if (require) Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
             Text(
               "$title",
               style: TextStyle(
@@ -186,8 +177,7 @@ class CustomTimePickerFormfield extends ConsumerWidget {
                     : CupertinoDynamicColor.resolve(
                         CupertinoDynamicColor.withBrightness(
                           color: CupertinoColors.darkBackgroundGray,
-                          darkColor:
-                              CupertinoColors.systemGrey3.highContrastColor,
+                          darkColor: CupertinoColors.systemGrey3.highContrastColor,
                         ),
                         context,
                       ),
@@ -205,11 +195,8 @@ class CustomTimePickerFormfield extends ConsumerWidget {
                   height: 300,
                   width: buildDesktop ? 1200 : null,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(9),
-                        topRight: Radius.circular(9)),
-                    color:
-                        CupertinoColors.systemBackground.resolveFrom(context),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(9), topRight: Radius.circular(9)),
+                    color: CupertinoColors.systemBackground.resolveFrom(context),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -226,10 +213,8 @@ class CustomTimePickerFormfield extends ConsumerWidget {
                           initialDateTime: initialDate,
                           mode: CustomCupertinoDatePickerMode.time,
                           onDateTimeChanged: (DateTime value) {
-                            controller.text =
-                                value.toString().split(' ')[1].split('.')[0];
-                            onSave!(
-                                value.toString().split(' ')[1].split('.')[0]);
+                            controller.text = value.toString().split(' ')[1].split('.')[0];
+                            onSave!(value.toString().split(' ')[1].split('.')[0]);
                           },
                         ),
                       ),
@@ -244,15 +229,13 @@ class CustomTimePickerFormfield extends ConsumerWidget {
                 children: [
                   CupertinoTextFormFieldRow(
                     readOnly: readOnly,
-                    placeholderStyle: placeholderStyleCustom(
-                        context: context, readOnly: readOnly),
+                    placeholderStyle: placeholderStyleCustom(context: context, readOnly: readOnly),
                     textAlignVertical: TextAlignVertical.center,
                     controller: controller,
                     cursorColor: CustomColors.primaryColor,
                     style: styleCustom(context),
                     padding: paddingCustom(),
-                    decoration:
-                        decorationCustom(context: context, readOnly: readOnly),
+                    decoration: decorationCustom(context: context, readOnly: readOnly),
                     autovalidateMode: AutovalidateMode.always,
                     validator: validator,
                     placeholder: title,
@@ -311,8 +294,7 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
       children: [
         Row(
           children: [
-            if (require)
-              Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
+            if (require) Text("*", style: TextStyle(color: CupertinoColors.systemRed)),
             Text(
               "$title",
               style: TextStyle(
@@ -322,8 +304,7 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
                     : CupertinoDynamicColor.resolve(
                         CupertinoDynamicColor.withBrightness(
                           color: CupertinoColors.darkBackgroundGray,
-                          darkColor:
-                              CupertinoColors.systemGrey3.highContrastColor,
+                          darkColor: CupertinoColors.systemGrey3.highContrastColor,
                         ),
                         context,
                       ),
@@ -341,11 +322,8 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
                   height: 300,
                   width: buildDesktop ? 1200 : null,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(9),
-                        topRight: Radius.circular(9)),
-                    color:
-                        CupertinoColors.systemBackground.resolveFrom(context),
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(9), topRight: Radius.circular(9)),
+                    color: CupertinoColors.systemBackground.resolveFrom(context),
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -362,7 +340,8 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
                           initialDateTime: initialDate,
                           mode: CustomCupertinoDatePickerMode.dateAndTime,
                           onDateTimeChanged: (DateTime value) {
-                            controller.text = "${previewForFormattedDate(date: value, ref: ref)} ${value.toString().split(' ')[1].split('.')[0]}";
+                            controller.text =
+                                "${previewForFormattedDate(date: value, ref: ref)} ${value.toString().split(' ')[1].split('.')[0]}";
                             onSave!(value.toString());
                           },
                         ),
@@ -378,15 +357,13 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
                 children: [
                   CupertinoTextFormFieldRow(
                     readOnly: readOnly,
-                    placeholderStyle: placeholderStyleCustom(
-                        context: context, readOnly: readOnly),
+                    placeholderStyle: placeholderStyleCustom(context: context, readOnly: readOnly),
                     textAlignVertical: TextAlignVertical.center,
                     controller: controller,
                     cursorColor: CustomColors.primaryColor,
                     style: styleCustom(context),
                     padding: paddingCustom(),
-                    decoration:
-                        decorationCustom(context: context, readOnly: readOnly),
+                    decoration: decorationCustom(context: context, readOnly: readOnly),
                     autovalidateMode: AutovalidateMode.always,
                     validator: validator,
                     placeholder: title,
@@ -409,8 +386,7 @@ class CustomDateTimePickerFormfield extends ConsumerWidget {
   }
 }
 
-String previewForFormattedDate(
-    {required DateTime date, required WidgetRef ref}) {
+String previewForFormattedDate({required DateTime date, required WidgetRef ref}) {
   Locale locale = ref.watch(localeProvider);
   int buddhistYear = date.year;
 

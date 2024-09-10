@@ -71,7 +71,13 @@ class ButtonCustom extends StatelessWidget {
                 })
               }
           : null,
-      disabledColor: Colors.grey.shade50,
+      disabledColor: CupertinoDynamicColor.resolve(
+        CupertinoDynamicColor.withBrightness(
+          color: CupertinoColors.systemGrey4,
+          darkColor: CupertinoColors.systemGrey,
+        ),
+        context,
+      ),
       color: buttonColor,
       child: loading
           ? CupertinoActivityIndicator(

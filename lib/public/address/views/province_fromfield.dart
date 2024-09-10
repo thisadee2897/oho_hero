@@ -57,7 +57,7 @@ class _ProvinceFormfieldState extends ConsumerState<ProvinceFormfield> {
       Future.microtask(() {
         setState(() {
           widget.onchanged(data);
-          initialText = data.name ?? '';
+          initialText = showText(ref: ref, TH: data.name, EN: data.nameEN);
           hasChanged = true;
         });
       });

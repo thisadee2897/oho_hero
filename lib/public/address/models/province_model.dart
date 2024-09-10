@@ -10,6 +10,7 @@ class ProvinceModel with _$ProvinceModel {
     @JsonKey(name: 'master_addr_province_name_eng') String? nameEN,
     @JsonKey(name: 'master_addr_region_id') String? regionId,
     @JsonKey(name: 'master_addr_region_name') String? regionName,
+    @JsonKey(name: 'master_addr_region_name_eng') String? regionNameEN,
   }) = _ProvinceModel;
 
   factory ProvinceModel.fromJson(Map<String, dynamic> json) => _$ProvinceModelFromJson(json);

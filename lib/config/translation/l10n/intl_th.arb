@@ -27,5 +27,6 @@
        "addProjectType": "เพิ่มประเภทโครงการ",
        "textCreate": "สร้าง",
        "pleasInputData": "กรุณากรอกข้อมูล",
-       "pleasSelectData": "กรุณาระบุข้อมูล"
+       "pleasSelectData": "กรุณาระบุข้อมูล",
+       "titleCreateCompany": "เพิ่มบริษัท"
 }

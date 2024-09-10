@@ -27,5 +27,7 @@
   "addProjectType": "Add Project Type",
   "textCreate": "Create",
   "pleasInputData": "Pleas Input Data",
-  "pleasSelectData": "Pleas Select Data"
+  "pleasSelectData": "Pleas Select Data",
+  "titleCreateCompany": "Create Company"
+
 }

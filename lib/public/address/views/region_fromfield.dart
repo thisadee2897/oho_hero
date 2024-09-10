@@ -53,10 +53,10 @@ class _IndustryGrorupDropDownState extends ConsumerState<RegionFormfield> {
   }
 
   Widget _data(BuildContext context, ProvinceModel data) {
-    if (!hasChanged&&data.id!=null) {
+    if (!hasChanged && data.id != null) {
       Future.microtask(() {
         setState(() {
-          initialText = data.regionName ?? '';
+          initialText = showText(ref: ref, TH: data.regionName ?? '', EN: data.regionNameEN ?? '');
           hasChanged = true;
           widget.onchanged(data);
         });

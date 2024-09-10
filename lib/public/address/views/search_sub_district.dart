@@ -106,18 +106,19 @@ class _SearchSubDistrictState extends BaseState<SearchSubDistrict> {
               Navigator.pop(context, data[index]);
             }
           },
-          title: Text(data[index].name ?? '', style: CupertinoTheme.of(context).textTheme.textStyle),
+          title: Text(showText(ref: ref, TH: data[index].name, EN: data[index].nameEN),
+              style: CupertinoTheme.of(context).textTheme.textStyle),
           subtitle: Row(
             children: [
               if (true)
                 Expanded(
                   flex: 1,
-                  child: Text(data[index].districtName ?? ''),
+                  child: Text(showText(ref: ref, TH: data[index].districtName, EN: data[index].districtName)),
                 ),
               if (true)
                 Expanded(
                   flex: 1,
-                  child: Text(data[index].provinceName ?? ''),
+                  child: Text(showText(ref: ref, TH: data[index].provinceName, EN: data[index].provinceName)),
                 ),
             ],
           ),

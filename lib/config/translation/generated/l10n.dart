@@ -339,6 +339,16 @@ class Trans {
       args: [],
     );
   }
+
+  /// `เพิ่มบริษัท`
+  String get titleCreateCompany {
+    return Intl.message(
+      'เพิ่มบริษัท',
+      name: 'titleCreateCompany',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<Trans> {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/main.dart';
 
 class CreateCompanyScreen extends BaseStatefulWidget {
   final String previousPageTitle;
@@ -112,13 +111,14 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       trailing: Padding(
         padding: const EdgeInsets.all(8),
         child: ButtonCustom(
+          enabled: createCompanyKey.currentState != null && createCompanyKey.currentState!.validate(),
           buttonType: ButtonType.filled,
           text: Trans().textCreate,
           loading: ref.watch(createCompanyProvider).isLoading,
           onTap: submitCreateCompay,
         ),
       ),
-      largeTitle: Text('Create company'),
+      largeTitle: Text(Trans().titleCreateCompany),
     );
   }
 
@@ -151,6 +151,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                   md: 6,
                   lg: 4,
                   child: BusinessCategoryDropDown(
+                    key: ValueKey(company.industryGroupId),
                     selectedID: company.businessCategoryId,
                     onchanged: (data) {
                       setCompany.businessCategoryId = data.id;
@@ -338,6 +339,9 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                       require: true,
                       title: Trans.of(context).create_company__addressDetail,
                       controller: address,
+                      validator: (String? value) {
+                        return value!.isEmpty ? Trans().pleasInputData : null;
+                      },
                     ),
                   ),
                 ),
@@ -357,6 +361,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                         ref.read(regionProvider.notifier).read();
                       }
                     },
+                    
                   ),
                 ),
                 ResponsiveGridCol(
@@ -462,16 +467,24 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: CustomDatePickerFormfield(
                                         initialDate: company.startDate,
+                                        minimumDate: DateTime.now(),
                                         require: true,
                                         title: Trans().startDate,
                                         controller: TextEditingController(
                                           text: company.startDate == null
                                               ? ''
-                                              : company.startDate.toString().split(' ')[0],
+                                              : previewForFormattedDate(
+                                                  date: company.startDate ?? DateTime.now(),
+                                                  ref: ref,
+                                                ),
                                         ),
+                                        validator: (String? value) {
+                                          return value!.isEmpty ? Trans().pleasSelectData : null;
+                                        },
                                         onSave: (String? value) {
                                           if (value != null) {
                                             set.startDate = sendToDateTime(value);
+                                            company.endDate = null;
                                           }
                                           return;
                                         },
@@ -483,18 +496,27 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: CustomDatePickerFormfield(
-                                        initialDate: company.endDate,
+                                        key: ValueKey(company.startDate),
+                                        initialDate: company.endDate ?? company.startDate,
+                                        minimumDate: company.startDate,
                                         require: true,
                                         title: Trans().endDate,
                                         controller: TextEditingController(
-                                          text: company.endDate == null ? '' : company.endDate.toString().split(' ')[0],
+                                          text: company.endDate == null
+                                              ? ''
+                                              : previewForFormattedDate(
+                                                  date: company.endDate ?? DateTime.now(),
+                                                  ref: ref,
+                                                ),
                                         ),
                                         onSave: (String? value) {
                                           if (value != null) {
-                                            print(value);
                                             set.endDate = sendToDateTime("${value.split(' ')[0]} 23:59:29.000");
                                           }
                                           return;
+                                        },
+                                        validator: (String? value) {
+                                          return value!.isEmpty ? Trans().pleasSelectData : null;
                                         },
                                       ),
                                     ),

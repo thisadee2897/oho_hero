@@ -1,3 +1,4 @@
+export 'package:oho_hero/main.dart';
 export 'package:oho_hero/screens/setting_project/setting_company/controllers/create_controller.dart';
 export 'package:oho_hero/config/constants/date_time.dart';
 export 'package:oho_hero/public/project_type/views/view.dart';

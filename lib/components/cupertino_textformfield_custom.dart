@@ -39,7 +39,7 @@ class CustomTextFormfield extends StatelessWidget {
               style: TextStyle(
                 fontSize: 14,
                 color: readOnly
-                    ? CupertinoColors.systemGrey3
+                    ? CupertinoColors.systemGrey
                     : CupertinoDynamicColor.resolve(
                         CupertinoDynamicColor.withBrightness(
                           color: CupertinoColors.darkBackgroundGray,
@@ -92,7 +92,7 @@ class CustomTextFormfield extends StatelessWidget {
 TextStyle placeholderStyleCustom(
     {required BuildContext context, bool readOnly = false}) {
   return TextStyle(
-    color: readOnly ? CupertinoColors.systemGrey6 : CupertinoColors.systemGrey,
+    color: readOnly ? CupertinoColors.systemGrey3 : CupertinoColors.systemGrey,
   );
 }
 

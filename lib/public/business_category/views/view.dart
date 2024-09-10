@@ -45,7 +45,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<BusinessCategoryDropDow
       var selected = data.firstWhere(
         (e) => e.id == widget.selectedID,
       );
-      initialText = selected.name;
+      initialText = showText(ref: ref, TH: selected.name, EN: selected.nameEN);
     }
     return CustomDroupdownFormfield(
       initId: widget.selectedID,
@@ -54,11 +54,14 @@ class _IndustryGrorupDropDownState extends ConsumerState<BusinessCategoryDropDow
       controller: TextEditingController(
         text: initialText ?? '',
       ),
+      validator: (String? value) {
+        return value!.isEmpty ? Trans().pleasSelectData : null;
+      },
       data: List.generate(
           data.length,
           (index) => {
                 'id': data[index].id,
-                'name': data[index].name,
+                'name': showText(ref: ref, TH: data[index].name, EN: data[index].nameEN),
               }),
       selectId: (String? value) {
         if (value != null) {

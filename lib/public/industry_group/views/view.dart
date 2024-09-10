@@ -45,7 +45,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<IndustryGrorupDropDown>
       var selected = data.firstWhere(
         (e) => e.id == widget.selectedID,
       );
-      initialText = selected.name;
+      initialText = showText(ref: ref, TH: selected.name, EN: selected.nameEN);
     }
     return CustomDroupdownFormfield(
       initId: widget.selectedID,
@@ -61,7 +61,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<IndustryGrorupDropDown>
           data.length,
           (index) => {
                 'id': data[index].id,
-                'name': data[index].name,
+                'name': showText(ref: ref, TH: data[index].name, EN: data[index].nameEN),
               }),
       selectId: (String? value) {
         if (value != null) {

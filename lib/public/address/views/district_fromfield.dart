@@ -58,9 +58,9 @@ class _IndustryGrorupDropDownState extends ConsumerState<DistrictFormfield> {
     if (!hasChanged && widget.selectedID != null && data.id != null) {
       Future.microtask(() {
         setState(() {
-          initialText = data.name ?? '';
-          hasChanged = true;
+          initialText = showText(ref: ref, TH: data.name, EN: data.nameEN);
           widget.onchanged(data);
+          hasChanged = true;
         });
       });
     }

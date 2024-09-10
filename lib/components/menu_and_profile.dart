@@ -1,5 +1,4 @@
 import 'package:oho_hero/config/routes/export.dart';
-import 'package:oho_hero/main.dart';
 
 showLogOut(BuildContext context, WidgetRef ref) {
   return showCupertinoDialog(
@@ -107,9 +106,7 @@ class _MenuForDesktopState extends ConsumerState<MenuForDesktop> {
         CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: () {
-            Locale newLocale = locale.languageCode == 'th'
-                ? const Locale('en')
-                : const Locale('th');
+            Locale newLocale = locale.languageCode == 'th' ? const Locale('en') : const Locale('th');
             switchLanguage(ref, newLocale);
           },
           child: Text(locale.languageCode == 'th' ? 'TH' : 'EN'),
@@ -159,9 +156,7 @@ class _MenuForMobileState extends ConsumerState<MenuForMobile> {
                               },
                               child: Text(
                                 subMenu.name,
-                                style: CupertinoTheme.of(context)
-                                    .textTheme
-                                    .textStyle,
+                                style: CupertinoTheme.of(context).textTheme.textStyle,
                               ),
                             );
                           }).toList(),

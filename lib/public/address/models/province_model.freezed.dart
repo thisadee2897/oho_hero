@@ -30,6 +30,8 @@ mixin _$ProvinceModel {
   String? get regionId => throw _privateConstructorUsedError;
   @JsonKey(name: 'master_addr_region_name')
   String? get regionName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'master_addr_region_name_eng')
+  String? get regionNameEN => throw _privateConstructorUsedError;
 
   /// Serializes this ProvinceModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +54,8 @@ abstract class $ProvinceModelCopyWith<$Res> {
       @JsonKey(name: 'master_addr_province_name') String? name,
       @JsonKey(name: 'master_addr_province_name_eng') String? nameEN,
       @JsonKey(name: 'master_addr_region_id') String? regionId,
-      @JsonKey(name: 'master_addr_region_name') String? regionName});
+      @JsonKey(name: 'master_addr_region_name') String? regionName,
+      @JsonKey(name: 'master_addr_region_name_eng') String? regionNameEN});
 }
 
 /// @nodoc
@@ -75,6 +78,7 @@ class _$ProvinceModelCopyWithImpl<$Res, $Val extends ProvinceModel>
     Object? nameEN = freezed,
     Object? regionId = freezed,
     Object? regionName = freezed,
+    Object? regionNameEN = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -97,6 +101,10 @@ class _$ProvinceModelCopyWithImpl<$Res, $Val extends ProvinceModel>
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
               as String?,
+      regionNameEN: freezed == regionNameEN
+          ? _value.regionNameEN
+          : regionNameEN // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -114,7 +122,8 @@ abstract class _$$ProvinceModelImplCopyWith<$Res>
       @JsonKey(name: 'master_addr_province_name') String? name,
       @JsonKey(name: 'master_addr_province_name_eng') String? nameEN,
       @JsonKey(name: 'master_addr_region_id') String? regionId,
-      @JsonKey(name: 'master_addr_region_name') String? regionName});
+      @JsonKey(name: 'master_addr_region_name') String? regionName,
+      @JsonKey(name: 'master_addr_region_name_eng') String? regionNameEN});
 }
 
 /// @nodoc
@@ -135,6 +144,7 @@ class __$$ProvinceModelImplCopyWithImpl<$Res>
     Object? nameEN = freezed,
     Object? regionId = freezed,
     Object? regionName = freezed,
+    Object? regionNameEN = freezed,
   }) {
     return _then(_$ProvinceModelImpl(
       id: freezed == id
@@ -157,6 +167,10 @@ class __$$ProvinceModelImplCopyWithImpl<$Res>
           ? _value.regionName
           : regionName // ignore: cast_nullable_to_non_nullable
               as String?,
+      regionNameEN: freezed == regionNameEN
+          ? _value.regionNameEN
+          : regionNameEN // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -169,7 +183,8 @@ class _$ProvinceModelImpl implements _ProvinceModel {
       @JsonKey(name: 'master_addr_province_name') this.name,
       @JsonKey(name: 'master_addr_province_name_eng') this.nameEN,
       @JsonKey(name: 'master_addr_region_id') this.regionId,
-      @JsonKey(name: 'master_addr_region_name') this.regionName});
+      @JsonKey(name: 'master_addr_region_name') this.regionName,
+      @JsonKey(name: 'master_addr_region_name_eng') this.regionNameEN});
 
   factory _$ProvinceModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ProvinceModelImplFromJson(json);
@@ -189,10 +204,13 @@ class _$ProvinceModelImpl implements _ProvinceModel {
   @override
   @JsonKey(name: 'master_addr_region_name')
   final String? regionName;
+  @override
+  @JsonKey(name: 'master_addr_region_name_eng')
+  final String? regionNameEN;
 
   @override
   String toString() {
-    return 'ProvinceModel(id: $id, name: $name, nameEN: $nameEN, regionId: $regionId, regionName: $regionName)';
+    return 'ProvinceModel(id: $id, name: $name, nameEN: $nameEN, regionId: $regionId, regionName: $regionName, regionNameEN: $regionNameEN)';
   }
 
   @override
@@ -206,13 +224,15 @@ class _$ProvinceModelImpl implements _ProvinceModel {
             (identical(other.regionId, regionId) ||
                 other.regionId == regionId) &&
             (identical(other.regionName, regionName) ||
-                other.regionName == regionName));
+                other.regionName == regionName) &&
+            (identical(other.regionNameEN, regionNameEN) ||
+                other.regionNameEN == regionNameEN));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, nameEN, regionId, regionName);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, nameEN, regionId, regionName, regionNameEN);
 
   /// Create a copy of ProvinceModel
   /// with the given fields replaced by the non-null parameter values.
@@ -232,12 +252,13 @@ class _$ProvinceModelImpl implements _ProvinceModel {
 
 abstract class _ProvinceModel implements ProvinceModel {
   const factory _ProvinceModel(
-          {@JsonKey(name: 'master_addr_province_id') final String? id,
-          @JsonKey(name: 'master_addr_province_name') final String? name,
-          @JsonKey(name: 'master_addr_province_name_eng') final String? nameEN,
-          @JsonKey(name: 'master_addr_region_id') final String? regionId,
-          @JsonKey(name: 'master_addr_region_name') final String? regionName}) =
-      _$ProvinceModelImpl;
+      {@JsonKey(name: 'master_addr_province_id') final String? id,
+      @JsonKey(name: 'master_addr_province_name') final String? name,
+      @JsonKey(name: 'master_addr_province_name_eng') final String? nameEN,
+      @JsonKey(name: 'master_addr_region_id') final String? regionId,
+      @JsonKey(name: 'master_addr_region_name') final String? regionName,
+      @JsonKey(name: 'master_addr_region_name_eng')
+      final String? regionNameEN}) = _$ProvinceModelImpl;
 
   factory _ProvinceModel.fromJson(Map<String, dynamic> json) =
       _$ProvinceModelImpl.fromJson;
@@ -257,6 +278,9 @@ abstract class _ProvinceModel implements ProvinceModel {
   @override
   @JsonKey(name: 'master_addr_region_name')
   String? get regionName;
+  @override
+  @JsonKey(name: 'master_addr_region_name_eng')
+  String? get regionNameEN;
 
   /// Create a copy of ProvinceModel
   /// with the given fields replaced by the non-null parameter values.

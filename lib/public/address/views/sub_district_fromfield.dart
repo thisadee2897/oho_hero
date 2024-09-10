@@ -58,7 +58,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
   Widget _data(BuildContext context, List<SubdistrictModel> data) {
     if (!hasChanged && widget.selectedID != null && data.isNotEmpty) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        initialText = data.first.name ?? '';
+        initialText = showText(ref: ref, TH: data.first.name, EN: data.first.nameEN);
         widget.onchanged(data.first);
         setState(() {
           hasChanged = true;
@@ -73,7 +73,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
           WidgetsBinding.instance.addPostFrameCallback((_) {
             ref.read(subDistrictForIdProvider.notifier).read(id: selectedSubDistrict.id);
           });
-          initialText = selectedSubDistrict.name ?? '';
+          initialText = showText(ref: ref, TH: selectedSubDistrict.name, EN: selectedSubDistrict.nameEN);
           widget.onchanged(selectedSubDistrict);
           setState(() {
             hasChanged = true;
@@ -89,10 +89,7 @@ class _IndustryGrorupDropDownState extends ConsumerState<SubDistrictFormfield> {
               ? Trans.of(context).create_company__searchSubDistrict
               : Trans.of(context).create_company__subDistrict,
           validator: (String? value) {
-            // if (value!.isEmpty) {
-            //   return Trans.of(context).pleasInputData;
-            // }
-            return null;
+            return value!.isEmpty ? Trans().pleasSelectData : null;
           },
           controller: TextEditingController(
             text: initialText,

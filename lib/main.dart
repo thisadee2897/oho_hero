@@ -50,7 +50,7 @@ void switchLanguage(WidgetRef ref, Locale newLocale) {
   ref.read(localeProvider.notifier).state = newLocale;
 }
 
-final localeProvider = StateProvider<Locale>((ref) => Locale('th'));
+final localeProvider = StateProvider<Locale>((ref) => Locale('en'));
 
 final languageProvider = StateProvider<Locale>((ref) {
   final locale = ref.watch(localeProvider);
