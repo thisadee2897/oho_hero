@@ -111,6 +111,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
       trailing: Padding(
         padding: const EdgeInsets.all(8),
         child: ButtonCustom(
+          key: ValueKey(createCompanyKey.currentState != null && createCompanyKey.currentState!.validate()),
           enabled: createCompanyKey.currentState != null && createCompanyKey.currentState!.validate(),
           buttonType: ButtonType.filled,
           text: Trans().textCreate,
@@ -361,7 +362,6 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                         ref.read(regionProvider.notifier).read();
                       }
                     },
-                    
                   ),
                 ),
                 ResponsiveGridCol(
@@ -467,7 +467,7 @@ class _CreateCompanyScreenState extends BaseState<CreateCompanyScreen> {
                                       padding: const EdgeInsets.all(8.0),
                                       child: CustomDatePickerFormfield(
                                         initialDate: company.startDate,
-                                        minimumDate: DateTime.now(),
+                                        minimumDate: company.startDate ?? DateTime.now(),
                                         require: true,
                                         title: Trans().startDate,
                                         controller: TextEditingController(

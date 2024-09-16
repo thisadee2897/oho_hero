@@ -60,6 +60,7 @@ dependencies:
   json_annotation:
   freezed_annotation:
   advanced_datatable: ^0.0.9
+  connectivity_plus: ^6.0.5
 dev_dependencies:
   flutter_test:
     sdk: flutter

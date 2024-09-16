@@ -320,6 +320,16 @@ class Trans {
     );
   }
 
+  /// `อัพเดต`
+  String get textUpdate {
+    return Intl.message(
+      'อัพเดต',
+      name: 'textUpdate',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `กรุณากรอกข้อมูล`
   String get pleasInputData {
     return Intl.message(
@@ -345,6 +355,16 @@ class Trans {
     return Intl.message(
       'เพิ่มบริษัท',
       name: 'titleCreateCompany',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `อัพเดตบริษัท`
+  String get titleUpdateCompany {
+    return Intl.message(
+      'อัพเดตบริษัท',
+      name: 'titleUpdateCompany',
       desc: '',
       args: [],
     );

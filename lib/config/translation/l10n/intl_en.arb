@@ -26,8 +26,9 @@
   "endDate": "End Date",
   "addProjectType": "Add Project Type",
   "textCreate": "Create",
+  "textUpdate": "Update",
   "pleasInputData": "Pleas Input Data",
   "pleasSelectData": "Pleas Select Data",
-  "titleCreateCompany": "Create Company"
-
+  "titleCreateCompany": "Create Company",
+  "titleUpdateCompany": "Update Company"
 }

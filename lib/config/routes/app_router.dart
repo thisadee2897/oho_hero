@@ -2,10 +2,8 @@ import 'package:oho_hero/config/routes/export.dart';
 
 import 'package:oho_hero/splash_screen.dart';
 
-final GlobalKey<NavigatorState> _rootNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'root');
-final GlobalKey<NavigatorState> _shellNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'shell');
+final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'root');
+final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'shell');
 final appRouterProvider = Provider<GoRouter>(
   (ref) {
     return GoRouter(
@@ -51,16 +49,13 @@ final appRouterProvider = Provider<GoRouter>(
             GoRoute(
                 path: Routes.createCompany,
                 pageBuilder: (context, state) {
-                  return NoTransitionPage(
-                      child: CreateCompanyScreen(Routes.company));
+                  return NoTransitionPage(child: CreateCompanyScreen(Routes.company));
                 },
                 routes: [
                   GoRoute(
                     path: SearchSubDistrict.path,
                     pageBuilder: (context, state) {
-                      return NoTransitionPage(
-                          child: SearchSubDistrict(
-                              '${Routes.company}/${SearchSubDistrict.path}'));
+                      return NoTransitionPage(child: SearchSubDistrict('${Routes.company}/${SearchSubDistrict.path}'));
                     },
                   ),
                 ]),
@@ -68,7 +63,7 @@ final appRouterProvider = Provider<GoRouter>(
               path: '${Routes.editCompany}/:id',
               pageBuilder: (context, state) {
                 String? id = state.pathParameters['id'];
-                return NoTransitionPage(child: UpdateCompany(companyId: id!));
+                return NoTransitionPage(child: UpdateCompanyScreen(Routes.company, id!));
               },
             ),
           ],
@@ -98,15 +93,13 @@ final appRouterProvider = Provider<GoRouter>(
               GoRoute(
                 path: "${Routes.dashEmission}/:id",
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(
-                      child: FootprintDashboardScreen());
+                  return const NoTransitionPage(child: FootprintDashboardScreen());
                 },
               ),
               GoRoute(
                 path: "${Routes.dashReduction}/:id",
                 pageBuilder: (context, state) {
-                  return const NoTransitionPage(
-                      child: CarbonProjectDashboardScreen());
+                  return const NoTransitionPage(child: CarbonProjectDashboardScreen());
                 },
               ),
               GoRoute(

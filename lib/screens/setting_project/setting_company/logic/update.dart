@@ -3,7 +3,7 @@ import 'package:oho_hero/config/routes/export.dart';
 final companyLogicUpdateProvider = ChangeNotifierProvider((ref) => CompanyLogicUpdateController());
 
 class CompanyLogicUpdateController extends ChangeNotifier {
-  String _id = "0";
+  String? _id;
   String? _name;
   String? _nameEN;
   String? _taxId;
@@ -32,9 +32,9 @@ class CompanyLogicUpdateController extends ChangeNotifier {
   DateTime? _startDate;
   DateTime? _endDate;
   List<Map<String, dynamic>>? _projectType;
-  // Getters and Setters for all fields
-  String get id => _id;
-  set id(String value) {
+
+  String? get id => _id;
+  set id(String? value) {
     _id = value;
     notifyListeners();
   }

@@ -74,7 +74,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Pleas Select Data"),
         "startDate": MessageLookupByLibrary.simpleMessage("Start Date"),
         "textCreate": MessageLookupByLibrary.simpleMessage("Create"),
+        "textUpdate": MessageLookupByLibrary.simpleMessage("Update"),
         "titleCreateCompany":
-            MessageLookupByLibrary.simpleMessage("Create Company")
+            MessageLookupByLibrary.simpleMessage("Create Company"),
+        "titleUpdateCompany":
+            MessageLookupByLibrary.simpleMessage("Update Company")
       };
 }

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:oho_hero/config/constants/api_path.dart';
@@ -18,6 +19,16 @@ class ApiInterceptor extends Interceptor {
 
   @override
   Future<void> onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    List<ConnectivityResult> connectivityResult = await Connectivity().checkConnectivity();
+    if (connectivityResult == ConnectivityResult.none) {
+      return handler.reject(
+        DioException(
+          requestOptions: options,
+          error: 'No internet connection',
+          type: DioExceptionType.unknown,
+        ),
+      );
+    }
     String token = "sK!wLWgVHta4%vteQoiBD9QZFPVZbW4aQ8HkLKm7x2a@7sJJH74P2MX!qH95&xfMP75cpoZHH25wi5%tZXNv5*QgjPj2q";
     options.headers["Authorization"] = "Bearer $token";
     // var lang = ref.read(languageProvider);

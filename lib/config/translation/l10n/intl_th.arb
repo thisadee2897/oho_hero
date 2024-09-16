@@ -26,7 +26,9 @@
        "endDate": "วันสิ้นสุด",
        "addProjectType": "เพิ่มประเภทโครงการ",
        "textCreate": "สร้าง",
+       "textUpdate": "อัพเดต",
        "pleasInputData": "กรุณากรอกข้อมูล",
        "pleasSelectData": "กรุณาระบุข้อมูล",
-       "titleCreateCompany": "เพิ่มบริษัท"
+       "titleCreateCompany": "เพิ่มบริษัท",
+       "titleUpdateCompany": "อัพเดตบริษัท"
 }

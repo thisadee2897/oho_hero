@@ -75,7 +75,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("กรุณาระบุข้อมูล"),
         "startDate": MessageLookupByLibrary.simpleMessage("วันเริ่มต้น"),
         "textCreate": MessageLookupByLibrary.simpleMessage("สร้าง"),
+        "textUpdate": MessageLookupByLibrary.simpleMessage("อัพเดต"),
         "titleCreateCompany":
-            MessageLookupByLibrary.simpleMessage("เพิ่มบริษัท")
+            MessageLookupByLibrary.simpleMessage("เพิ่มบริษัท"),
+        "titleUpdateCompany":
+            MessageLookupByLibrary.simpleMessage("อัพเดตบริษัท")
       };
 }

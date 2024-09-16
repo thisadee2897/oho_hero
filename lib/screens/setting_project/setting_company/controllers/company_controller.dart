@@ -1,3 +1,4 @@
+
 import 'package:oho_hero/config/routes/export.dart';
 import 'package:uuid/uuid.dart';
 
@@ -55,7 +56,6 @@ final companyDataProvider = Provider<List<Company>>((ref) {
     ),
   ];
 });
-
 class CompanyController extends StateNotifier<AsyncValue<List<CompanyForm>>> {
   CompanyController(this.ref) : super(AsyncValue.data([]));
   final Ref ref;
