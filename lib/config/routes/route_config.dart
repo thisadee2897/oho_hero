@@ -22,4 +22,8 @@ class Routes {
   static const String dashEmission = 'dashboard-footprint';
   static const String dashReduction = 'dashboard-carbon-project';
   static const String dashMarket = 'dashboard-market';
+  //Footprint
+  static const String footprint = '/footprint';
+  //Reducton
+  static const String reduction = '/reduction';
 }

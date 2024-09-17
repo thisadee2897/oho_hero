@@ -8,7 +8,7 @@ class ScopeDropdownModel with _$ScopeDropdownModel {
     @JsonKey(name: 'master_scope_id') String? id,
     @JsonKey(name: 'master_scope_name') String? name,
     @JsonKey(name: 'master_scope_name_eng') String? nameEN,
-     @JsonKey(name: 'master_scope_remark') String? remark,
+    @JsonKey(name: 'master_scope_remark') String? remark,
   }) = _ScopeDropdownModel;
 
   factory ScopeDropdownModel.fromJson(Map<String, dynamic> json) => _$ScopeDropdownModelFromJson(json);

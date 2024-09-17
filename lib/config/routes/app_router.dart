@@ -14,12 +14,11 @@ final appRouterProvider = Provider<GoRouter>(
           // parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) {
             final isLoggedIn = ref.watch(isLoggedInProvider);
-
             if (isLoggedIn.isLoading) {
               return const NoTransitionPage(child: SplashScreen());
             }
             if (isLoggedIn.value == true) {
-              return const NoTransitionPage(child: MainScreen());
+              return const NoTransitionPage(child: AllDashboardScreen());
             } else {
               return const NoTransitionPage(child: LoginScreen());
             }
@@ -33,10 +32,24 @@ final appRouterProvider = Provider<GoRouter>(
           },
         ),
         GoRoute(
-          path: Routes.home,
+          path: Routes.allDashboard,
           // parentNavigatorKey: _rootNavigatorKey,
           pageBuilder: (context, state) {
-            return const NoTransitionPage(child: MainScreen());
+            return const NoTransitionPage(child: AllDashboardScreen());
+          },
+        ),
+        GoRoute(
+          path: Routes.footprint,
+          // parentNavigatorKey: _rootNavigatorKey,
+          pageBuilder: (context, state) {
+            return const NoTransitionPage(child: FootprintScreen());
+          },
+        ),
+        GoRoute(
+          path: Routes.reduction,
+          // parentNavigatorKey: _rootNavigatorKey,
+          pageBuilder: (context, state) {
+            return const NoTransitionPage(child: ReductionScreen());
           },
         ),
         GoRoute(

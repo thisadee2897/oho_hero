@@ -61,6 +61,7 @@ dependencies:
   freezed_annotation:
   advanced_datatable: ^0.0.9
   connectivity_plus: ^6.0.5
+  flutter_svg: ^2.0.10+1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,6 +94,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/images/
+    - assets/svg/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

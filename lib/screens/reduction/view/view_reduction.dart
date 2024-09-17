@@ -1,13 +1,13 @@
 import 'package:oho_hero/config/routes/export.dart';
 
-class AllDashboardScreen extends BaseStatefulWidget {
-  const AllDashboardScreen({Key? key}) : super(key: key);
+class ReductionScreen extends BaseStatefulWidget {
+  const ReductionScreen({Key? key}) : super(key: key);
 
   @override
-  _AllDashboardScreenState createState() => _AllDashboardScreenState();
+  _AccountSecurityScreenState createState() => _AccountSecurityScreenState();
 }
 
-class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
+class _AccountSecurityScreenState extends BaseState<ReductionScreen> {
   TextEditingController provinceCtl = TextEditingController();
   @override
   Widget buildDesktop(BuildContext context, SizingInformation sizingInformation) {
@@ -28,7 +28,7 @@ class _AllDashboardScreenState extends BaseState<AllDashboardScreen> {
 
   Widget content({bool buildDesktop = false}) {
     return SafeArea(
-      child: Center(child: Text('All Dashboard')),
+      child: Center(child: Text('ReductionScreen')),
     );
   }
 }
